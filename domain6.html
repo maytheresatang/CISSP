@@ -40,17 +40,18 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
-</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.2);color:var(--teal-light);border:1px solid rgba(13,148,136,.4);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.35);}.home-bar{background:var(--navy-mid);padding:10px 40px;border-bottom:1px solid rgba(255,255,255,.07);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
 </head>
 <body>
 
+<div class="home-bar"><a class="home-btn" href="index.html"><div class="header">#8592; All Domains</a></div>
 <div class="header">
   <div class="label">CISSP CBK 2024 · Study Notes</div>
   <h1>Domain 6 — Security Assessment &amp; Testing</h1>
   <div class="sub">Vulnerability Scanning · Penetration Testing · Audits · SCAP · SOC Reports · Software Testing</div>
   <div class="meta">
     <span class="badge badge-teal">Exam Weight: 12%</span>
-    <span class="badge badge-green">2LoD Strength Domain</span>
+    <span class="badge badge-green">Assessment Strength Domain</span>
   </div>
 </div>
 
@@ -67,11 +68,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 
 <div id="overview" class="tab-content active">
   <div class="section-title">Domain at a Glance</div>
-  <p>Domain 6 tests your ability to design and interpret security assessments, from vulnerability scans to penetration tests, formal audits, and software testing techniques. Your 2LoD background is a strength — you already think in terms of audit strategy, KPI/KRI design, and vendor assurance.</p>
+  <p>Domain 6 tests your ability to design and interpret security assessments, from vulnerability scans to penetration tests, formal audits, and software testing techniques. This domain rewards experience with audit strategy, KPI/KRI design, and vendor assurance.</p>
 
   <div class="callout callout-green">
-    <strong>✅ 2LoD Advantage</strong>
-    Your risk oversight role gives you natural fluency with audit types, KPI vs KRI distinction, SOC report interpretation, and assessment programme design. The specific tool names (Nessus vs Nikto) and SCAP components are the areas to sharpen.
+    <strong>✅ risk oversight Advantage</strong>
+    Strong exam domain for those familiar with audit types, KPI vs KRI distinction, SOC report interpretation, and assessment programme design. Focus areas: specific tool names (Nessus vs Nikto) and SCAP components.
   </div>
 
   <table>
@@ -79,7 +80,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Vulnerability scanning tools (Nessus vs Nmap vs Nikto)</td><td>🔴 High</td><td>⚠️ Tool distinction needed</td></tr>
     <tr><td>Penetration testing phases and types</td><td>🔴 High</td><td>Good</td></tr>
     <tr><td>SCAP components (CVE/CVSS/CCE/CPE/OVAL/XCCDF)</td><td>🔴 High</td><td>⚠️ Memorise acronyms</td></tr>
-    <tr><td>Audit types and SOC reports</td><td>🔴 High</td><td>Strong (2LoD)</td></tr>
+    <tr><td>Audit types and SOC reports</td><td>🔴 High</td><td>Strong</td></tr>
     <tr><td>Software testing (SAST/DAST/IAST)</td><td>🟡 Medium</td><td>Good</td></tr>
     <tr><td>KPI vs KRI distinction</td><td>🟡 Medium</td><td>Strong</td></tr>
     <tr><td>Log review and SIEM</td><td>🟡 Medium</td><td>Good</td></tr>
@@ -147,7 +148,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><th>Type</th><th>Description</th></tr>
     <tr><td><strong>Internal Audit</strong></td><td>Conducted by internal audit function. Less independent but more frequent and contextual.</td></tr>
     <tr><td><strong>External Audit</strong></td><td>Conducted by independent third party. More credible, required for regulatory compliance (SOX, PCI).</td></tr>
-    <tr><td><strong>Third-Party Audit</strong></td><td>Assessment of a vendor/supplier. Standard in 2LoD vendor assurance programmes.</td></tr>
+    <tr><td><strong>Third-Party Audit</strong></td><td>Assessment of a vendor/supplier. Standard in vendor assurance programmes.</td></tr>
     <tr><td><strong>Certification Audit</strong></td><td>Leads to formal certification (ISO 27001, PCI-DSS). Stage 1 = document review. Stage 2 = implementation test.</td></tr>
     <tr><td><strong>Compliance Audit</strong></td><td>Assesses adherence to regulatory requirements (GDPR, HIPAA).</td></tr>
   </table>
@@ -161,7 +162,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </table>
 
   <div class="callout callout-blue">
-    <strong>📌 2LoD Usage: SOC 2 Type 2</strong>
+    <strong>📌 Practical Usage: SOC 2 Type 2</strong>
     In your vendor assurance role, you request SOC 2 Type 2 reports — they show controls were operating effectively over a period (not just designed correctly). A Type 1 is weaker evidence for ongoing assurance.
   </div>
 
@@ -219,18 +220,18 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 </div>
 
 <div id="kpi" class="tab-content">
-  <div class="section-title">KPI vs KRI — Critical 2LoD Distinction</div>
+  <div class="section-title">KPI vs KRI — Critical Distinction</div>
   <table>
     <tr><th></th><th>KPI (Key Performance Indicator)</th><th>KRI (Key Risk Indicator)</th></tr>
     <tr><td><strong>Measures</strong></td><td>How well controls and processes are performing <em>now</em></td><td>Leading signal of increasing risk — <em>predictive</em></td></tr>
     <tr><td><strong>Time orientation</strong></td><td>Lagging indicator (historical)</td><td>Leading indicator (forward-looking)</td></tr>
     <tr><td><strong>Example</strong></td><td>% of critical patches applied within 30 days = 94%</td><td>Increase in failed login attempts = rising brute-force risk</td></tr>
-    <tr><td><strong>Used by</strong></td><td>Operations / 1LoD to show control effectiveness</td><td>Risk function / 2LoD to identify emerging risk</td></tr>
+    <tr><td><strong>Used by</strong></td><td>Operations team to show control effectiveness</td><td>Risk function to identify emerging risk</td></tr>
     <tr><td><strong>Action when threshold breached</strong></td><td>Investigate control failure</td><td>Escalate risk to risk committee, consider control enhancement</td></tr>
   </table>
 
   <div class="callout callout-green">
-    <strong>✅ 2LoD Strength: You live this distinction</strong>
+    <strong>✅ Key Distinction</strong>
     In your role, you design KRIs for the risk dashboard and monitor KPIs reported by 1LoD. Map this directly to CISSP questions about security metrics design and reporting to senior management.
   </div>
 
@@ -247,11 +248,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>SOC 1 vs SOC 2 vs SOC 3 distinction</td><td class="gap-med">🟡 MEDIUM</td><td>SOC 1=financial. SOC 2=security (TSC). SOC 3=public summary. Type 2=period of effectiveness.</td></tr>
     <tr><td>Black/White/Grey box pen testing</td><td class="gap-low">🟢 LOW</td><td>Black=no knowledge. White=full knowledge. Grey=partial. Know what each simulates.</td></tr>
     <tr><td>SAST vs DAST vs IAST</td><td class="gap-low">🟢 LOW</td><td>SAST=code review (pre-execution). DAST=runtime test (no source). IAST=both.</td></tr>
-    <tr><td>KPI vs KRI</td><td class="gap-low">🟢 LOW</td><td>Already strong from 2LoD role. KRI=predictive/leading. KPI=historical/lagging.</td></tr>
+    <tr><td>KPI vs KRI</td><td class="gap-low">🟢 LOW</td><td>KRI=predictive/leading. KPI=historical/lagging.</td></tr>
   </table>
 </div>
 
-<footer>CISSP Study Notes · Domain 6 · May Tang · Source: ISC2 CBK 2024, Chapple &amp; Seidl, Miller · Last updated June 2026</footer>
+<footer>CISSP Study Notes · Domain 6 · ISC2 CBK 2024 · Chapple &amp; Seidl · Miller</footer>
 
 <script>
 function showTab(id) {
