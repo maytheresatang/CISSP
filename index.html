@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>May Tang — CISSP Study Notes 2026</title>
+<style>
+:root{--navy:#0A1628;--navy-mid:#152238;--teal:#0D9488;--teal-light:#14B8A6;--amber:#B45309;--amber-bg:#FEF3C7;--red:#B91C1C;--red-bg:#FEE2E2;--green:#15803D;--green-bg:#DCFCE7;--border:#E2E8F0;--bg:#F8FAFC;--text:#1E293B;--muted:#64748B;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;}
+.header{background:var(--navy);color:white;padding:48px 40px;border-bottom:4px solid var(--teal);}
+.header .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-light);margin-bottom:10px;}
+.header h1{font-size:2.2rem;font-weight:800;margin-bottom:8px;}
+.header .sub{color:#94A3B8;font-size:15px;max-width:600px;}
+.header .meta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-teal{background:rgba(13,148,136,.25);color:var(--teal-light);}
+.badge-amber{background:var(--amber-bg);color:var(--amber);}
+.badge-green{background:var(--green-bg);color:var(--green);}
+.content{max-width:960px;margin:0 auto;padding:40px;}
+.section-title{font-size:1.1rem;font-weight:700;color:var(--navy);margin:32px 0 16px;padding-bottom:6px;border-bottom:2px solid var(--teal);}
+.domains{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.domain-card{background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;text-decoration:none;color:var(--text);transition:box-shadow .2s,border-color .2s;display:block;}
+.domain-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1);border-color:var(--teal);}
+.dc-num{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:4px;}
+.dc-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.dc-sub{font-size:13px;color:var(--muted);margin-bottom:10px;}
+.dc-meta{display:flex;gap:8px;flex-wrap:wrap;}
+.dc-badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;}
+.status-done{background:var(--green-bg);color:var(--green);}
+.status-new{background:var(--amber-bg);color:var(--amber);}
+.progress-bar{background:#E2E8F0;border-radius:8px;height:8px;margin:8px 0 4px;}
+.progress-fill{background:var(--teal);border-radius:8px;height:8px;}
+.callout{border-left:4px solid;padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0;}
+.callout-amber{border-color:var(--amber);background:var(--amber-bg);}
+.callout-red{border-color:var(--red);background:var(--red-bg);}
+.callout-green{border-color:var(--green);background:var(--green-bg);}
+.callout strong{display:block;margin-bottom:4px;font-size:13px;}
+.gap-table{width:100%;border-collapse:collapse;font-size:14px;}
+.gap-table th{background:var(--navy);color:white;padding:9px 12px;text-align:left;font-size:13px;}
+.gap-table td{padding:8px 12px;border-bottom:1px solid var(--border);}
+.gap-table tr:nth-child(even) td{background:#F1F5F9;}
+.high{color:var(--red);font-weight:700;}
+.med{color:var(--amber);font-weight:700;}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
+@media(max-width:640px){.domains{grid-template-columns:1fr;}.content{padding:20px;}.header{padding:28px 20px;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">CISSP CBK 2024 · Personal Study Notes</div>
+  <h1>May Tang — CISSP 2026</h1>
+  <div class="sub">All 8 CBK domains. Target exam: August–September 2026. Notes built from ISC2 CBK 2024, Chapple &amp; Seidl, and Miller.</div>
+  <div class="meta">
+    <span class="badge badge-teal">8 Domains</span>
+    <span class="badge badge-green">Domains 1–7: Complete</span>
+    <span class="badge badge-amber">Domain 8: Fresh</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section-title">Domain Notes</div>
+  <div class="domains">
+
+    <a class="domain-card" href="domain1.html">
+      <div class="dc-num">Domain 1 · 16%</div>
+      <div class="dc-title">Security &amp; Risk Management</div>
+      <div class="dc-sub">Ethics · GRC · BCP · Risk · Legal</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
+      <div class="dc-meta">
+        <span class="dc-badge status-done">Notes Complete</span>
+        <span class="dc-badge" style="background:var(--red-bg);color:var(--red);">Quiz: 67%</span>
+      </div>
+    </a>
+
+    <a class="domain-card" href="domain2.html">
+      <div class="dc-num">Domain 2 · 10%</div>
+      <div class="dc-title">Asset Security</div>
+      <div class="dc-sub">Classification · Ownership · Data States · Handling</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      <div class="dc-meta">
+        <span class="dc-badge status-done">Notes Complete</span>
+        <span class="dc-badge status-done">Quiz: 100%</span>
+      </div>
+    </a>
+
+    <a class="domain-card" href="domain3.html">
+      <div class="dc-num">Domain 3 · 13%</div>
+      <div class="dc-title">Security Architecture &amp; Engineering</div>
+      <div class="dc-sub">Crypto · PKI · Models · Physical · Cloud</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+      <div class="dc-meta">
+        <span class="dc-badge status-done">Notes Complete</span>
+        <span class="dc-badge" style="background:var(--amber-bg);color:var(--amber);">Crypto Gap</span>
+      </div>
+    </a>
+
+    <a class="domain-card" href="domain4.html">
+      <div class="dc-num">Domain 4 · 13%</div>
+      <div class="dc-title">Communication &amp; Network Security</div>
+      <div class="dc-sub">OSI · TCP/IP · Firewalls · IPsec · Wireless · AAA</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+      <div class="dc-meta">
+        <span class="dc-badge status-done">Notes Complete</span>
+        <span class="dc-badge" style="background:var(--amber-bg);color:var(--amber);">RADIUS/TACACS+ Gap</span>
+      </div>
+    </a>
+
+    <a class="domain-card" href="domain5.html">
+      <div class="dc-num">Domain 5 · 13%</div>
+      <div class="dc-title">Identity &amp; Access Management</div>
+      <div class="dc-sub">OAuth · SAML · MFA · Biometrics · Zero Trust</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+      <div class="dc-meta">
+        <span class="dc-badge status-done">Notes Complete</span>
+        <span class="dc-badge" style="background:var(--amber-bg);color:var(--amber);">OAuth/SAML Gap</span>
+      </div>
+    </a>
+
+    <a class="domain-card" href="domain6.html">
+      <div class="dc-num">Domain 6 · 12%</div>
+      <div class="dc-title">Security Assessment &amp; Testing</div>
+      <div class="dc-sub">SAST/DAST · Pen Testing · Audits · SOC · SCAP</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+      <div class="dc-meta">
+        <span class="dc-badge status-done">Notes Complete</span>
+        <span class="dc-badge" style="background:var(--amber-bg);color:var(--amber);">SCAP Gap</span>
+      </div>
+    </a>
+
+    <a class="domain-card" href="domain7.html">
+      <div class="dc-num">Domain 7 · 13%</div>
+      <div class="dc-title">Security Operations</div>
+      <div class="dc-sub">IR · Forensics · DR/BC · Patch · Physical</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
+      <div class="dc-meta">
+        <span class="dc-badge status-done">Notes + Quiz Gaps</span>
+        <span class="dc-badge" style="background:var(--red-bg);color:var(--red);">Quiz: 67% — Re-test</span>
+      </div>
+    </a>
+
+    <a class="domain-card" href="domain8.html">
+      <div class="dc-num">Domain 8 · 10%</div>
+      <div class="dc-title">Software Development Security</div>
+      <div class="dc-sub">SDLC · Secure Coding · OWASP · Testing · Supply Chain</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+      <div class="dc-meta">
+        <span class="dc-badge status-new">Notes Complete · Quiz Pending</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-title">Running Gap Tracker</div>
+  <div class="callout callout-red">
+    <strong>🔴 Highest Priority Gaps — Drill These</strong>
+  </div>
+  <table class="gap-table">
+    <tr><th>Gap</th><th>Priority</th><th>Domain(s)</th></tr>
+    <tr><td>ISC2 Ethics canon order (Public → Client → Profession → Self)</td><td class="high">HIGH</td><td>D1, D7</td></tr>
+    <tr><td>Digital forensics — Order of volatility</td><td class="high">HIGH</td><td>D7</td></tr>
+    <tr><td>RADIUS (UDP, partial encrypt) vs TACACS+ (TCP, full encrypt)</td><td class="high">HIGH</td><td>D4, D5, D6</td></tr>
+    <tr><td>Crypto round counts (DES=16, AES-128=10, AES-192=12, AES-256=14)</td><td class="high">HIGH</td><td>D3</td></tr>
+    <tr><td>Bootkit vs Rootkit (TPM/Secure Boot distinction)</td><td class="high">HIGH</td><td>D3, D7</td></tr>
+    <tr><td>SAST vs DAST vs IAST — what each does, when</td><td class="high">HIGH</td><td>D6, D8</td></tr>
+    <tr><td>Threat modelling belongs at DESIGN phase</td><td class="high">HIGH</td><td>D8</td></tr>
+    <tr><td>OAuth vs SAML vs OIDC scenario mapping</td><td class="med">MED</td><td>D5</td></tr>
+    <tr><td>Biometric FAR / FRR / CER</td><td class="med">MED</td><td>D5</td></tr>
+    <tr><td>SCAP components (CVE, CVSS, CCE, CPE, OVAL, XCCDF)</td><td class="med">MED</td><td>D6</td></tr>
+    <tr><td>SQL injection: parameterised queries fix it; client-side validation does NOT</td><td class="med">MED</td><td>D8</td></tr>
+    <tr><td>Aggregation vs Inference attacks on databases</td><td class="med">MED</td><td>D8</td></tr>
+  </table>
+
+  <div class="section-title">Study Framework</div>
+  <div class="callout callout-green">
+    <strong>✅ Approach</strong>
+    80% mastery threshold before advancing. Quiz after each domain. D7 at 67% — needs re-quiz. Full mock exam pending. BCM/2LoD background = strength in governance, risk, BCP/DR questions. Primary blind spots: cryptography, PKI, network specifics, software vulnerabilities.
+  </div>
+
+</div>
+
+<footer>May Tang · CISSP Study Notes 2026 · ISC2 CBK 2024 · Chapple &amp; Seidl · Miller · Budapest, Hungary</footer>
+
+</body>
+</html>
