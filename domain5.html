@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP Domain 5 — Identity &amp; Access Management</title>
+<style>
+:root{--navy:#0A1628;--navy-mid:#152238;--teal:#0D9488;--teal-light:#14B8A6;--amber:#B45309;--amber-bg:#FEF3C7;--red:#B91C1C;--red-bg:#FEE2E2;--green:#15803D;--green-bg:#DCFCE7;--blue:#1D4ED8;--blue-bg:#DBEAFE;--border:#E2E8F0;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+.header{background:var(--navy);color:white;padding:40px;border-bottom:4px solid var(--teal);}
+.header .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-light);margin-bottom:8px;}
+.header h1{font-size:2rem;font-weight:800;margin-bottom:6px;}
+.header .sub{color:#94A3B8;font-size:14px;}
+.header .meta{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-teal{background:rgba(13,148,136,.25);color:var(--teal-light);}
+.badge-red{background:var(--red-bg);color:var(--red);}
+.tabs{display:flex;gap:2px;background:var(--navy-mid);padding:0 40px;overflow-x:auto;}
+.tab-btn{padding:12px 18px;font-size:13px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+.tab-btn.active,.tab-btn:hover{color:var(--teal-light);border-bottom-color:var(--teal-light);}
+.tab-content{display:none;padding:32px 40px;}
+.tab-content.active{display:block;}
+.section-title{font-size:1.15rem;font-weight:700;color:var(--navy);margin:28px 0 14px;padding-bottom:6px;border-bottom:2px solid var(--teal);}
+.section-title:first-child{margin-top:0;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;}
+th{background:var(--navy);color:white;padding:10px 12px;text-align:left;font-size:13px;}
+td{padding:9px 12px;border-bottom:1px solid var(--border);}
+tr:nth-child(even) td{background:#F1F5F9;}
+.callout{border-left:4px solid;padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0;}
+.callout-amber{border-color:var(--amber);background:var(--amber-bg);}
+.callout-red{border-color:var(--red);background:var(--red-bg);}
+.callout-green{border-color:var(--green);background:var(--green-bg);}
+.callout-blue{border-color:var(--blue);background:var(--blue-bg);}
+.callout strong{display:block;margin-bottom:4px;font-size:13px;}
+.mnemonic{background:linear-gradient(135deg,#1E1B4B,#312E81);color:white;padding:16px 20px;border-radius:10px;margin:14px 0;}
+.mnemonic .m-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A5B4FC;margin-bottom:8px;}
+.mnemonic .m-text{font-size:1.1rem;font-weight:800;color:#E0E7FF;}
+.mnemonic .m-expand{font-size:13px;color:#C7D2FE;margin-top:6px;}
+ul{padding-left:20px;margin:8px 0;}
+li{margin-bottom:5px;}
+.gap-high{color:var(--red);font-weight:700;}
+.gap-med{color:var(--amber);font-weight:700;}
+.gap-low{color:var(--green);font-weight:700;}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
+@media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">CISSP CBK 2024 · Study Notes</div>
+  <h1>Domain 5 — Identity &amp; Access Management (IAM)</h1>
+  <div class="sub">Authentication · Federation · Access Models · Zero Trust · PAM</div>
+  <div class="meta">
+    <span class="badge badge-teal">Exam Weight: 13%</span>
+    <span class="badge badge-red">Gaps: OAuth/SAML/OIDC mapping, Biometrics, Bell-LaPadula/Biba</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('concepts')">Core IAM</button>
+  <button class="tab-btn" onclick="showTab('auth')">Authentication</button>
+  <button class="tab-btn" onclick="showTab('federation')">Federation &amp; SSO</button>
+  <button class="tab-btn" onclick="showTab('access')">Access Models</button>
+  <button class="tab-btn" onclick="showTab('lifecycle')">Lifecycle &amp; PAM</button>
+  <button class="tab-btn" onclick="showTab('zt')">Zero Trust</button>
+  <button class="tab-btn" onclick="showTab('gaps')">Gap Analysis</button>
+</div>
+
+<div id="concepts" class="tab-content active">
+  <div class="section-title">The 4 A's of IAM</div>
+  <table>
+    <tr><th>Concept</th><th>Question it answers</th><th>Example</th></tr>
+    <tr><td><strong>Identification</strong></td><td>Who are you? (claimed identity)</td><td>Username, employee ID, smart card</td></tr>
+    <tr><td><strong>Authentication</strong></td><td>Prove it. (verify identity)</td><td>Password, fingerprint, token</td></tr>
+    <tr><td><strong>Authorisation</strong></td><td>What can you do? (access rights)</td><td>RBAC role assignment, ACL</td></tr>
+    <tr><td><strong>Accounting / Auditing</strong></td><td>What did you do? (audit trail)</td><td>Log files, SIEM events</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ Exam Trap: Identification vs Authentication</strong>
+    Presenting your username card = identification. Entering your PIN = authentication. Identification is <em>claiming</em> who you are; authentication is <em>proving</em> it. They are always separate steps.
+  </div>
+
+  <div class="section-title">Subjects, Objects, and Access</div>
+  <table>
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td><strong>Subject</strong></td><td>Active entity requesting access — user, process, program, system</td></tr>
+    <tr><td><strong>Object</strong></td><td>Passive entity being accessed — file, database, printer, network resource</td></tr>
+    <tr><td><strong>Access right</strong></td><td>Permission granted to a subject for an object (read, write, execute, delete)</td></tr>
+  </table>
+</div>
+
+<div id="auth" class="tab-content">
+  <div class="section-title">Authentication Factors</div>
+  <table>
+    <tr><th>Factor</th><th>Category</th><th>Examples</th><th>Weakness</th></tr>
+    <tr><td><strong>Type 1</strong></td><td>Something you <strong>know</strong></td><td>Password, PIN, passphrase, security question</td><td>Can be shared, guessed, phished</td></tr>
+    <tr><td><strong>Type 2</strong></td><td>Something you <strong>have</strong></td><td>Hardware token (RSA SecurID), smart card, OTP via phone, FIDO2 key</td><td>Can be lost or stolen</td></tr>
+    <tr><td><strong>Type 3</strong></td><td>Something you <strong>are</strong></td><td>Fingerprint, iris, voice, face, palm vein</td><td>Cannot be changed if compromised</td></tr>
+    <tr><td><strong>Type 4</strong></td><td>Somewhere you <strong>are</strong></td><td>Geolocation, IP range, GPS</td><td>Can be spoofed with VPN</td></tr>
+    <tr><td><strong>Type 5</strong></td><td>Something you <strong>do</strong></td><td>Keystroke dynamics, signature, gait</td><td>Variable, complex to implement</td></tr>
+  </table>
+
+  <div class="callout callout-blue">
+    <strong>📌 MFA requirement</strong>
+    MFA = at least two <em>different factor types</em>. Password + PIN = 1FA (both Type 1). Password + token = MFA (Type 1 + Type 2).
+  </div>
+
+  <div class="section-title">Biometric Error Rates</div>
+  <table>
+    <tr><th>Metric</th><th>Full Name</th><th>Definition</th><th>Exam Relevance</th></tr>
+    <tr><td><strong>FAR</strong></td><td>False Acceptance Rate</td><td>% of unauthorised users incorrectly accepted. Type II error. Security risk.</td><td>Lower FAR = more secure</td></tr>
+    <tr><td><strong>FRR</strong></td><td>False Rejection Rate</td><td>% of authorised users incorrectly rejected. Type I error. Usability issue.</td><td>Lower FRR = more usable</td></tr>
+    <tr><td><strong>CER</strong></td><td>Crossover Error Rate</td><td>Point where FAR = FRR. Best overall accuracy measure.</td><td>Lower CER = better system</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ FAR vs FRR trade-off</strong>
+    You cannot simultaneously minimise both. Increasing sensitivity (accept fewer people) → lower FAR (more secure) but higher FRR (more false rejections). The CER is the "sweet spot." High security = lower FAR (accept fewer). High convenience = lower FRR (reject fewer legit users).
+  </div>
+
+  <div class="section-title">Password Policies (NIST SP 800-63B)</div>
+  <ul>
+    <li>Minimum 8 characters (15+ recommended for admin accounts)</li>
+    <li>Check against breached password lists</li>
+    <li>Do NOT force periodic password changes without evidence of compromise</li>
+    <li>Do NOT require complexity rules that lead to predictable patterns (P@ssw0rd!)</li>
+    <li>Use passphrases — length beats complexity</li>
+    <li>Support password managers</li>
+  </ul>
+</div>
+
+<div id="federation" class="tab-content">
+  <div class="section-title">SSO and Federation</div>
+  <table>
+    <tr><th>Technology</th><th>Purpose</th><th>Key Feature</th></tr>
+    <tr><td><strong>SSO (Single Sign-On)</strong></td><td>Authenticate once, access multiple systems</td><td>Reduces password fatigue; single point of failure risk</td></tr>
+    <tr><td><strong>Kerberos</strong></td><td>SSO for internal networks</td><td>Ticket-based, symmetric crypto, requires KDC. Port 88.</td></tr>
+    <tr><td><strong>LDAP</strong></td><td>Directory protocol for identity lookup</td><td>Port 389 (636 for LDAPS). Used by Active Directory.</td></tr>
+  </table>
+
+  <div class="section-title">SAML vs OAuth vs OpenID Connect — Critical Distinction</div>
+  <table>
+    <tr><th>Protocol</th><th>Purpose</th><th>Token Type</th><th>Best Use Case</th></tr>
+    <tr><td><strong>SAML 2.0</strong></td><td>Authentication AND Authorisation</td><td>XML assertions</td><td>Enterprise SSO (corporate portals, federated login between orgs)</td></tr>
+    <tr><td><strong>OAuth 2.0</strong></td><td>Authorisation ONLY — not authentication</td><td>Access token</td><td>API access delegation (app accessing your Google Drive)</td></tr>
+    <tr><td><strong>OpenID Connect (OIDC)</strong></td><td>Authentication (built on OAuth 2.0)</td><td>ID token (JWT)</td><td>"Sign in with Google/Apple" — consumer identity</td></tr>
+  </table>
+
+  <div class="callout callout-red">
+    <strong>🚨 Exam Trap: OAuth is NOT authentication</strong>
+    OAuth 2.0 grants an app permission to act on your behalf — it does NOT authenticate you. OIDC adds the identity layer on top of OAuth. SAML is typically enterprise-to-enterprise. OIDC is consumer/cloud-to-cloud.
+  </div>
+
+  <div class="mnemonic">
+    <div class="m-title">Federation Mnemonic</div>
+    <div class="m-text">SAML = Enterprise SSO · OAuth = API delegation · OIDC = "Sign in with..."</div>
+    <div class="m-expand">Scenario: company merger → SAML. App accessing your calendar → OAuth. "Login with Google" → OIDC.</div>
+  </div>
+
+  <div class="section-title">Federation Roles</div>
+  <table>
+    <tr><th>Role</th><th>Definition</th><th>Example</th></tr>
+    <tr><td><strong>IdP (Identity Provider)</strong></td><td>Authenticates the user and asserts their identity</td><td>Corporate Active Directory, Okta, Google</td></tr>
+    <tr><td><strong>SP (Service Provider)</strong></td><td>Relies on the IdP assertion to grant access</td><td>Salesforce, Office 365, your SaaS app</td></tr>
+    <tr><td><strong>Trust relationship</strong></td><td>SP trusts assertions from the IdP</td><td>Established via metadata exchange and signing certs</td></tr>
+  </table>
+
+  <div class="section-title">JIT (Just-In-Time) Provisioning</div>
+  <p>User accounts in the SP are created automatically on first login using IdP assertion data. No pre-provisioning needed. Common in cloud SaaS federated environments.</p>
+</div>
+
+<div id="access" class="tab-content">
+  <div class="section-title">Access Control Models</div>
+  <table>
+    <tr><th>Model</th><th>Acronym</th><th>Decision Maker</th><th>Key Feature</th><th>Use Case</th></tr>
+    <tr><td><strong>Discretionary</strong></td><td>DAC</td><td>Data owner</td><td>Owner sets permissions on their objects. Flexible but weak — permission creep risk.</td><td>Windows file system</td></tr>
+    <tr><td><strong>Mandatory</strong></td><td>MAC</td><td>System / policy</td><td>Labels on subjects and objects. No owner override. Most secure. Bell-LaPadula model.</td><td>Military classification</td></tr>
+    <tr><td><strong>Role-Based</strong></td><td>RBAC</td><td>Admin assigns roles</td><td>Permissions tied to role, not individual. Scalable. Principle of least privilege.</td><td>Enterprise ERP systems</td></tr>
+    <tr><td><strong>Attribute-Based</strong></td><td>ABAC</td><td>Policy engine</td><td>Uses attributes (user, resource, environment). Most granular and context-aware.</td><td>Zero Trust, cloud IAM</td></tr>
+    <tr><td><strong>Rule-Based</strong></td><td>Rule-BAC</td><td>Admin sets rules</td><td>System-enforced rules (e.g. firewall ACL — allow port 443 from any). Not role-based.</td><td>Firewall rules, router ACLs</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ RBAC vs ABAC</strong>
+    RBAC: "What is your role?" ABAC: "What are ALL your attributes, and what context does this request occur in?" ABAC is more granular — can evaluate time of day, device health, location. Zero Trust implementations use ABAC-style continuous evaluation.
+  </div>
+
+  <div class="section-title">Formal Security Models (revisit from D3)</div>
+  <table>
+    <tr><th>Model</th><th>Protects</th><th>Key Rule</th></tr>
+    <tr><td><strong>Bell-LaPadula</strong></td><td>Confidentiality</td><td>No Read Up (NRU), No Write Down (NWD). Data flows up only.</td></tr>
+    <tr><td><strong>Biba</strong></td><td>Integrity</td><td>No Read Down (NRD), No Write Up (NWU). High integrity won't be corrupted by low integrity.</td></tr>
+    <tr><td><strong>Clark-Wilson</strong></td><td>Integrity</td><td>Well-formed transactions, separation of duties. Commercial model.</td></tr>
+    <tr><td><strong>Brewer-Nash</strong></td><td>Confidentiality / CoI</td><td>Access to one entity blocks access to competitors. Consulting/finance.</td></tr>
+  </table>
+</div>
+
+<div id="lifecycle" class="tab-content">
+  <div class="section-title">Identity Provisioning Lifecycle</div>
+  <ol style="padding-left:24px;margin:8px 0 20px;">
+    <li style="margin-bottom:8px;"><strong>Provision</strong> — Create account, assign minimum role, grant baseline access</li>
+    <li style="margin-bottom:8px;"><strong>Maintain</strong> — Update roles on job change, add access by exception with approval</li>
+    <li style="margin-bottom:8px;"><strong>Review</strong> — Regular access certification / recertification (user access reviews)</li>
+    <li style="margin-bottom:8px;"><strong>Deprovision</strong> — Disable account immediately on termination, revoke tokens, collect hardware</li>
+  </ol>
+
+  <div class="callout callout-red">
+    <strong>🚨 Deprovisioning is a critical control</strong>
+    Terminated employee accounts left active are a leading insider threat vector. The CISSP answer for "most important action upon termination" is <strong>immediately disable/revoke access</strong> — not the exit interview, not collecting equipment.
+  </div>
+
+  <div class="section-title">Access Control Problems to Watch</div>
+  <table>
+    <tr><th>Problem</th><th>Definition</th><th>Control</th></tr>
+    <tr><td><strong>Privilege Creep</strong></td><td>Accumulated permissions from role changes not cleaned up</td><td>Regular access reviews / recertification</td></tr>
+    <tr><td><strong>Excessive Privilege</strong></td><td>Users have more access than their job requires</td><td>Least privilege, role-based access design</td></tr>
+    <tr><td><strong>Aggregation</strong></td><td>Combining individually permitted data reveals sensitive insight</td><td>Data classification, need-to-know enforcement</td></tr>
+  </table>
+
+  <div class="section-title">PAM — Privileged Access Management</div>
+  <p>PAM controls and monitors accounts with elevated privileges (admins, service accounts, root).</p>
+  <ul style="margin-top:8px;">
+    <li><strong>Just-in-time (JIT) access</strong> — Elevate privilege only when needed, auto-expire</li>
+    <li><strong>Session recording</strong> — All privileged session activity logged and reviewable</li>
+    <li><strong>Password vaulting</strong> — Privileged passwords managed by PAM system (CyberArk, BeyondTrust)</li>
+    <li><strong>Break-glass accounts</strong> — Emergency admin accounts; access triggers alert and full audit</li>
+  </ul>
+</div>
+
+<div id="zt" class="tab-content">
+  <div class="section-title">Zero Trust Architecture (NIST SP 800-207)</div>
+  <p>Zero Trust = "never trust, always verify." No implicit trust based on network location. Every request is verified as if it originates from an untrusted network.</p>
+
+  <div class="section-title">Zero Trust Core Principles</div>
+  <ul>
+    <li>Verify explicitly — always authenticate and authorise based on all available data points</li>
+    <li>Use least privilege access — limit user access with JIT, JEA, risk-based adaptive policies</li>
+    <li>Assume breach — minimise blast radius, segment access, encrypt everything, use analytics</li>
+  </ul>
+
+  <div class="section-title">Zero Trust Components (NIST 800-207)</div>
+  <table>
+    <tr><th>Component</th><th>Role</th></tr>
+    <tr><td><strong>Policy Decision Point (PDP)</strong></td><td>Makes access decisions. Contains Policy Engine (PE) + Policy Administrator (PA).</td></tr>
+    <tr><td><strong>Policy Enforcement Point (PEP)</strong></td><td>Enforces decisions made by PDP. Gate between subject and resource.</td></tr>
+    <tr><td><strong>Policy Engine (PE)</strong></td><td>Evaluates trust score, applies policies, grants or denies.</td></tr>
+    <tr><td><strong>Policy Administrator (PA)</strong></td><td>Signals PEP to allow or deny; issues session tokens.</td></tr>
+  </table>
+
+  <div class="section-title">SASE (Secure Access Service Edge)</div>
+  <p>SASE = SD-WAN + cloud-native security (CASB, FWaaS, ZTNA, SWG) delivered as a single cloud service. Eliminates the concept of a network perimeter — security travels with the user.</p>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ ZTNA vs VPN</strong>
+    VPN gives network-level access (once connected, trust is implicit). ZTNA gives application-level access only — each application is a separate policy decision. ZTNA = Zero Trust Network Access.
+  </div>
+</div>
+
+<div id="gaps" class="tab-content">
+  <div class="section-title">Domain 5 Gap Analysis</div>
+  <table>
+    <tr><th>Topic</th><th>Risk Level</th><th>Action</th></tr>
+    <tr><td>OAuth vs SAML vs OIDC scenario mapping</td><td class="gap-high">🔴 HIGH</td><td>Enterprise SSO=SAML. API delegation=OAuth. "Sign in with Google"=OIDC. Drill scenarios.</td></tr>
+    <tr><td>Biometric error rates (FAR/FRR/CER)</td><td class="gap-high">🔴 HIGH</td><td>FAR=false acceptance=security risk. FRR=false rejection=usability issue. CER=crossover.</td></tr>
+    <tr><td>Bell-LaPadula vs Biba properties</td><td class="gap-high">🔴 HIGH</td><td>BLP: No Read Up, No Write Down. Biba: No Read Down, No Write Up.</td></tr>
+    <tr><td>Zero Trust component names (PDP/PEP)</td><td class="gap-med">🟡 MEDIUM</td><td>PDP = decides. PEP = enforces. Policy Engine inside PDP.</td></tr>
+    <tr><td>RBAC vs ABAC distinction</td><td class="gap-med">🟡 MEDIUM</td><td>ABAC = most granular, context-aware. Zero Trust uses ABAC-style continuous eval.</td></tr>
+    <tr><td>Privilege creep and access reviews</td><td class="gap-low">🟢 LOW</td><td>2LoD strength — map to access certification / recertification controls.</td></tr>
+    <tr><td>Deprovisioning priority</td><td class="gap-low">🟢 LOW</td><td>Disable access FIRST. Everything else follows. This is the primary control on termination.</td></tr>
+  </table>
+</div>
+
+<footer>CISSP Study Notes · Domain 5 · May Tang · Source: ISC2 CBK 2024, Chapple &amp; Seidl, Miller · Last updated June 2026</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
