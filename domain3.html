@@ -51,10 +51,11 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.two-col{grid-template-columns:1fr;}.header{padding:24px;}}
-</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.2);color:var(--teal-light);border:1px solid rgba(13,148,136,.4);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.35);}.home-bar{background:var(--navy-mid);padding:10px 40px;border-bottom:1px solid rgba(255,255,255,.07);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
 </head>
 <body>
 
+<div class="home-bar"><a class="home-btn" href="index.html"><div class="header">#8592; All Domains</a></div>
 <div class="header">
   <div class="label">CISSP CBK 2024 · Study Notes</div>
   <h1>Domain 3 — Security Architecture &amp; Engineering</h1>
@@ -80,7 +81,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <p>Domain 3 covers the engineering principles and models that underpin secure system design, plus cryptography and physical security. At 13% exam weight it is substantial. Cryptography and PKI are your identified weak areas — focus here first.</p>
   <div class="callout callout-red">
     <strong>🚨 Priority Gap</strong>
-    Cryptography round counts, key sizes, and PKI certificate lifecycle are pure recall. There is no BCM instinct to fall back on. These require deliberate memorisation — specifically the algorithm comparison table and PKI chain of trust.
+    Cryptography round counts, key sizes, and PKI certificate lifecycle are pure recall. These require deliberate memorisation — specifically the algorithm comparison table and PKI chain of trust.
   </div>
 
   <table>
@@ -327,7 +328,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<footer>CISSP Study Notes · Domain 3 · May Tang · Source: ISC2 CBK 2024, Chapple &amp; Seidl, Miller · Last updated June 2026</footer>
+<footer>CISSP Study Notes · Domain 3 · ISC2 CBK 2024 · Chapple &amp; Seidl · Miller</footer>
 
 <script>
 function showTab(id) {
