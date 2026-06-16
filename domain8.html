@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP Domain 8 — Software Development Security</title>
+<style>
+:root{--navy:#0A1628;--navy-mid:#152238;--teal:#0D9488;--teal-light:#14B8A6;--amber:#B45309;--amber-bg:#FEF3C7;--red:#B91C1C;--red-bg:#FEE2E2;--green:#15803D;--green-bg:#DCFCE7;--blue:#1D4ED8;--blue-bg:#DBEAFE;--border:#E2E8F0;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+.header{background:var(--navy);color:white;padding:40px;border-bottom:4px solid var(--teal);}
+.header .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-light);margin-bottom:8px;}
+.header h1{font-size:2rem;font-weight:800;margin-bottom:6px;}
+.header .sub{color:#94A3B8;font-size:14px;}
+.header .meta{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-teal{background:rgba(13,148,136,.25);color:var(--teal-light);}
+.badge-amber{background:var(--amber-bg);color:var(--amber);}
+.badge-red{background:var(--red-bg);color:var(--red);}
+.tabs{display:flex;gap:2px;background:var(--navy-mid);padding:0 40px;overflow-x:auto;}
+.tab-btn{padding:12px 18px;font-size:13px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+.tab-btn.active,.tab-btn:hover{color:var(--teal-light);border-bottom-color:var(--teal-light);}
+.tab-content{display:none;padding:32px 40px;}
+.tab-content.active{display:block;}
+.section-title{font-size:1.15rem;font-weight:700;color:var(--navy);margin:28px 0 14px;padding-bottom:6px;border-bottom:2px solid var(--teal);}
+.section-title:first-child{margin-top:0;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;}
+th{background:var(--navy);color:white;padding:10px 12px;text-align:left;font-size:13px;}
+td{padding:9px 12px;border-bottom:1px solid var(--border);}
+tr:nth-child(even) td{background:#F1F5F9;}
+.callout{border-left:4px solid;padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0;}
+.callout-amber{border-color:var(--amber);background:var(--amber-bg);}
+.callout-red{border-color:var(--red);background:var(--red-bg);}
+.callout-green{border-color:var(--green);background:var(--green-bg);}
+.callout-blue{border-color:var(--blue);background:var(--blue-bg);}
+.callout strong{display:block;margin-bottom:4px;font-size:13px;}
+.mnemonic{background:linear-gradient(135deg,#1E1B4B,#312E81);color:white;padding:16px 20px;border-radius:10px;margin:14px 0;}
+.mnemonic .m-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A5B4FC;margin-bottom:8px;}
+.mnemonic .m-text{font-size:1.1rem;font-weight:800;color:#E0E7FF;line-height:1.5;}
+.mnemonic .m-expand{font-size:13px;color:#C7D2FE;margin-top:6px;}
+ul{padding-left:20px;margin:8px 0;}
+li{margin-bottom:5px;}
+.trap{background:#FFF7ED;border:2px solid #F97316;border-radius:10px;padding:16px 18px;margin:14px 0;}
+.trap-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#C2410C;font-weight:700;margin-bottom:6px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+.card{background:white;border:1px solid var(--border);border-radius:10px;padding:16px;}
+.card h4{color:var(--navy);font-size:14px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
+@media(max-width:700px){.tab-content{padding:20px;}.header{padding:24px;}.grid2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">CISSP CBK 2024 · Study Notes</div>
+  <h1>Domain 8 — Software Development Security</h1>
+  <div class="sub">SDLC · Secure Coding · Software Testing · Acquired Software · Database Security · API Security</div>
+  <div class="meta">
+    <span class="badge badge-teal">Exam Weight: 10%</span>
+    <span class="badge badge-amber">References: Chapple &amp; Seidl · Miller · ISC2 CBK 2024</span>
+    <span class="badge badge-red">New Domain — Study Fresh</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('sdlc')">SDLC &amp; Models</button>
+  <button class="tab-btn" onclick="showTab('devsecops')">DevSecOps</button>
+  <button class="tab-btn" onclick="showTab('securecoding')">Secure Coding</button>
+  <button class="tab-btn" onclick="showTab('testing')">Testing Methods</button>
+  <button class="tab-btn" onclick="showTab('vulns')">Vulnerabilities</button>
+  <button class="tab-btn" onclick="showTab('database')">Database Security</button>
+  <button class="tab-btn" onclick="showTab('acquired')">Acquired Software</button>
+  <button class="tab-btn" onclick="showTab('gaps')">Gap Analysis</button>
+</div>
+
+<!-- OVERVIEW -->
+<div id="overview" class="tab-content active">
+  <div class="section-title">Domain 8 at a Glance</div>
+
+  <div class="callout callout-blue">
+    <strong>📌 2LoD Lens</strong>
+    Your BCM/risk background maps well here. Threat modelling belongs in DESIGN phase (not post-build). Security reviews of acquired/third-party software = vendor assurance. Change Advisory Board (CAB) = formal change control you know from operations. The gap is in software-specific terms: SDLC model names, vulnerability classes, testing types.
+  </div>
+
+  <table>
+    <tr><th>Sub-domain</th><th>Key Topics</th><th>Exam Weight</th></tr>
+    <tr><td>Integrate security in SDLC</td><td>SDLC phases, threat modelling, security requirements</td><td>High</td></tr>
+    <tr><td>Security controls in dev environments</td><td>Env separation, code repos, DevSecOps, IaC</td><td>Medium</td></tr>
+    <tr><td>Assess software security effectiveness</td><td>SAST/DAST/IAST, code review, fuzzing, pen testing</td><td>High</td></tr>
+    <tr><td>Assess acquired software security</td><td>COTS, open source, third-party, SBOM, supply chain</td><td>Medium</td></tr>
+    <tr><td>Secure coding guidelines &amp; standards</td><td>OWASP Top 10, input validation, error handling, APIs</td><td>High</td></tr>
+  </table>
+
+  <div class="section-title">Core Concepts Summary</div>
+  <div class="grid2">
+    <div class="card">
+      <h4>SDLC Security Principle</h4>
+      Security is cheapest to fix at <strong>requirements/design</strong> phase. Cost to fix grows 10× per phase. Threat modelling → design phase. Penetration testing → pre-release.
+    </div>
+    <div class="card">
+      <h4>Environment Separation</h4>
+      Dev → Test/QA → UAT → Production. Each must be <strong>separate</strong>. Prod data must NOT be used in Dev/Test. Developers should NOT have prod access.
+    </div>
+    <div class="card">
+      <h4>OWASP Top 10 (Exam Focus)</h4>
+      Injection · Broken Auth · Sensitive Data Exposure · XXE · Broken Access Control · Security Misconfiguration · XSS · Insecure Deserialization · Vulnerable Components · Insufficient Logging
+    </div>
+    <div class="card">
+      <h4>Testing Sequence</h4>
+      Unit → Integration → System → UAT → Regression. Security testing: SAST (static, early) → DAST (dynamic, running app) → IAST (runtime instrumentation).
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="m-title">Mnemonic — OWASP Top 10 (2021 update)</div>
+    <div class="m-text">Broken Access Control leads now (#1)</div>
+    <div class="m-expand">2021 order: 1-Broken Access Control · 2-Cryptographic Failures · 3-Injection · 4-Insecure Design · 5-Security Misconfiguration · 6-Vulnerable Components · 7-ID &amp; Auth Failures · 8-Software &amp; Data Integrity · 9-Logging Failures · 10-SSRF. Exam may still reference older top-10 with Injection at #1 — know both.</div>
+  </div>
+</div>
+
+<!-- SDLC & MODELS -->
+<div id="sdlc" class="tab-content">
+  <div class="section-title">SDLC Phases</div>
+  <table>
+    <tr><th>Phase</th><th>Security Activity</th><th>Key Term</th></tr>
+    <tr><td>1. Requirements / Initiation</td><td>Define security requirements, privacy requirements, compliance needs</td><td>Security requirements specification</td></tr>
+    <tr><td>2. Design</td><td><strong>Threat modelling</strong>, security architecture, data flow diagrams</td><td>STRIDE, DREAD, PASTA</td></tr>
+    <tr><td>3. Development / Coding</td><td>Secure coding standards, peer code review, SAST tools</td><td>Static analysis, linting</td></tr>
+    <tr><td>4. Testing / V&amp;V</td><td>DAST, penetration testing, fuzz testing, vulnerability scanning</td><td>Dynamic analysis</td></tr>
+    <tr><td>5. Release / Deployment</td><td>Change control (CAB), configuration management, final security sign-off</td><td>Change Advisory Board</td></tr>
+    <tr><td>6. Operations &amp; Maintenance</td><td>Patch management, vulnerability management, monitoring</td><td>SW-CMM Level 4–5</td></tr>
+    <tr><td>7. Disposal / End-of-Life</td><td>Secure data disposal, decommission, SBOM tracking</td><td>EoL support, sanitisation</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ Exam Trap — Threat Modelling Phase</strong>
+    Threat modelling must occur at the <strong>Design phase</strong>, not during testing and not post-deployment. Remediation ownership = system/application owners, not the security team (your 2LoD instinct is correct here — you advise, they fix).
+  </div>
+
+  <div class="section-title">SDLC Development Models</div>
+  <table>
+    <tr><th>Model</th><th>Characteristics</th><th>When Used / Exam Signal</th></tr>
+    <tr><td><strong>Waterfall</strong></td><td>Sequential phases, no going back, heavy documentation</td><td>Stable requirements, high control needed. Oldest model.</td></tr>
+    <tr><td><strong>Spiral</strong></td><td>Iterative + risk-driven. Each loop = plan → risk → develop → evaluate</td><td>High-risk, complex projects. Risk analysis at every loop.</td></tr>
+    <tr><td><strong>Agile</strong></td><td>Sprints (2–4 wks), working software over documentation, customer collaboration</td><td>Rapid change, frequent delivery. 4 core values in manifesto.</td></tr>
+    <tr><td><strong>RAD (Rapid Application Dev)</strong></td><td>Prototyping, user feedback loops, quick build</td><td>Fast delivery, user-driven. Trade-off: less structured security.</td></tr>
+    <tr><td><strong>Scrum</strong></td><td>Agile subset. Sprints, Product Owner, Scrum Master, daily standups</td><td>Sprints = timeboxed iterations.</td></tr>
+    <tr><td><strong>Kanban</strong></td><td>Visual board, continuous flow, WIP limits</td><td>Continuous delivery, no fixed sprints.</td></tr>
+    <tr><td><strong>V-Model</strong></td><td>Each dev phase has a corresponding test phase (mirror image)</td><td>Verification = are we building it right? Validation = are we building the right thing?</td></tr>
+  </table>
+
+  <div class="section-title">SW-CMM — Software Capability Maturity Model</div>
+  <table>
+    <tr><th>Level</th><th>Name</th><th>Characteristics</th></tr>
+    <tr><td>1</td><td><strong>Initial</strong></td><td>Ad hoc, chaotic, heroic efforts. No processes.</td></tr>
+    <tr><td>2</td><td><strong>Repeatable</strong></td><td>Basic project mgmt, requirements managed, can repeat prior successes. Code reuse begins.</td></tr>
+    <tr><td>3</td><td><strong>Defined</strong></td><td>Standard documented processes across org. Training programmes in place.</td></tr>
+    <tr><td>4</td><td><strong>Managed</strong></td><td>Quantitative metrics, process measurement, predictable.</td></tr>
+    <tr><td>5</td><td><strong>Optimising</strong></td><td>Continuous improvement, innovation, defect prevention.</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="m-title">Mnemonic — SW-CMM Levels</div>
+    <div class="m-text">"I Really Do Manage Optimally"</div>
+    <div class="m-expand">Initial → Repeatable → Defined → Managed → Optimising</div>
+  </div>
+
+  <div class="section-title">Threat Modelling Frameworks</div>
+  <table>
+    <tr><th>Framework</th><th>Stands For</th><th>Focus</th></tr>
+    <tr><td><strong>STRIDE</strong></td><td>Spoofing · Tampering · Repudiation · Info Disclosure · DoS · Elevation of Privilege</td><td>Threat classification (Microsoft)</td></tr>
+    <tr><td><strong>DREAD</strong></td><td>Damage · Reproducibility · Exploitability · Affected Users · Discoverability</td><td>Risk rating/scoring each threat</td></tr>
+    <tr><td><strong>PASTA</strong></td><td>Process for Attack Simulation and Threat Analysis</td><td>Business risk–aligned, 7-stage process</td></tr>
+    <tr><td><strong>TRIKE</strong></td><td>—</td><td>Risk-based, stakeholder requirements focus</td></tr>
+    <tr><td><strong>VAST</strong></td><td>Visual Agile Simple Threat</td><td>Scalable for Agile/DevOps environments</td></tr>
+  </table>
+</div>
+
+<!-- DEVSECOPS -->
+<div id="devsecops" class="tab-content">
+  <div class="section-title">DevOps → DevSecOps</div>
+
+  <div class="callout callout-blue">
+    <strong>Core Concept</strong>
+    DevOps = Development + Operations (tear down the wall between them). DevSecOps = Dev + Sec + Ops — security is integrated throughout CI/CD pipeline, not bolted on at the end. Security shifts left (earlier in the lifecycle).
+  </div>
+
+  <table>
+    <tr><th>Term</th><th>Definition</th><th>Exam Signal</th></tr>
+    <tr><td><strong>CI/CD</strong></td><td>Continuous Integration / Continuous Delivery. Automated build, test, deploy pipeline.</td><td>Security scans run automatically on each code commit.</td></tr>
+    <tr><td><strong>Infrastructure as Code (IaC)</strong></td><td>Infrastructure defined in code (Terraform, Ansible). Version-controlled, repeatable.</td><td>SDS (Software-Defined Security) = IaC applied to security controls.</td></tr>
+    <tr><td><strong>Shift Left</strong></td><td>Move security earlier in SDLC. Find defects at design/code, not in production.</td><td>Cost to fix is lowest at design phase.</td></tr>
+    <tr><td><strong>Software-Defined Security (SDS)</strong></td><td>Security infrastructure managed through code/APIs, not manual config.</td><td>SDS is a type of IaC; DevSecOps context.</td></tr>
+    <tr><td><strong>Container Security</strong></td><td>Docker/Kubernetes. Images should be minimal, scanned, immutable.</td><td>Registry scanning, image signing (Notary).</td></tr>
+    <tr><td><strong>Serverless Security</strong></td><td>Function-as-a-Service. No OS to patch; risk is code and IAM permissions.</td><td>Function permissions should be least privilege.</td></tr>
+  </table>
+
+  <div class="section-title">Environment Separation (Critical)</div>
+  <table>
+    <tr><th>Environment</th><th>Purpose</th><th>Key Rule</th></tr>
+    <tr><td>Development</td><td>Active coding</td><td>No production data. Developers have access.</td></tr>
+    <tr><td>Test / QA</td><td>Functional testing</td><td>Separate from dev. Sanitised data only.</td></tr>
+    <tr><td>UAT (User Acceptance Testing)</td><td>Business validation</td><td>Business users test here. Realistic but not prod data.</td></tr>
+    <tr><td>Staging / Pre-prod</td><td>Final check before go-live</td><td>Mirror of production. Final security scan here.</td></tr>
+    <tr><td>Production</td><td>Live system</td><td>Developers must NOT have direct access. Changes via CAB only.</td></tr>
+  </table>
+
+  <div class="trap">
+    <div class="trap-label">🪤 Exam Trap — CAB vs Change Management</div>
+    <strong>Change Advisory Board (CAB)</strong> reviews and approves/rejects code changes in the <em>release to production</em> step. CAB does NOT write code, manage credentials, or prioritise development backlogs. If the question asks "who approves production code changes?" → CAB.
+  </div>
+
+  <div class="section-title">Maturity Models — SAMM &amp; BSIMM</div>
+  <table>
+    <tr><th>Model</th><th>Full Name</th><th>Purpose</th></tr>
+    <tr><td><strong>SW-CMM</strong></td><td>Software Capability Maturity Model</td><td>Process maturity, 5 levels. Classic model.</td></tr>
+    <tr><td><strong>SAMM</strong></td><td>Software Assurance Maturity Model (OWASP)</td><td>Security-specific. 5 business functions: Governance, Design, Implementation, Verification, Operations.</td></tr>
+    <tr><td><strong>BSIMM</strong></td><td>Building Security In Maturity Model</td><td>Descriptive (what orgs actually do). 12 practices, 4 domains.</td></tr>
+    <tr><td><strong>CMMI</strong></td><td>Capability Maturity Model Integration</td><td>Evolved from SW-CMM. Covers broader engineering disciplines.</td></tr>
+  </table>
+</div>
+
+<!-- SECURE CODING -->
+<div id="securecoding" class="tab-content">
+  <div class="section-title">Secure Coding Principles</div>
+
+  <table>
+    <tr><th>Principle</th><th>What It Means</th></tr>
+    <tr><td><strong>Input Validation</strong></td><td>Validate ALL input on the server side. Never trust client-side validation alone. Prevents injection, XSS, buffer overflow.</td></tr>
+    <tr><td><strong>Output Encoding</strong></td><td>Encode output before rendering to prevent XSS. Convert &lt; &gt; &amp; to HTML entities.</td></tr>
+    <tr><td><strong>Parameterised Queries</strong></td><td>Use prepared statements for SQL. Prevents SQL injection. Escaping alone is insufficient.</td></tr>
+    <tr><td><strong>Principle of Least Privilege</strong></td><td>Code runs with minimum permissions needed. DB accounts should be read-only where possible.</td></tr>
+    <tr><td><strong>Error Handling</strong></td><td>Never reveal stack traces or DB errors to end users. Log internally, show generic message externally.</td></tr>
+    <tr><td><strong>Fail Secure (Fail Closed)</strong></td><td>On failure, default to DENY. Opposite of Fail Open (default allow) which is dangerous.</td></tr>
+    <tr><td><strong>Defence in Depth</strong></td><td>Multiple layers: WAF → input validation → parameterised queries → least privilege DB account.</td></tr>
+    <tr><td><strong>Separation of Duties in Code</strong></td><td>Developers should not deploy to production. Reviewers should not merge their own code.</td></tr>
+  </table>
+
+  <div class="callout callout-red">
+    <strong>🔴 Critical — Client-side validation is NOT a security control</strong>
+    Client-side input validation (JavaScript in browser) is BYPASSED easily by attackers. It improves UX only. Server-side validation is the required security control. Exam answer: client-side validation is NOT effective against SQL injection.
+  </div>
+
+  <div class="section-title">Code Review Types</div>
+  <table>
+    <tr><th>Type</th><th>Description</th><th>Exam Signal</th></tr>
+    <tr><td><strong>Peer Review / Fagan Inspection</strong></td><td>Formal, structured review. Roles: Moderator, Author, Reader, Recorder. 6 phases.</td><td>Most rigorous manual review. Fagan = formal inspection.</td></tr>
+    <tr><td><strong>Pair Programming</strong></td><td>Two developers, one keyboard. Inline review as code is written.</td><td>Agile practice. Real-time review but informal.</td></tr>
+    <tr><td><strong>Over-the-Shoulder</strong></td><td>Informal. Dev walks reviewer through code after writing.</td><td>Least rigorous.</td></tr>
+    <tr><td><strong>Tool-Assisted Review</strong></td><td>Automated SAST tools flag issues for human review.</td><td>Scales well; combines with manual review.</td></tr>
+  </table>
+
+  <div class="section-title">API Security</div>
+  <table>
+    <tr><th>Control</th><th>Detail</th></tr>
+    <tr><td><strong>API Keys</strong></td><td>Most common method to authenticate API clients. Passed in headers.</td></tr>
+    <tr><td><strong>OAuth 2.0</strong></td><td>Authorisation delegation. Third-party apps access resources without passwords.</td></tr>
+    <tr><td><strong>Rate Limiting</strong></td><td>Limit calls per time period. Prevents abuse and DoS.</td></tr>
+    <tr><td><strong>Input Sanitisation</strong></td><td>Validate and sanitise all API inputs server-side. APIs are injection targets.</td></tr>
+    <tr><td><strong>WAF (Web Application Firewall)</strong></td><td>Layer 7 protection. Protects REST APIs from OWASP Top 10 attacks.</td></tr>
+    <tr><td><strong>TLS for Transit</strong></td><td>API calls over HTTPS. TLS is not the API's responsibility — it's infrastructure's. If TLS is off, fix infra, not the API code.</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="m-title">Mnemonic — Secure Coding Controls</div>
+    <div class="m-text">"I Validate, Parameterise, Encode, Fail-Closed, Log"</div>
+    <div class="m-expand">Input Validation → Parameterised Queries → Output Encoding → Fail Secure → Logging/Monitoring</div>
+  </div>
+</div>
+
+<!-- TESTING METHODS -->
+<div id="testing" class="tab-content">
+  <div class="section-title">Security Testing Types — The Big Three</div>
+
+  <table>
+    <tr><th>Type</th><th>What It Does</th><th>When Run</th><th>Exam Signal</th></tr>
+    <tr><td><strong>SAST</strong> (Static Application Security Testing)</td><td>Analyses source code WITHOUT running it. White-box by nature.</td><td>During development, before compile</td><td>"Code review tool", "source code scanner" → SAST</td></tr>
+    <tr><td><strong>DAST</strong> (Dynamic Application Security Testing)</td><td>Tests RUNNING application from outside. Black-box by nature.</td><td>After deployment to test env</td><td>"Fuzzing", "web app scanner", "Nikto", "Burp Suite" → DAST</td></tr>
+    <tr><td><strong>IAST</strong> (Interactive AST)</td><td>Agents inside running app. Combines SAST + DAST insight.</td><td>During runtime testing</td><td>Most accurate; high overhead.</td></tr>
+    <tr><td><strong>RASP</strong> (Runtime Application Self-Protection)</td><td>Security built into the app itself. Detects and blocks attacks at runtime.</td><td>Production</td><td>App defends itself in real time.</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ SAST vs DAST Key Distinction</strong>
+    SAST = static, source code, early, white-box. DAST = dynamic, running app, later, black-box. Fuzzing is DAST (sends malformed inputs to running app). Code review is SAST (reading source). This is a high-frequency exam distinction.
+  </div>
+
+  <div class="section-title">Testing Approaches by Knowledge Level</div>
+  <table>
+    <tr><th>Approach</th><th>Tester Knows…</th><th>Also Called</th></tr>
+    <tr><td><strong>White-Box</strong></td><td>Full access to source code, architecture, credentials</td><td>Crystal box, clear box</td></tr>
+    <tr><td><strong>Black-Box</strong></td><td>Nothing about internal workings. External attacker perspective.</td><td>Blind testing</td></tr>
+    <tr><td><strong>Gray-Box</strong></td><td>Partial knowledge (e.g., knows tech stack, not source code)</td><td>—</td></tr>
+  </table>
+
+  <div class="section-title">Specific Testing Techniques</div>
+  <table>
+    <tr><th>Technique</th><th>Description</th><th>Exam Signal</th></tr>
+    <tr><td><strong>Fuzzing (Fuzz Testing)</strong></td><td>Sends random/malformed inputs to find unexpected behaviour. DAST.</td><td>"Random input", "crash testing" → fuzzing</td></tr>
+    <tr><td><strong>Regression Testing</strong></td><td>Re-run full test suite after each change to verify no new defects introduced.</td><td>"After every change, re-test" → regression</td></tr>
+    <tr><td><strong>Penetration Testing</strong></td><td>Authorised simulated attack to find exploitable vulnerabilities.</td><td>Must have written authorisation. Pre-release or periodic.</td></tr>
+    <tr><td><strong>Stress / Load Testing</strong></td><td>Test behaviour under high load. Finds performance and availability issues.</td><td>Not security-focused but reveals DoS exposure.</td></tr>
+    <tr><td><strong>Unit Testing</strong></td><td>Test individual functions/modules in isolation.</td><td>Developer-written. First level of testing.</td></tr>
+    <tr><td><strong>Integration Testing</strong></td><td>Test how modules work together.</td><td>After unit tests pass.</td></tr>
+    <tr><td><strong>System Testing</strong></td><td>Test the full assembled application.</td><td>Before UAT.</td></tr>
+    <tr><td><strong>UAT (User Acceptance Testing)</strong></td><td>Business users validate the system meets requirements.</td><td>Final gate before production.</td></tr>
+    <tr><td><strong>Mutation Testing</strong></td><td>Introduce deliberate bugs to see if tests catch them. Validates test quality.</td><td>Tests your tests.</td></tr>
+    <tr><td><strong>Orthogonal Array Testing</strong></td><td>Systematic selection of test cases to cover all pairs of variables efficiently.</td><td>Reduces test case count while maximising coverage.</td></tr>
+  </table>
+
+  <div class="section-title">Testing Sequence</div>
+  <div class="mnemonic">
+    <div class="m-title">Mnemonic — Test Order</div>
+    <div class="m-text">"Uncle Jim Stops Until Release"</div>
+    <div class="m-expand">Unit → Integration → System → UAT → Regression (on every release)</div>
+  </div>
+</div>
+
+<!-- VULNERABILITIES -->
+<div id="vulns" class="tab-content">
+  <div class="section-title">Common Software Vulnerabilities</div>
+
+  <table>
+    <tr><th>Vulnerability</th><th>How It Works</th><th>Mitigation</th></tr>
+    <tr><td><strong>SQL Injection</strong></td><td>Malicious SQL in input field manipulates query. Single quote (') is telltale sign.</td><td>Parameterised queries, stored procedures, least-privilege DB account. Client-side validation is NOT effective.</td></tr>
+    <tr><td><strong>Cross-Site Scripting (XSS)</strong></td><td>Attacker injects malicious script into web page viewed by victim.</td><td>Output encoding, Content Security Policy (CSP), input validation.</td></tr>
+    <tr><td><strong>Cross-Site Request Forgery (CSRF)</strong></td><td>Tricks authenticated user's browser into sending unauthorised request.</td><td>CSRF tokens, SameSite cookie attribute, re-authentication for sensitive actions.</td></tr>
+    <tr><td><strong>Buffer Overflow</strong></td><td>Input exceeds allocated memory, overwrites adjacent memory. Can execute arbitrary code.</td><td>Input validation, bounds checking, safe languages (Rust, Java manage memory). Address Space Layout Randomization (ASLR).</td></tr>
+    <tr><td><strong>Directory Traversal</strong></td><td>../../../etc/passwd — navigate outside web root using path sequences.</td><td>Input validation, canonicalise paths, chroot jail.</td></tr>
+    <tr><td><strong>Injection (general)</strong></td><td>SQL, LDAP, XML, OS command injection. Untrusted data sent to interpreter.</td><td>Input validation, parameterisation, least privilege.</td></tr>
+    <tr><td><strong>Insecure Deserialisation</strong></td><td>Malicious objects crafted in serialised data, executed on deserialisation.</td><td>Integrity checks on serialised objects, type validation.</td></tr>
+    <tr><td><strong>Session Hijacking</strong></td><td>Attacker steals or predicts session token to impersonate user.</td><td><strong>TLS</strong> (most effective). Complex + expiring tokens (insufficient alone).</td></tr>
+    <tr><td><strong>Logic Bomb</strong></td><td>Malicious code dormant until trigger condition met (e.g., fired employee)</td><td>Code review, mandatory holidays, separation of duties.</td></tr>
+    <tr><td><strong>Race Condition / TOCTOU</strong></td><td>Time-of-Check to Time-of-Use. State changes between check and use.</td><td>Atomic operations, mutex locks, proper transaction handling.</td></tr>
+    <tr><td><strong>Memory Leak</strong></td><td>App fails to release unneeded memory. Resource exhaustion over time.</td><td>Proper memory management, garbage collection, code review.</td></tr>
+  </table>
+
+  <div class="callout callout-red">
+    <strong>🔴 XSS Types — Know the Difference</strong>
+    <strong>Persistent (Stored) XSS</strong>: Script stored in DB, served to every visitor. Example: forum post with embedded script. More dangerous.<br>
+    <strong>Reflected (Non-persistent) XSS</strong>: Script in URL, reflected back in response. Victim must click malicious link.
+  </div>
+
+  <div class="section-title">Malware Relevant to Software Development</div>
+  <table>
+    <tr><th>Type</th><th>Description</th><th>Dev Context</th></tr>
+    <tr><td><strong>Backdoor / Trapdoor</strong></td><td>Hidden entry point left by developer. Bypasses normal authentication.</td><td>Left in code intentionally or by mistake. Code review catches it.</td></tr>
+    <tr><td><strong>Logic Bomb</strong></td><td>Executes when condition met (date, event, login).</td><td>Insider threat. Disgruntled developer may plant one.</td></tr>
+    <tr><td><strong>Salami Attack</strong></td><td>Small, unnoticeable fraud increments over time (e.g., rounding fractions to attacker account).</td><td>Financial software vulnerability. Aggregate theft.</td></tr>
+    <tr><td><strong>Covert Channel</strong></td><td>Exfiltrates data through unintended communication path (timing, storage).</td><td>Hard to detect; bypasses normal access controls.</td></tr>
+  </table>
+
+  <div class="section-title">Database-Specific Vulnerabilities</div>
+  <table>
+    <tr><th>Issue</th><th>Description</th></tr>
+    <tr><td><strong>SQL Injection</strong></td><td>See above. Primary DB attack vector.</td></tr>
+    <tr><td><strong>Inference Attack</strong></td><td>Deduce confidential data from non-confidential query results (statistical patterns).</td></tr>
+    <tr><td><strong>Aggregation Attack</strong></td><td>Combining individually non-sensitive data items to reveal sensitive information.</td></tr>
+    <tr><td><strong>Dirty Read</strong></td><td>Transaction reads data written by another uncommitted transaction. Concurrency issue.</td></tr>
+    <tr><td><strong>Lost Update</strong></td><td>Transaction overwrites data written by another transaction with earlier precedence.</td></tr>
+    <tr><td><strong>Incorrect Summary</strong></td><td>Aggregate function runs while another transaction modifies the data. Produces wrong summary.</td></tr>
+  </table>
+</div>
+
+<!-- DATABASE SECURITY -->
+<div id="database" class="tab-content">
+  <div class="section-title">Database Security Concepts</div>
+
+  <table>
+    <tr><th>Concept</th><th>Description</th></tr>
+    <tr><td><strong>Database Views</strong></td><td>Restrict what data users see. Virtual table showing subset of DB. Access control mechanism.</td></tr>
+    <tr><td><strong>Stored Procedures</strong></td><td>Pre-compiled SQL stored in DB. Reduces injection risk; enforces consistent logic.</td></tr>
+    <tr><td><strong>Polyinstantiation</strong></td><td>Allows different values for same data at different classification levels. MLS databases. Prevents inference.</td></tr>
+    <tr><td><strong>Content-Dependent Access Control</strong></td><td>Access decisions based on data content (e.g., salary &lt; £50k only). Row-level security.</td></tr>
+    <tr><td><strong>Context-Dependent Access Control</strong></td><td>Access based on context (time, location, previous queries).</td></tr>
+    <tr><td><strong>Database Normalisation</strong></td><td>Eliminate data redundancy. 1NF → 2NF → 3NF → BCNF. Not a security control but reduces integrity risks.</td></tr>
+    <tr><td><strong>ACID Properties</strong></td><td>Atomicity · Consistency · Isolation · Durability. Transaction integrity properties.</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="m-title">Mnemonic — ACID</div>
+    <div class="m-text">"Always Check If Data survives"</div>
+    <div class="m-expand">Atomicity (all or nothing) · Consistency (valid state always) · Isolation (transactions don't interfere) · Durability (committed = permanent)</div>
+  </div>
+
+  <div class="section-title">Database Types</div>
+  <table>
+    <tr><th>Type</th><th>Description</th><th>Security Note</th></tr>
+    <tr><td><strong>Relational (RDBMS)</strong></td><td>Tables, rows, SQL. Oracle, MS SQL, MySQL, PostgreSQL.</td><td>Primary target for SQL injection. Use parameterised queries.</td></tr>
+    <tr><td><strong>NoSQL</strong></td><td>Document, key-value, graph, column-store. MongoDB, Cassandra, Redis.</td><td>NoSQL injection exists. Input validation still required.</td></tr>
+    <tr><td><strong>Object-Oriented DB</strong></td><td>Objects stored directly. Matches OOP languages.</td><td>Access control must map to object methods.</td></tr>
+    <tr><td><strong>Hierarchical DB</strong></td><td>Tree structure. Parent-child relationships. IBM IMS.</td><td>Legacy. Limited flexibility.</td></tr>
+    <tr><td><strong>Data Warehouse</strong></td><td>Analytical DB. Read-heavy. OLAP vs OLTP.</td><td>Large data volumes = high sensitivity. Access controls critical.</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ Aggregation vs Inference</strong>
+    <strong>Inference</strong>: Deduce secret from non-secret query results. Example: average salary query reveals CEO pay by elimination.<br>
+    <strong>Aggregation</strong>: Combine multiple non-sensitive pieces to reveal something sensitive. Example: name + address + employer + schedule = stalking risk.<br>
+    Controls: Polyinstantiation, query result rounding, access restrictions on aggregate functions.
+  </div>
+</div>
+
+<!-- ACQUIRED SOFTWARE -->
+<div id="acquired" class="tab-content">
+  <div class="section-title">Acquired / Third-Party Software Security</div>
+
+  <table>
+    <tr><th>Category</th><th>Description</th><th>Security Concern</th></tr>
+    <tr><td><strong>COTS (Commercial Off-the-Shelf)</strong></td><td>Vendor-built, commercially sold (MS Office, SAP)</td><td>No source code access. Rely on vendor patches. Validate vendor security posture.</td></tr>
+    <tr><td><strong>Open Source Software (OSS)</strong></td><td>Publicly available source code. Community maintained.</td><td>Vulnerable components (OWASP #6). Must scan and maintain component inventory.</td></tr>
+    <tr><td><strong>Third-Party Libraries / SDKs</strong></td><td>Code modules integrated into applications.</td><td>Supply chain risk. Compromised library = compromised app (SolarWinds-type attack).</td></tr>
+    <tr><td><strong>SaaS Applications</strong></td><td>Cloud-delivered software. Vendor manages infrastructure.</td><td>Data residency, shared responsibility model, API security, SSO integration.</td></tr>
+    <tr><td><strong>Managed Code vs Unmanaged</strong></td><td>Managed = runtime handles memory (.NET, Java). Unmanaged = manual memory (C, C++).</td><td>Unmanaged code is more vulnerable to buffer overflows. Managed safer by design.</td></tr>
+  </table>
+
+  <div class="section-title">Software Bill of Materials (SBOM)</div>
+  <div class="callout callout-blue">
+    <strong>SBOM — Added to CISSP CBK 2024</strong>
+    An SBOM is a formal record of all components, libraries, and dependencies in a software product. It enables:
+    <ul>
+      <li>Rapid identification of affected systems when a vulnerable component (e.g., Log4j) is discovered</li>
+      <li>Supply chain risk management and vendor assurance</li>
+      <li>Regulatory compliance (US Executive Order 14028 mandates SBOMs for federal software)</li>
+      <li>End-of-Life tracking — know when components stop receiving patches</li>
+    </ul>
+    SBOM formats: SPDX (Linux Foundation), CycloneDX (OWASP), SWID (ISO).
+  </div>
+
+  <div class="section-title">Software Supply Chain Security</div>
+  <table>
+    <tr><th>Attack Type</th><th>Description</th><th>Control</th></tr>
+    <tr><td><strong>Dependency Confusion</strong></td><td>Attacker publishes malicious package with same name as internal package in public registry.</td><td>Use private registries, version pinning, integrity verification.</td></tr>
+    <tr><td><strong>Typosquatting</strong></td><td>Malicious package with near-identical name (colour vs color).</td><td>Verify package names and publishers.</td></tr>
+    <tr><td><strong>Compromised Update</strong></td><td>Legitimate vendor update mechanism used to push malware (SolarWinds).</td><td>Signed updates, hash verification, behaviour monitoring.</td></tr>
+    <tr><td><strong>Malicious Library</strong></td><td>Embedded malicious code in widely used OSS library (event-stream, xz-utils).</td><td>SBOM, scanning, pinned versions, code review of dependencies.</td></tr>
+  </table>
+
+  <div class="section-title">Assessing Acquired Software Security</div>
+  <table>
+    <tr><th>Method</th><th>Description</th></tr>
+    <tr><td><strong>Vendor Assessment</strong></td><td>Review vendor security practices, SOC 2 reports, pen test results, patch history.</td></tr>
+    <tr><td><strong>Software Composition Analysis (SCA)</strong></td><td>Automated tool scans codebase for known vulnerable open source components. Produces SBOM.</td></tr>
+    <tr><td><strong>Binary Analysis</strong></td><td>Analyse compiled code (no source) for vulnerabilities. Used when source unavailable.</td></tr>
+    <tr><td><strong>Contractual Requirements</strong></td><td>SLA terms requiring vendor to patch vulnerabilities within defined timeframes.</td></tr>
+  </table>
+
+  <div class="trap">
+    <div class="trap-label">🪤 Exam Trap — EoL Software</div>
+    End-of-Life software = no more patches from vendor. This is a <strong>significant risk</strong>. Controls: network isolation, compensating controls, virtualisation, migration planning. Exam will expect you to identify EoL as an unacceptable risk without compensating controls in high-sensitivity environments.
+  </div>
+</div>
+
+<!-- GAP ANALYSIS -->
+<div id="gaps" class="tab-content">
+  <div class="section-title">Domain 8 Priority Gap Areas</div>
+
+  <div class="callout callout-red">
+    <strong>🔴 High Priority — Learn These Cold</strong>
+    <ul>
+      <li>SAST vs DAST vs IAST vs RASP — what each tests, when run, what tools belong to each</li>
+      <li>SW-CMM 5 levels in order (Initial → Optimising)</li>
+      <li>SQL injection: single quote is the signal; parameterised queries are the fix; client-side validation is NOT a fix</li>
+      <li>XSS Persistent vs Reflected — where the script lives, who is affected</li>
+      <li>TLS = best defence against session hijacking (not complex cookies)</li>
+      <li>Threat modelling → Design phase (not testing phase)</li>
+      <li>CAB approves code changes going to production — not a dev team function</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-amber">
+    <strong>🟡 Medium Priority</strong>
+    <ul>
+      <li>SDLC model names: Waterfall vs Spiral vs Agile vs V-Model vs RAD</li>
+      <li>STRIDE and PASTA frameworks — what they do</li>
+      <li>Aggregation vs Inference attacks on databases</li>
+      <li>SBOM — what it is, why it matters, formats (SPDX, CycloneDX)</li>
+      <li>Fagan Inspection roles (Moderator, Author, Reader, Recorder)</li>
+      <li>ACID properties for database transactions</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-green">
+    <strong>✅ Your Strengths Map In Here</strong>
+    <ul>
+      <li>Change Advisory Board (CAB) — maps directly to your change management experience</li>
+      <li>Environment separation (Dev/Test/UAT/Prod) — risk governance parallel</li>
+      <li>Vendor assurance / third-party assessment — your 2LoD background</li>
+      <li>Supply chain risk — oil &amp; gas OT/ICS supply chain maps here</li>
+      <li>SBOM / EoL tracking — regulatory compliance lens from GDPR experience</li>
+    </ul>
+  </div>
+
+  <div class="section-title">Cross-Domain Connections</div>
+  <table>
+    <tr><th>D8 Topic</th><th>Links To</th><th>Why It Matters</th></tr>
+    <tr><td>Threat modelling at Design</td><td>Domain 3 (Security Architecture)</td><td>Same principle — security by design</td></tr>
+    <tr><td>Change Advisory Board</td><td>Domain 7 (Security Operations)</td><td>D7 Quiz Gap — don't confuse change vs config management</td></tr>
+    <tr><td>Penetration testing / DAST</td><td>Domain 6 (Assessment &amp; Testing)</td><td>Same tools, D6 context is enterprise, D8 is app-specific</td></tr>
+    <tr><td>Least privilege in code</td><td>Domain 5 (IAM)</td><td>IAM principles applied to service accounts and DB users</td></tr>
+    <tr><td>Patch management for acquired SW</td><td>Domain 7 (Ops)</td><td>EoL software risk + patch SLAs</td></tr>
+    <tr><td>SBOM / supply chain</td><td>Domain 1 (Risk Management)</td><td>Third-party risk, vendor risk assessment</td></tr>
+  </table>
+
+  <div class="section-title">Quick-Reference Exam Traps</div>
+  <table>
+    <tr><th>Question Pattern</th><th>Right Answer</th><th>Wrong Trap</th></tr>
+    <tr><td>"Best defence against session hijacking"</td><td><strong>TLS</strong></td><td>Complex session tokens (insufficient)</td></tr>
+    <tr><td>"Effective against SQL injection"</td><td><strong>Parameterised queries / stored procedures</strong></td><td>Client-side validation (NOT effective)</td></tr>
+    <tr><td>"When should threat modelling occur"</td><td><strong>Design phase</strong></td><td>Testing phase, post-deployment</td></tr>
+    <tr><td>"Who approves production code changes"</td><td><strong>CAB (Change Advisory Board)</strong></td><td>Security team, project manager</td></tr>
+    <tr><td>"Script stored in DB, served to all users"</td><td><strong>Persistent (Stored) XSS</strong></td><td>Reflected XSS (that's URL-based)</td></tr>
+    <tr><td>"Combines non-sensitive data to reveal sensitive info"</td><td><strong>Aggregation</strong></td><td>Inference (deduction from query results)</td></tr>
+    <tr><td>"Malicious code dormant until employee fired"</td><td><strong>Logic bomb</strong></td><td>Backdoor, Trojan</td></tr>
+    <tr><td>"SAST tool for code review"</td><td><strong>SAST = static, on source code</strong></td><td>DAST (that runs against live app)</td></tr>
+  </table>
+</div>
+
+<footer>CISSP Domain 8 — Software Development Security · Built for May Tang · ISC2 CBK 2024 + Chapple &amp; Seidl + Miller · Target Exam: Aug–Sep 2026</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
