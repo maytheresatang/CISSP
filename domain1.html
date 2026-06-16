@@ -56,10 +56,11 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.two-col{grid-template-columns:1fr;}.tabs{padding:0 16px;}.header{padding:24px;}}
-</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.2);color:var(--teal-light);border:1px solid rgba(13,148,136,.4);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.35);}.home-bar{background:var(--navy-mid);padding:10px 40px;border-bottom:1px solid rgba(255,255,255,.07);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
 </head>
 <body>
 
+<div class="home-bar"><a class="home-btn" href="index.html"><div class="header">#8592; All Domains</a></div>
 <div class="header">
   <div class="label">CISSP CBK 2024 · Study Notes</div>
   <h1>Domain 1 — Security &amp; Risk Management</h1>
@@ -67,7 +68,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="meta">
     <span class="badge badge-teal">Exam Weight: 16%</span>
     <span class="badge badge-amber">Highest Weight Domain</span>
-    <span class="badge badge-green">BCM Strength Domain</span>
+    <span class="badge badge-green">Core Strength Domain</span>
   </div>
 </div>
 
@@ -84,10 +85,10 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 <!-- OVERVIEW -->
 <div id="overview" class="tab-content active">
   <div class="section-title">Domain at a Glance</div>
-  <p>Domain 1 is the largest domain at <strong>16% of the exam</strong>. It tests your ability to think like a security leader — not a technician. Your BCM and 2LoD background is a major asset here. The domain anchors every other CISSP domain: governance, risk, and ethics form the lens through which all security decisions are made.</p>
+  <p>Domain 1 is the largest domain at <strong>16% of the exam</strong>. It tests your ability to think like a security leader — not a technician. The domain anchors every other CISSP domain: governance, risk, and ethics form the lens through which all security decisions are made.</p>
 
   <div class="callout callout-green" style="margin-top:16px;">
-    <strong>✅ Your BCM/2LoD Advantage</strong>
+    <strong>✅ Key Strength Area</strong>
     You already live BCP/DRP, risk treatment, governance frameworks, and regulatory compliance daily. This domain should feel like a formality — but watch the exam traps around Ethics canon ordering and evidence handling under legal investigation.
   </div>
 
@@ -188,8 +189,8 @@ ALE after control = ALE before – ALE after – Cost of control</div>
   </table>
 
   <div class="callout callout-green">
-    <strong>✅ BCM Anchor</strong>
-    Threat modelling belongs at the <em>design phase</em> — not after deployment. Remediation ownership sits with the system/application owner, not the security function. As 2LoD you advise; 1LoD owns the risk.
+    <strong>✅ Key Concept</strong>
+    Threat modelling belongs at the <em>design phase</em> — not after deployment. 
   </div>
 </div>
 
@@ -327,8 +328,8 @@ ALE after control = ALE before – ALE after – Cost of control</div>
   </table>
 
   <div class="callout callout-green">
-    <strong>✅ BCM Advantage: You already know this</strong>
-    The BIA output drives everything: MTD → site selection, RPO → backup frequency, RTO → recovery strategy. The CISSP frames this exactly as you use it in your BCM role.
+    <strong>✅ Core Concept</strong>
+    The BIA output drives everything: MTD → site selection, RPO → backup frequency, RTO → recovery strategy. The CISSP frames BCP/DR exactly this way.
   </div>
 </div>
 
@@ -368,7 +369,7 @@ ALE after control = ALE before – ALE after – Cost of control</div>
   <div class="section-title">Domain 1 Gap Analysis</div>
   <div class="callout callout-red">
     <strong>🚨 Confirmed Weak Areas (from quiz history)</strong>
-    ISC2 Ethics canon priority order has been answered incorrectly twice. Evidence handling under legal investigation was also missed. These are pure memorisation items — no BCM instinct helps here.
+    ISC2 Ethics canon priority order has been answered incorrectly twice. Evidence handling under legal investigation was also missed. These are pure memorisation items — these are pure memorisation items.
   </div>
 
   <table class="gap-table">
@@ -378,7 +379,7 @@ ALE after control = ALE before – ALE after – Cost of control</div>
     <tr><td>ALE / SLE / ARO calculations</td><td class="gap-med">🟡 MEDIUM</td><td>Practice 5 calculation drills. Know the formula cold.</td></tr>
     <tr><td>Due Care vs Due Diligence distinction</td><td class="gap-med">🟡 MEDIUM</td><td>Due care = ongoing conduct. Due diligence = investigation before action.</td></tr>
     <tr><td>CIA Triad applied to OT/ICS scenarios</td><td class="gap-med">🟡 MEDIUM</td><td>In OT: Availability often prioritised. Know when to flip the default.</td></tr>
-    <tr><td>BCP terminology (RTO/RPO/MTD)</td><td class="gap-low">🟢 LOW</td><td>Already strong from BCM role. Review WRT formula.</td></tr>
+    <tr><td>BCP terminology (RTO/RPO/MTD)</td><td class="gap-low">🟢 LOW</td><td>Already strong from prior experience. Review WRT formula.</td></tr>
     <tr><td>Risk treatment options</td><td class="gap-low">🟢 LOW</td><td>Already strong. Watch for "accept" vs "ignore" — accepting is documented and signed off.</td></tr>
     <tr><td>Legal frameworks (HIPAA/SOX/GLBA)</td><td class="gap-low">🟢 LOW</td><td>Know which law applies to which sector. GDPR already strong.</td></tr>
   </table>
@@ -393,7 +394,7 @@ ALE after control = ALE before – ALE after – Cost of control</div>
   </ul>
 </div>
 
-<footer>CISSP Study Notes · Domain 1 · May Tang · Source: ISC2 CBK 2024, Chapple &amp; Seidl, Miller · Last updated June 2026</footer>
+<footer>CISSP Study Notes · Domain 1 · ISC2 CBK 2024 · Chapple &amp; Seidl · Miller</footer>
 
 <script>
 function showTab(id) {
