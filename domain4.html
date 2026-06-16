@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP Domain 4 — Communication &amp; Network Security</title>
+<style>
+:root{--navy:#0A1628;--navy-mid:#152238;--teal:#0D9488;--teal-light:#14B8A6;--amber:#B45309;--amber-bg:#FEF3C7;--red:#B91C1C;--red-bg:#FEE2E2;--green:#15803D;--green-bg:#DCFCE7;--blue:#1D4ED8;--blue-bg:#DBEAFE;--border:#E2E8F0;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+.header{background:var(--navy);color:white;padding:40px;border-bottom:4px solid var(--teal);}
+.header .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-light);margin-bottom:8px;}
+.header h1{font-size:2rem;font-weight:800;margin-bottom:6px;}
+.header .sub{color:#94A3B8;font-size:14px;}
+.header .meta{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-teal{background:rgba(13,148,136,.25);color:var(--teal-light);}
+.badge-red{background:var(--red-bg);color:var(--red);}
+.tabs{display:flex;gap:2px;background:var(--navy-mid);padding:0 40px;overflow-x:auto;}
+.tab-btn{padding:12px 18px;font-size:13px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;}
+.tab-btn.active,.tab-btn:hover{color:var(--teal-light);border-bottom-color:var(--teal-light);}
+.tab-content{display:none;padding:32px 40px;}
+.tab-content.active{display:block;}
+.section-title{font-size:1.15rem;font-weight:700;color:var(--navy);margin:28px 0 14px;padding-bottom:6px;border-bottom:2px solid var(--teal);}
+.section-title:first-child{margin-top:0;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;}
+th{background:var(--navy);color:white;padding:10px 12px;text-align:left;font-size:13px;}
+td{padding:9px 12px;border-bottom:1px solid var(--border);}
+tr:nth-child(even) td{background:#F1F5F9;}
+.callout{border-left:4px solid;padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0;}
+.callout-amber{border-color:var(--amber);background:var(--amber-bg);}
+.callout-red{border-color:var(--red);background:var(--red-bg);}
+.callout-green{border-color:var(--green);background:var(--green-bg);}
+.callout-blue{border-color:var(--blue);background:var(--blue-bg);}
+.callout strong{display:block;margin-bottom:4px;font-size:13px;}
+.mnemonic{background:linear-gradient(135deg,#1E1B4B,#312E81);color:white;padding:16px 20px;border-radius:10px;margin:14px 0;}
+.mnemonic .m-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A5B4FC;margin-bottom:8px;}
+.mnemonic .m-text{font-size:1.1rem;font-weight:800;color:#E0E7FF;}
+.mnemonic .m-expand{font-size:13px;color:#C7D2FE;margin-top:6px;}
+.compare-box{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+.box{background:white;border:2px solid var(--border);border-radius:10px;padding:16px;}
+.box h4{font-size:14px;font-weight:700;margin-bottom:10px;}
+.box.teal-box{border-color:var(--teal);}
+.box.amber-box{border-color:var(--amber);}
+ul{padding-left:20px;margin:8px 0;}
+li{margin-bottom:5px;}
+.gap-high{color:var(--red);font-weight:700;}
+.gap-med{color:var(--amber);font-weight:700;}
+.gap-low{color:var(--green);font-weight:700;}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
+@media(max-width:600px){.tab-content{padding:20px;}.compare-box{grid-template-columns:1fr;}.header{padding:24px;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">CISSP CBK 2024 · Study Notes</div>
+  <h1>Domain 4 — Communication &amp; Network Security</h1>
+  <div class="sub">OSI Model · IPsec · Wireless · Firewalls · AAA · Network Attacks</div>
+  <div class="meta">
+    <span class="badge badge-teal">Exam Weight: 13%</span>
+    <span class="badge badge-red">Priority Gaps: IPsec, Wireless, RADIUS vs TACACS+</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('osi')">OSI Model</button>
+  <button class="tab-btn" onclick="showTab('ipsec')">IPsec &amp; VPN</button>
+  <button class="tab-btn" onclick="showTab('wireless')">Wireless</button>
+  <button class="tab-btn" onclick="showTab('aaa')">AAA Protocols</button>
+  <button class="tab-btn" onclick="showTab('firewalls')">Firewalls &amp; IDS</button>
+  <button class="tab-btn" onclick="showTab('attacks')">Network Attacks</button>
+  <button class="tab-btn" onclick="showTab('ports')">Ports Cheatsheet</button>
+  <button class="tab-btn" onclick="showTab('gaps')">Gap Analysis</button>
+</div>
+
+<div id="osi" class="tab-content active">
+  <div class="section-title">OSI Reference Model — 7 Layers</div>
+  <table>
+    <tr><th>#</th><th>Layer</th><th>PDU</th><th>Key Protocols</th><th>Security Relevance</th></tr>
+    <tr><td>7</td><td><strong>Application</strong></td><td>Data</td><td>HTTP, HTTPS, SMTP, DNS, FTP</td><td>WAF, DLP, content filtering</td></tr>
+    <tr><td>6</td><td><strong>Presentation</strong></td><td>Data</td><td>SSL/TLS, MIME, ASCII, JPEG</td><td>Encryption/decryption, compression</td></tr>
+    <tr><td>5</td><td><strong>Session</strong></td><td>Data</td><td>NetBIOS, RPC, SQL</td><td>Session tokens, authentication</td></tr>
+    <tr><td>4</td><td><strong>Transport</strong></td><td>Segment</td><td>TCP, UDP</td><td>Port-based firewall rules, TLS</td></tr>
+    <tr><td>3</td><td><strong>Network</strong></td><td>Packet</td><td>IP, ICMP, IPsec, BGP, OSPF</td><td>IP ACLs, routing security, IPsec</td></tr>
+    <tr><td>2</td><td><strong>Data Link</strong></td><td>Frame</td><td>Ethernet, 802.11 (Wi-Fi), ARP, MAC</td><td>MAC filtering, 802.1X, DAI</td></tr>
+    <tr><td>1</td><td><strong>Physical</strong></td><td>Bit</td><td>Cables, fibre, hubs, repeaters</td><td>Physical access control, EMF shielding</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="m-title">OSI Layer Mnemonic (7→1)</div>
+    <div class="m-text">All People Seem To Need Data Processing</div>
+    <div class="m-expand">Application · Presentation · Session · Transport · Network · Data Link · Physical</div>
+  </div>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ TCP vs UDP — Exam Trap</strong>
+    TCP = connection-oriented (3-way handshake: SYN → SYN-ACK → ACK). Reliable, ordered delivery. UDP = connectionless, no handshake. Fast but unreliable. Layer 4 connectionless = <strong>UDP</strong> (not ICMP — that's Layer 3).
+  </div>
+</div>
+
+<div id="ipsec" class="tab-content">
+  <div class="section-title">IPsec Overview</div>
+  <p>IPsec operates at <strong>Layer 3 (Network)</strong>. It provides authentication, integrity, and optionally confidentiality for IP packets.</p>
+
+  <div class="section-title">AH vs ESP</div>
+  <div class="compare-box">
+    <div class="box teal-box">
+      <h4>🛡️ AH — Authentication Header</h4>
+      <ul>
+        <li>Provides: <strong>Authentication + Integrity</strong></li>
+        <li>Does NOT encrypt payload</li>
+        <li>Protects IP header (including source/dest)</li>
+        <li>Protocol number: <strong>51</strong></li>
+        <li>Cannot traverse NAT (IP header changes)</li>
+      </ul>
+    </div>
+    <div class="box amber-box">
+      <h4>🔐 ESP — Encapsulating Security Payload</h4>
+      <ul>
+        <li>Provides: <strong>Confidentiality + Auth + Integrity</strong></li>
+        <li>Encrypts payload</li>
+        <li>Can traverse NAT (uses NAT-T)</li>
+        <li>Protocol number: <strong>50</strong></li>
+        <li>Most commonly used in practice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-red">
+    <strong>🚨 Critical Exam Rule: AH vs ESP Selection</strong>
+    If the question mentions encryption or confidentiality → <strong>ESP</strong>. If only authentication/integrity → AH. If NAT is involved → always <strong>ESP</strong> (AH breaks with NAT). In practice, ESP is used for both because it includes authentication too.
+  </div>
+
+  <div class="section-title">Transport vs Tunnel Mode</div>
+  <table>
+    <tr><th></th><th>Transport Mode</th><th>Tunnel Mode</th></tr>
+    <tr><td><strong>Protects</strong></td><td>Payload only; original IP header exposed</td><td>Entire original packet; new IP header added</td></tr>
+    <tr><td><strong>Use case</strong></td><td>End-to-end (host to host)</td><td>Gateway to gateway (site-to-site VPN)</td></tr>
+    <tr><td><strong>Overhead</strong></td><td>Lower</td><td>Higher (new IP header)</td></tr>
+  </table>
+
+  <div class="section-title">Security Associations (SA) Count</div>
+  <div class="callout callout-blue">
+    <strong>📌 SA Count Formula</strong>
+    Each SA is <strong>unidirectional</strong>. AH and ESP require separate SAs. For bidirectional communication using AH + ESP: <strong>4 SAs</strong> (2 directions × 2 protocols). For ESP only (most common): <strong>2 SAs</strong>.
+  </div>
+
+  <div class="section-title">IKE (Internet Key Exchange) Phases</div>
+  <table>
+    <tr><th>Phase</th><th>Mode</th><th>Purpose</th></tr>
+    <tr><td>Phase 1</td><td>Main Mode (more secure, 6 messages) or Aggressive Mode (faster, 3 messages, less secure)</td><td>Establish IKE SA — secure channel for Phase 2 negotiation</td></tr>
+    <tr><td>Phase 2</td><td>Quick Mode (always)</td><td>Negotiate IPsec SAs for actual data protection</td></tr>
+  </table>
+</div>
+
+<div id="wireless" class="tab-content">
+  <div class="section-title">Wireless Security Evolution</div>
+  <table>
+    <tr><th>Standard</th><th>Auth</th><th>Encryption Protocol</th><th>Algorithm</th><th>Status</th></tr>
+    <tr><td><strong>WEP</strong></td><td>Open/Shared key</td><td>RC4</td><td>RC4 (stream)</td><td>🔴 Broken — never use</td></tr>
+    <tr><td><strong>WPA</strong></td><td>PSK / 802.1X</td><td>TKIP</td><td>RC4 with per-packet keys</td><td>🔴 Deprecated</td></tr>
+    <tr><td><strong>WPA2-Personal</strong></td><td>PSK (passphrase)</td><td>CCMP</td><td><strong>AES-128</strong></td><td>🟡 Common, being replaced</td></tr>
+    <tr><td><strong>WPA2-Enterprise</strong></td><td>802.1X + RADIUS</td><td>CCMP</td><td><strong>AES-128</strong></td><td>🟢 Enterprise standard</td></tr>
+    <tr><td><strong>WPA3-Personal</strong></td><td>SAE (replaces PSK)</td><td>GCMP-128</td><td><strong>AES-128</strong></td><td>🟢 Current standard</td></tr>
+    <tr><td><strong>WPA3-Enterprise</strong></td><td>802.1X + RADIUS</td><td>GCMP-256</td><td><strong>AES-256</strong></td><td>🟢 Highest security</td></tr>
+  </table>
+
+  <div class="callout callout-red">
+    <strong>🚨 Exam Trap: Know the encryption algorithm, not just the standard name</strong>
+    WPA2 → CCMP → AES-128. WPA3 → GCMP → AES-128 (personal) or AES-256 (enterprise). TKIP is WPA — RC4 based, deprecated. The exam WILL ask for the algorithm name, not the standard name.
+  </div>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ SAE (Simultaneous Authentication of Equals)</strong>
+    WPA3-Personal replaces PSK with SAE. Key improvement: forward secrecy — each session has a unique key, so capturing traffic today cannot be decrypted even if the passphrase is later compromised. SAE is resistant to offline dictionary attacks.
+  </div>
+
+  <div class="section-title">Wireless Attack Types</div>
+  <table>
+    <tr><th>Attack</th><th>Description</th><th>Mitigation</th></tr>
+    <tr><td><strong>Evil Twin / Rogue AP</strong></td><td>Attacker sets up AP mimicking legitimate SSID to intercept traffic</td><td>802.1X auth, wireless IDS, VPN</td></tr>
+    <tr><td><strong>War Driving</strong></td><td>Scanning for open/weak wireless networks while driving</td><td>WPA2/3 Enterprise, disable SSID broadcast</td></tr>
+    <tr><td><strong>Deauthentication Attack</strong></td><td>Forged 802.11 deauth frames force clients to reconnect (capture handshake for offline cracking)</td><td>WPA3 SAE (protected management frames)</td></tr>
+    <tr><td><strong>KRACK</strong></td><td>Key Reinstallation Attack against WPA2 4-way handshake</td><td>Patch devices, use WPA3</td></tr>
+  </table>
+</div>
+
+<div id="aaa" class="tab-content">
+  <div class="section-title">RADIUS vs TACACS+ — Most Tested Exam Trap</div>
+
+  <div class="callout callout-red">
+    <strong>🚨 This distinction appears in Domains 4, 5, and 6. Get it right every time.</strong>
+  </div>
+
+  <table>
+    <tr><th></th><th>RADIUS</th><th>TACACS+</th></tr>
+    <tr><td><strong>Transport</strong></td><td><strong>UDP</strong> (1812 auth, 1813 accounting)</td><td><strong>TCP</strong> (port 49)</td></tr>
+    <tr><td><strong>Encryption</strong></td><td>Encrypts <strong>password only</strong></td><td>Encrypts <strong>entire payload</strong></td></tr>
+    <tr><td><strong>AAA separation</strong></td><td>Combines Authentication + Authorization</td><td>Separates Auth, Authz, Accounting independently</td></tr>
+    <tr><td><strong>Best for</strong></td><td>Network access (Wi-Fi, VPN, 802.1X)</td><td>Device administration (router/switch login, Cisco AAA)</td></tr>
+    <tr><td><strong>Vendor</strong></td><td>Open standard (RFC)</td><td>Cisco proprietary (open spec)</td></tr>
+    <tr><td><strong>Multiprotocol</strong></td><td>IP only</td><td>Multiple protocols</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="m-title">Memory Anchor</div>
+    <div class="m-text">RADIUS = UDP + partial encrypt = Network Access · TACACS+ = TCP + full encrypt = Device Admin</div>
+    <div class="m-expand">When the exam describes securing a Cisco router CLI → TACACS+. When it describes 802.1X wireless auth → RADIUS.</div>
+  </div>
+
+  <div class="section-title">Diameter Protocol</div>
+  <p>Diameter = successor to RADIUS. Used in 4G/LTE mobile networks and modern AAA infrastructure. Named because it is "twice the RADIUS" (same analogy, upgraded capability).</p>
+
+  <div class="section-title">Kerberos</div>
+  <table>
+    <tr><th>Component</th><th>Role</th></tr>
+    <tr><td><strong>KDC (Key Distribution Centre)</strong></td><td>Central authority. Contains AS + TGS.</td></tr>
+    <tr><td><strong>AS (Authentication Service)</strong></td><td>Verifies identity, issues TGT.</td></tr>
+    <tr><td><strong>TGS (Ticket-Granting Service)</strong></td><td>Issues service tickets based on TGT.</td></tr>
+    <tr><td><strong>TGT (Ticket-Granting Ticket)</strong></td><td>Proof of identity — used to request service tickets without re-authenticating.</td></tr>
+  </table>
+  <p style="margin-top:8px;">Kerberos uses <strong>symmetric encryption</strong> and requires time synchronisation (default 5-minute skew tolerance). Port: <strong>88</strong>.</p>
+</div>
+
+<div id="firewalls" class="tab-content">
+  <div class="section-title">Firewall Types</div>
+  <table>
+    <tr><th>Type</th><th>OSI Layer</th><th>Inspects</th><th>Limitation</th></tr>
+    <tr><td><strong>Packet Filtering</strong></td><td>Layer 3–4</td><td>IP/port headers only</td><td>No application awareness, stateless</td></tr>
+    <tr><td><strong>Stateful Inspection</strong></td><td>Layer 3–4</td><td>Connection state table + headers</td><td>No application payload inspection</td></tr>
+    <tr><td><strong>Application Layer / Proxy</strong></td><td>Layer 7</td><td>Full application payload</td><td>Slower, breaks end-to-end connections</td></tr>
+    <tr><td><strong>NGFW (Next-Gen Firewall)</strong></td><td>Layer 3–7</td><td>Deep packet inspection, SSL inspection, identity-aware</td><td>Complex, expensive</td></tr>
+    <tr><td><strong>WAF (Web Application Firewall)</strong></td><td>Layer 7</td><td>HTTP/HTTPS requests — protects web apps</td><td>Web-specific only</td></tr>
+  </table>
+
+  <div class="section-title">IDS vs IPS</div>
+  <div class="compare-box">
+    <div class="box teal-box">
+      <h4>🔍 IDS — Intrusion Detection System</h4>
+      <ul>
+        <li>Detects and <strong>alerts</strong> — passive</li>
+        <li>Out of band — traffic copy analysed</li>
+        <li>Cannot block traffic</li>
+        <li>Lower risk of disrupting legitimate traffic</li>
+      </ul>
+    </div>
+    <div class="box amber-box">
+      <h4>🚫 IPS — Intrusion Prevention System</h4>
+      <ul>
+        <li>Detects and <strong>blocks</strong> — active</li>
+        <li>Inline — sits in traffic path</li>
+        <li>Can drop/reset malicious sessions</li>
+        <li>Risk of false positives blocking legit traffic</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">IDS Detection Methods</div>
+  <table>
+    <tr><th>Method</th><th>How it works</th><th>Pros/Cons</th></tr>
+    <tr><td><strong>Signature-based</strong></td><td>Match traffic against known attack patterns</td><td>Low false positives / Cannot detect zero-days</td></tr>
+    <tr><td><strong>Anomaly-based (behaviour)</strong></td><td>Establish baseline, flag deviations</td><td>Can detect zero-days / High false positive rate</td></tr>
+    <tr><td><strong>Heuristic</strong></td><td>Rule-based expert system, weighted scoring</td><td>Flexible / Complex to tune</td></tr>
+  </table>
+</div>
+
+<div id="attacks" class="tab-content">
+  <div class="section-title">Common Network Attacks</div>
+  <table>
+    <tr><th>Attack</th><th>Description</th><th>Mitigation</th></tr>
+    <tr><td><strong>SYN Flood</strong></td><td>Floods target with SYN packets without completing handshakes. Exhausts connection table.</td><td>SYN cookies, rate limiting, TCP Intercept</td></tr>
+    <tr><td><strong>DDoS</strong></td><td>Distributed denial of service — massive traffic from botnet</td><td>CDN scrubbing, black hole routing, upstream ISP filtering</td></tr>
+    <tr><td><strong>ARP Poisoning</strong></td><td>Sends false ARP replies to associate attacker's MAC with legitimate IP. Enables MITM.</td><td>Dynamic ARP Inspection (DAI), static ARP entries</td></tr>
+    <tr><td><strong>VLAN Hopping</strong></td><td>Attacker tags frames to access VLANs they shouldn't. Via switch spoofing or double tagging.</td><td>Disable DTP, set unused ports to inactive VLAN, set trunk ports explicitly</td></tr>
+    <tr><td><strong>DNS Poisoning</strong></td><td>Corrupting DNS cache to redirect traffic to malicious sites</td><td>DNSSEC, DNS over HTTPS (DoH)</td></tr>
+    <tr><td><strong>MITM (Man in the Middle)</strong></td><td>Intercepts communication between two parties</td><td>TLS with certificate pinning, MFA</td></tr>
+    <tr><td><strong>Smurf Attack</strong></td><td>Amplification — ICMP echo requests to broadcast with spoofed victim source IP</td><td>Disable directed broadcasts, ingress filtering</td></tr>
+    <tr><td><strong>Replay Attack</strong></td><td>Captures and retransmits valid packets to replay authenticated sessions</td><td>Sequence numbers, timestamps, nonces</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ Exam Trap: Best DDoS mitigation</strong>
+    The CISSP preferred answer for volumetric DDoS is <strong>CDN-based scrubbing</strong> (upstream filtering), not on-premise firewall. On-prem controls get overwhelmed before they can help.
+  </div>
+</div>
+
+<div id="ports" class="tab-content">
+  <div class="section-title">Critical Port Numbers — Exam Cheatsheet</div>
+  <table>
+    <tr><th>Port</th><th>Protocol</th><th>Use</th><th>Secure Alternative</th></tr>
+    <tr><td>20/21</td><td>FTP</td><td>File transfer (unencrypted)</td><td>SFTP (22) / FTPS (990)</td></tr>
+    <tr><td>22</td><td>SSH</td><td>Secure remote shell, SFTP</td><td>—</td></tr>
+    <tr><td>23</td><td>Telnet</td><td>Remote shell (unencrypted)</td><td>SSH (22)</td></tr>
+    <tr><td>25</td><td>SMTP</td><td>Email send (unencrypted)</td><td>SMTPS (465) / STARTTLS (587)</td></tr>
+    <tr><td>53</td><td>DNS</td><td>Name resolution (UDP/TCP)</td><td>DoH (443), DoT (853)</td></tr>
+    <tr><td>67/68</td><td>DHCP</td><td>IP address assignment</td><td>—</td></tr>
+    <tr><td>80</td><td>HTTP</td><td>Web (unencrypted)</td><td>HTTPS (443)</td></tr>
+    <tr><td>88</td><td>Kerberos</td><td>Authentication</td><td>—</td></tr>
+    <tr><td>110/995</td><td>POP3/POP3S</td><td>Email receive</td><td>995 (TLS)</td></tr>
+    <tr><td>123</td><td>NTP</td><td>Time synchronisation</td><td>— (critical for log integrity)</td></tr>
+    <tr><td>143/993</td><td>IMAP/IMAPS</td><td>Email sync</td><td>993 (TLS)</td></tr>
+    <tr><td>161/162</td><td>SNMP</td><td>Network management</td><td>SNMPv3 (same ports, encrypted)</td></tr>
+    <tr><td>389/636</td><td>LDAP/LDAPS</td><td>Directory services</td><td>636 (TLS)</td></tr>
+    <tr><td>443</td><td>HTTPS</td><td>Encrypted web — also Nikto target</td><td>—</td></tr>
+    <tr><td>445</td><td>SMB</td><td>Windows file sharing (WannaCry vector)</td><td>Block externally, use VPN</td></tr>
+    <tr><td>500</td><td>IKE</td><td>IPsec key exchange</td><td>—</td></tr>
+    <tr><td>514</td><td>Syslog</td><td>Log forwarding (UDP, unencrypted)</td><td>Syslog over TLS (6514)</td></tr>
+    <tr><td>1812/1813</td><td>RADIUS</td><td>Auth / Accounting</td><td>—</td></tr>
+    <tr><td>49</td><td>TACACS+</td><td>Device administration AAA</td><td>—</td></tr>
+    <tr><td>3389</td><td>RDP</td><td>Remote Desktop (Windows)</td><td>VPN + MFA required</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ NTP (port 123) is critical for forensics</strong>
+    Log integrity depends on synchronised time. If NTP is compromised, log timestamps become unreliable and forensic timelines are invalidated. This appears in Domain 6 and Domain 7 questions too.
+  </div>
+</div>
+
+<div id="gaps" class="tab-content">
+  <div class="section-title">Domain 4 Gap Analysis</div>
+  <table>
+    <tr><th>Topic</th><th>Risk Level</th><th>Action</th></tr>
+    <tr><td>RADIUS vs TACACS+ distinction</td><td class="gap-high">🔴 HIGH</td><td>Drill: RADIUS=UDP+partial encrypt=network access. TACACS+=TCP+full encrypt=device admin.</td></tr>
+    <tr><td>IPsec AH vs ESP selection</td><td class="gap-high">🔴 HIGH</td><td>ESP if NAT present. ESP if encryption needed. AH if integrity/auth only and no NAT.</td></tr>
+    <tr><td>Wireless encryption algorithm names</td><td class="gap-high">🔴 HIGH</td><td>WPA2=CCMP=AES-128. WPA3=GCMP=AES-128/256. TKIP=WPA (legacy). Never WEP.</td></tr>
+    <tr><td>TCP vs UDP (Layer 4 connectionless)</td><td class="gap-med">🟡 MEDIUM</td><td>Confirmed gap from quiz. UDP = connectionless Layer 4. ICMP = Layer 3 only.</td></tr>
+    <tr><td>IDS/IPS detection method differences</td><td class="gap-med">🟡 MEDIUM</td><td>Signature = no zero-days. Anomaly = zero-day detection but high false positives.</td></tr>
+    <tr><td>Port numbers (critical ports)</td><td class="gap-med">🟡 MEDIUM</td><td>Drill the ports cheatsheet. Focus: RADIUS 1812/1813, TACACS+ 49, Kerberos 88, LDAPS 636.</td></tr>
+    <tr><td>IKE Phase 1 modes</td><td class="gap-med">🟡 MEDIUM</td><td>Main Mode = more secure (6 messages). Aggressive Mode = faster (3 messages, less secure).</td></tr>
+    <tr><td>VLAN hopping techniques</td><td class="gap-low">🟢 LOW</td><td>Know double-tagging and switch spoofing. Mitigation: disable DTP, explicit trunk config.</td></tr>
+  </table>
+</div>
+
+<footer>CISSP Study Notes · Domain 4 · May Tang · Source: ISC2 CBK 2024, Chapple &amp; Seidl, Miller · Last updated June 2026</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
