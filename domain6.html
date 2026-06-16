@@ -7,7 +7,7 @@
 <style>
 :root{--navy:#0A1628;--navy-mid:#152238;--teal:#0D9488;--teal-light:#14B8A6;--amber:#B45309;--amber-bg:#FEF3C7;--red:#B91C1C;--red-bg:#FEE2E2;--green:#15803D;--green-bg:#DCFCE7;--blue:#1D4ED8;--blue-bg:#DBEAFE;--border:#E2E8F0;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8FAFC;color:#1E293B;font-size:15px;line-height:1.7;}
 .header{background:var(--navy);color:white;padding:40px;border-bottom:4px solid var(--teal);}
 .header .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-light);margin-bottom:8px;}
 .header h1{font-size:2rem;font-weight:800;margin-bottom:6px;}
@@ -19,8 +19,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tabs{display:flex;gap:2px;background:var(--navy-mid);padding:0 40px;overflow-x:auto;}
 .tab-btn{padding:12px 18px;font-size:13px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
 .tab-btn.active,.tab-btn:hover{color:var(--teal-light);border-bottom-color:var(--teal-light);}
-.tab-content{display:none;padding:32px 40px;}
-.tab-content.active{display:block;}
+.tab-content{display:none;padding:32px 40px;background:#FFFFFF;}
+.tab-content.active{display:block;background:#FFFFFF;color:#1E293B;}
 .section-title{font-size:1.15rem;font-weight:700;color:var(--navy);margin:28px 0 14px;padding-bottom:6px;border-bottom:2px solid var(--teal);}
 .section-title:first-child{margin-top:0;}
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;}
@@ -40,11 +40,11 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.2);color:var(--teal-light);border:1px solid rgba(13,148,136,.4);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.35);}.home-bar{background:var(--navy-mid);padding:10px 40px;border-bottom:1px solid rgba(255,255,255,.07);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
 </head>
 <body>
 
-<div class="home-bar"><a class="home-btn" href="index.html"><div class="header">#8592; All Domains</a></div>
+<div class="home-bar"><a class="home-btn" href="index.html">&#8592; All Domains</a></div>
 <div class="header">
   <div class="label">CISSP CBK 2024 · Study Notes</div>
   <h1>Domain 6 — Security Assessment &amp; Testing</h1>
