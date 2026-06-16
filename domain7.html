@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP Domain 7 — Security Operations</title>
+<style>
+:root{--navy:#0A1628;--navy-mid:#152238;--teal:#0D9488;--teal-light:#14B8A6;--amber:#B45309;--amber-bg:#FEF3C7;--red:#B91C1C;--red-bg:#FEE2E2;--green:#15803D;--green-bg:#DCFCE7;--blue:#1D4ED8;--blue-bg:#DBEAFE;--border:#E2E8F0;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+.header{background:var(--navy);color:white;padding:40px;border-bottom:4px solid var(--teal);}
+.header .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-light);margin-bottom:8px;}
+.header h1{font-size:2rem;font-weight:800;margin-bottom:6px;}
+.header .sub{color:#94A3B8;font-size:14px;}
+.header .meta{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-teal{background:rgba(13,148,136,.25);color:var(--teal-light);}
+.badge-amber{background:var(--amber-bg);color:var(--amber);}
+.badge-green{background:var(--green-bg);color:var(--green);}
+.tabs{display:flex;gap:2px;background:var(--navy-mid);padding:0 40px;overflow-x:auto;}
+.tab-btn{padding:12px 18px;font-size:13px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+.tab-btn.active,.tab-btn:hover{color:var(--teal-light);border-bottom-color:var(--teal-light);}
+.tab-content{display:none;padding:32px 40px;}
+.tab-content.active{display:block;}
+.section-title{font-size:1.15rem;font-weight:700;color:var(--navy);margin:28px 0 14px;padding-bottom:6px;border-bottom:2px solid var(--teal);}
+.section-title:first-child{margin-top:0;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;}
+th{background:var(--navy);color:white;padding:10px 12px;text-align:left;font-size:13px;}
+td{padding:9px 12px;border-bottom:1px solid var(--border);}
+tr:nth-child(even) td{background:#F1F5F9;}
+.callout{border-left:4px solid;padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0;}
+.callout-amber{border-color:var(--amber);background:var(--amber-bg);}
+.callout-red{border-color:var(--red);background:var(--red-bg);}
+.callout-green{border-color:var(--green);background:var(--green-bg);}
+.callout-blue{border-color:var(--blue);background:var(--blue-bg);}
+.callout strong{display:block;margin-bottom:4px;font-size:13px;}
+.mnemonic{background:linear-gradient(135deg,#1E1B4B,#312E81);color:white;padding:16px 20px;border-radius:10px;margin:14px 0;}
+.mnemonic .m-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#A5B4FC;margin-bottom:8px;}
+.mnemonic .m-text{font-size:1.1rem;font-weight:800;color:#E0E7FF;line-height:1.5;}
+.mnemonic .m-expand{font-size:13px;color:#C7D2FE;margin-top:6px;}
+.quiz-gap{background:var(--red-bg);border:2px solid var(--red);border-radius:10px;padding:18px;margin:16px 0;}
+.quiz-gap .qg-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:8px;}
+.quiz-gap .qg-wrong{font-size:13px;color:var(--muted);margin-bottom:6px;}
+.quiz-gap .qg-right{font-size:14px;font-weight:600;color:var(--green);}
+ul{padding-left:20px;margin:8px 0;}
+li{margin-bottom:5px;}
+.gap-high{color:var(--red);font-weight:700;}
+.gap-med{color:var(--amber);font-weight:700;}
+.gap-low{color:var(--green);font-weight:700;}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
+@media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">CISSP CBK 2024 · Study Notes</div>
+  <h1>Domain 7 — Security Operations</h1>
+  <div class="sub">Investigations · Incident Response · DR/BC · Patch &amp; Change · Physical &amp; Personnel</div>
+  <div class="meta">
+    <span class="badge badge-teal">Exam Weight: 13%</span>
+    <span class="badge badge-amber">Quiz Score: 10/15 (67%)</span>
+    <span class="badge badge-green">BCM Strength Domain</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('investigations')">Investigations</button>
+  <button class="tab-btn" onclick="showTab('logging')">Logging &amp; SIEM</button>
+  <button class="tab-btn" onclick="showTab('ops')">Ops Concepts</button>
+  <button class="tab-btn" onclick="showTab('incident')">Incident Mgmt</button>
+  <button class="tab-btn" onclick="showTab('patch')">Patch &amp; Change</button>
+  <button class="tab-btn" onclick="showTab('drbc')">DR/BC</button>
+  <button class="tab-btn" onclick="showTab('physical')">Physical &amp; Personnel</button>
+  <button class="tab-btn" onclick="showTab('quizgaps')">⚡ Quiz Gaps</button>
+  <button class="tab-btn" onclick="showTab('gaps')">Gap Analysis</button>
+</div>
+
+<div id="overview" class="tab-content active">
+  <div class="section-title">Domain at a Glance</div>
+  <p>Domain 7 is operationally dense — it covers security operations centre practices, incident response, digital forensics, patch/change management, DR/BC, and physical security. Your BCM background is a major asset for the DR/BC sub-topics. Digital forensics and order of volatility are your highest-risk gap.</p>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ Quiz Result: 10/15 (67%) — Below 80% threshold</strong>
+    Root cause: selecting broad terms when the exam wants the most specific one (e.g., "change management" vs "configuration management," "patch" definition too narrow, "failover" vs "automatic failover"). Tabs below address each missed question.
+  </div>
+
+  <table>
+    <tr><th>Topic</th><th>Priority</th><th>Readiness</th></tr>
+    <tr><td>Digital forensics &amp; order of volatility</td><td>🔴 High</td><td>⚠️ Highest gap — drill the order</td></tr>
+    <tr><td>Incident response phases</td><td>🔴 High</td><td>Good</td></tr>
+    <tr><td>Change vs configuration management</td><td>🔴 High</td><td>⚠️ Quiz miss — see Quiz Gaps tab</td></tr>
+    <tr><td>Malware types (bootkit vs rootkit)</td><td>🔴 High</td><td>⚠️ Quiz miss — drill distinction</td></tr>
+    <tr><td>RAID levels</td><td>🟡 Medium</td><td>⚠️ Quiz miss — know RAID 1 vs 5</td></tr>
+    <tr><td>Automatic failover terminology</td><td>🟡 Medium</td><td>⚠️ Quiz miss — "failover" not "fail-safe"</td></tr>
+    <tr><td>DR/BC (BCP, RTO, RPO, MTD)</td><td>🔴 High</td><td>Very strong (BCM)</td></tr>
+    <tr><td>Patch management process</td><td>🟡 Medium</td><td>⚠️ Quiz miss — full scope of patch definition</td></tr>
+  </table>
+</div>
+
+<div id="investigations" class="tab-content">
+  <div class="section-title">Types of Investigations</div>
+  <table>
+    <tr><th>Type</th><th>Purpose</th><th>Standard</th></tr>
+    <tr><td><strong>Criminal</strong></td><td>Potential prosecution; law enforcement involved</td><td>Beyond reasonable doubt</td></tr>
+    <tr><td><strong>Civil</strong></td><td>Lawsuit, damages — no criminal prosecution</td><td>Preponderance of evidence (51%)</td></tr>
+    <tr><td><strong>Administrative / HR</strong></td><td>Internal disciplinary action</td><td>Lowest standard — preponderance or less</td></tr>
+    <tr><td><strong>Regulatory</strong></td><td>Regulator (SEC, ICO, etc.) investigates compliance breach</td><td>Varies by regulation</td></tr>
+    <tr><td><strong>Intelligence / Counter-intel</strong></td><td>National security threat actor investigation</td><td>Special authorities, classified</td></tr>
+  </table>
+
+  <div class="section-title">Digital Forensics — Order of Volatility (CRITICAL)</div>
+  <div class="callout callout-red">
+    <strong>🚨 Highest Risk Gap in Domain 7</strong>
+    Collect most volatile evidence FIRST. Once power is lost, volatile evidence is gone forever.
+  </div>
+
+  <div class="mnemonic">
+    <div class="m-title">Order of Volatility — Most → Least Volatile</div>
+    <div class="m-text">Registers → RAM → Swap/Page → Disk → Remote → Archive</div>
+    <div class="m-expand">
+      1. CPU registers, cache<br>
+      2. RAM (running processes, network connections, crypto keys)<br>
+      3. Swap / Page file (virtual memory on disk)<br>
+      4. Persistent disk storage (files, logs, databases)<br>
+      5. Remote logging / monitoring data<br>
+      6. Archival media (tapes, backups)
+    </div>
+  </div>
+
+  <div class="section-title">Forensic Evidence Principles</div>
+  <table>
+    <tr><th>Principle</th><th>Detail</th></tr>
+    <tr><td><strong>Chain of Custody</strong></td><td>Document every person who handles evidence, when, and for what purpose. Never broken.</td></tr>
+    <tr><td><strong>Write Blockers</strong></td><td>Hardware/software that prevents any writes to original evidence media during acquisition.</td></tr>
+    <tr><td><strong>Hash Verification</strong></td><td>Hash evidence before and after acquisition (SHA-256/MD5). Proves evidence not altered.</td></tr>
+    <tr><td><strong>Forensic Copy (bit-level)</strong></td><td>Complete bit-for-bit copy including deleted files and slack space. Not a logical copy.</td></tr>
+    <tr><td><strong>Work on copy</strong></td><td>Always analyse a copy — never work on original evidence.</td></tr>
+  </table>
+</div>
+
+<div id="logging" class="tab-content">
+  <div class="section-title">Logging and Monitoring</div>
+  <table>
+    <tr><th>Control</th><th>Detail</th></tr>
+    <tr><td><strong>SIEM</strong></td><td>Security Information and Event Management. Aggregates logs from multiple sources, correlates events, generates alerts. Examples: Splunk, IBM QRadar, Microsoft Sentinel.</td></tr>
+    <tr><td><strong>Log aggregation</strong></td><td>Centralise logs from all systems to a secure, tamper-evident repository.</td></tr>
+    <tr><td><strong>NTP synchronisation</strong></td><td>All systems must sync to authoritative time source. Log correlation is impossible without synchronised timestamps.</td></tr>
+    <tr><td><strong>Log retention</strong></td><td>Define retention period based on regulatory requirements (GDPR, SOX) and forensic needs. Typically 90 days online, 12+ months archive.</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ NTP is a forensic prerequisite</strong>
+    If NTP fails or is compromised, log timestamps become unreliable and forensic timelines break. NTP (port 123) is not just an operational nicety — it is a security control.
+  </div>
+
+  <div class="section-title">Monitoring Types</div>
+  <table>
+    <tr><th>Type</th><th>What it monitors</th></tr>
+    <tr><td><strong>Security monitoring</strong></td><td>Security events, failed logins, privilege escalation, policy violations</td></tr>
+    <tr><td><strong>Network monitoring</strong></td><td>Traffic patterns, bandwidth anomalies, new connections</td></tr>
+    <tr><td><strong>System monitoring</strong></td><td>CPU/memory/disk usage, process behaviour, file integrity</td></tr>
+    <tr><td><strong>User Activity Monitoring (UAM)</strong></td><td>Privileged user behaviour, data access patterns — insider threat detection</td></tr>
+  </table>
+</div>
+
+<div id="ops" class="tab-content">
+  <div class="section-title">Need-to-Know and Least Privilege</div>
+  <p><strong>Need-to-know</strong>: Access to information only when required to perform assigned duties. Even users with high clearance do not automatically have access to all data at that level — they must have a need.</p>
+  <p style="margin-top:8px;"><strong>Least privilege</strong>: Grant only the minimum access rights required. Applies to users AND systems (service accounts, processes).</p>
+
+  <div class="section-title">Separation of Duties in Operations</div>
+  <p>Critical operational tasks require multiple individuals to complete. Prevents any single person from controlling a full process — reduces fraud and error risk.</p>
+  <ul style="margin-top:8px;">
+    <li>Operator who runs backup ≠ operator who validates the backup</li>
+    <li>Developer who writes code ≠ person who promotes it to production</li>
+    <li>Person who approves a transaction ≠ person who executes it</li>
+  </ul>
+
+  <div class="section-title">RAID Levels</div>
+  <table>
+    <tr><th>RAID Level</th><th>Method</th><th>Min Drives</th><th>Capacity Impact</th><th>Fault Tolerance</th></tr>
+    <tr><td><strong>RAID 0</strong></td><td>Striping — no redundancy</td><td>2</td><td>Full capacity</td><td>None — failure of one disk = total loss</td></tr>
+    <tr><td><strong>RAID 1</strong></td><td>Mirroring — exact copy</td><td>2</td><td><strong>50% always</strong></td><td>1 disk can fail</td></tr>
+    <tr><td><strong>RAID 5</strong></td><td>Striping with distributed parity</td><td>3</td><td>Lose 1 disk worth</td><td>1 disk can fail</td></tr>
+    <tr><td><strong>RAID 6</strong></td><td>Striping with double parity</td><td>4</td><td>Lose 2 disks worth</td><td>2 disks can fail</td></tr>
+    <tr><td><strong>RAID 10</strong></td><td>Mirror + Stripe (RAID 1+0)</td><td>4</td><td>50%</td><td>Up to half the drives</td></tr>
+  </table>
+
+  <div class="callout callout-red">
+    <strong>🚨 Quiz Miss: RAID 1 ALWAYS reduces capacity by 50%</strong>
+    Regardless of how many drives in a RAID 1 array, you always lose 50% to mirroring. This is different from RAID 5 where you only lose the equivalent of 1 drive regardless of array size.
+  </div>
+
+  <div class="section-title">Grid Computing (Architecture Distinction)</div>
+  <div class="callout callout-amber">
+    <strong>⚠️ Quiz Gap: Grid vs Cloud vs Cluster</strong>
+    Grid computing = pooling idle CPU resources from <em>geographically dispersed, independent</em> machines for one large computational task. Not cloud (provisioned resources), not clustering (co-located high-availability). CISSP risk: grid controller compromise = security boundary breach across all contributing nodes.
+  </div>
+</div>
+
+<div id="incident" class="tab-content">
+  <div class="section-title">Incident Response Phases (NIST SP 800-61)</div>
+  <ol style="padding-left:24px;margin:8px 0 20px;">
+    <li style="margin-bottom:8px;"><strong>Preparation</strong> — Build the IR capability before incidents occur: team, tools, playbooks, contacts, communication plan</li>
+    <li style="margin-bottom:8px;"><strong>Detection &amp; Analysis</strong> — Identify potential incidents via SIEM, alerts, user reports. Triage severity. Declare incident if threshold met.</li>
+    <li style="margin-bottom:8px;"><strong>Containment</strong> — Short-term (isolate affected system now) + Long-term (stable, allow business to continue). Preserve evidence.</li>
+    <li style="margin-bottom:8px;"><strong>Eradication</strong> — Remove malware, close vulnerabilities, clean affected systems</li>
+    <li style="margin-bottom:8px;"><strong>Recovery</strong> — Restore systems from clean backups. Monitor closely. Validate integrity before returning to production.</li>
+    <li style="margin-bottom:8px;"><strong>Post-Incident Activity (Lessons Learned)</strong> — Document what happened, what worked, what failed. Update playbooks.</li>
+  </ol>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ Exam Trap: Containment vs Eradication order</strong>
+    Containment comes BEFORE eradication. You must stop the bleeding before you can clean the wound. Also: during containment, preserve forensic evidence before cleaning. Do not wipe systems before imaging.
+  </div>
+
+  <div class="section-title">ISC2 Ethics in Incident Response</div>
+  <p>If investigation reveals criminal activity, the security professional must prioritise public safety (Canon 1) over client confidentiality (Canon 3). Evidence must be preserved. Contact legal counsel before law enforcement to understand obligations.</p>
+</div>
+
+<div id="patch" class="tab-content">
+  <div class="section-title">Patch Management vs Configuration Management</div>
+
+  <div class="quiz-gap">
+    <div class="qg-label">⚡ Quiz Gap — Q5 Missed</div>
+    <div class="qg-wrong">You selected: Change Management (tracks data centre additions)</div>
+    <div class="qg-right">✅ Correct: Configuration Management — tracks and audits all hardware/software additions to a data centre asset inventory</div>
+  </div>
+
+  <table>
+    <tr><th></th><th>Configuration Management</th><th>Change Management</th><th>Patch Management</th></tr>
+    <tr><td><strong>Purpose</strong></td><td>Tracks what is in the environment (the "as-is" state)</td><td>Controls and approves modifications to the environment</td><td>Applies software fixes to address vulnerabilities</td></tr>
+    <tr><td><strong>Key output</strong></td><td>CMDB (Configuration Management Database), asset inventory</td><td>Approved change records, RFC (Request for Change)</td><td>Patched systems, patch compliance reports</td></tr>
+    <tr><td><strong>Exam trigger</strong></td><td>"Track and audit additions to data centre" → Configuration Management</td><td>"Process for approving new firewall rule" → Change Management</td><td>"Apply security fixes to OS" → Patch Management</td></tr>
+  </table>
+
+  <div class="section-title">What Patches Do — Full Scope</div>
+
+  <div class="quiz-gap">
+    <div class="qg-label">⚡ Quiz Gap — Patch Definition</div>
+    <div class="qg-wrong">Narrow answer chosen: "fixes security vulnerabilities only"</div>
+    <div class="qg-right">✅ Complete answer: Patches fix security vulnerabilities AND bugs, AND can add/improve functionality. Most complete description wins on CISSP.</div>
+  </div>
+
+  <div class="section-title">Patch Management Process</div>
+  <ol style="padding-left:24px;margin:8px 0;">
+    <li style="margin-bottom:6px;">Identify available patches (vendor bulletins, CVSS scores)</li>
+    <li style="margin-bottom:6px;">Test patches in non-production environment</li>
+    <li style="margin-bottom:6px;">Approve and schedule deployment (change management)</li>
+    <li style="margin-bottom:6px;">Deploy — emergency patches vs scheduled patches (SLA-driven)</li>
+    <li style="margin-bottom:6px;">Verify and document compliance</li>
+  </ol>
+</div>
+
+<div id="drbc" class="tab-content">
+  <div class="section-title">DR/BC in Domain 7 Context</div>
+  <div class="callout callout-green">
+    <strong>✅ BCM Strength: You know this material deeply</strong>
+    Apply your BCM role knowledge directly. The CISSP frames DR/BC the same way you use it at work. Watch for the specific term "automatic failover."
+  </div>
+
+  <div class="section-title">Automatic Failover</div>
+  <div class="quiz-gap">
+    <div class="qg-label">⚡ Quiz Gap — Failover Terminology</div>
+    <div class="qg-wrong">You selected: "fail-safe" or "resilience" (broader terms)</div>
+    <div class="qg-right">✅ Correct: "Automatic failover" — the specific term for systems that automatically switch to a redundant system when the primary fails, without human intervention</div>
+  </div>
+
+  <table>
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td><strong>Failover</strong></td><td>System automatically switches to backup when primary fails. No human action required.</td></tr>
+    <tr><td><strong>Failback</strong></td><td>Return to primary after it is restored. May require manual steps.</td></tr>
+    <tr><td><strong>Fail-safe</strong></td><td>On failure, system defaults to a <em>safe state</em> (e.g., door unlocks on power loss). Life safety concept.</td></tr>
+    <tr><td><strong>Fail-secure</strong></td><td>On failure, system defaults to a <em>secure/deny state</em> (e.g., firewall blocks all traffic if it crashes).</td></tr>
+    <tr><td><strong>Resilience</strong></td><td>Broad ability to absorb disruption and recover. Failover is a specific resilience mechanism.</td></tr>
+  </table>
+
+  <div class="section-title">Backup Types</div>
+  <table>
+    <tr><th>Type</th><th>What it backs up</th><th>Restore time</th><th>Storage</th></tr>
+    <tr><td><strong>Full</strong></td><td>All data</td><td>Fastest (one set)</td><td>Most</td></tr>
+    <tr><td><strong>Incremental</strong></td><td>Changes since last backup (any type)</td><td>Slowest (need full + all incrementals)</td><td>Least</td></tr>
+    <tr><td><strong>Differential</strong></td><td>Changes since last <em>full</em> backup</td><td>Medium (need full + latest differential)</td><td>Medium</td></tr>
+  </table>
+</div>
+
+<div id="physical" class="tab-content">
+  <div class="section-title">Physical Security in Operations</div>
+  <table>
+    <tr><th>Control</th><th>Purpose</th></tr>
+    <tr><td><strong>Mantrap / Airlock</strong></td><td>Two-door entry where both doors cannot open simultaneously. Prevents tailgating.</td></tr>
+    <tr><td><strong>Tailgating / Piggybacking</strong></td><td>Unauthorized person follows authorized person through controlled door. Prevented by mantraps + security awareness.</td></tr>
+    <tr><td><strong>CCTV</strong></td><td>Detective control — records activity. Does not prevent entry but deters and provides evidence.</td></tr>
+    <tr><td><strong>Guards</strong></td><td>Detective AND deterrent AND corrective (can respond). Most flexible physical control.</td></tr>
+    <tr><td><strong>Fencing</strong></td><td>Deterrent and delay. Does not stop determined attacker but increases time and visibility.</td></tr>
+    <tr><td><strong>Lighting</strong></td><td>Deterrent — reduces concealment. Cost-effective. Required by some standards.</td></tr>
+  </table>
+
+  <div class="section-title">Personnel Safety in Operations</div>
+  <table>
+    <tr><th>Topic</th><th>Key Point</th></tr>
+    <tr><td><strong>Duress codes</strong></td><td>Secret signal (PIN, word) indicating employee is under coercion. Triggers silent alarm.</td></tr>
+    <tr><td><strong>Warden system</strong></td><td>Floor wardens for evacuation. Ensure all personnel account for in emergency.</td></tr>
+    <tr><td><strong>Safety vs security priority</strong></td><td>In conflicts, human safety ALWAYS takes precedence over protecting assets. This is a core CISSP principle.</td></tr>
+  </table>
+</div>
+
+<div id="quizgaps" class="tab-content">
+  <div class="section-title">⚡ Quiz Gap Remediation — 5 Missed Questions</div>
+  <p>Quiz score: 10/15 (67%). Cross-cutting error pattern: <em>choosing broad terms when the exam requires the most specific one, and not selecting the most complete risk-framing answer.</em></p>
+
+  <div class="quiz-gap">
+    <div class="qg-label">Gap 1 — Configuration vs Change Management</div>
+    <div class="qg-wrong">Wrong: "Change management" tracks and audits data centre additions</div>
+    <div class="qg-right">✅ Configuration Management — maintains the CMDB and tracks what is IN the environment. Change Management controls HOW changes are approved and implemented.</div>
+  </div>
+
+  <div class="quiz-gap">
+    <div class="qg-label">Gap 2 — Full scope of what patches do</div>
+    <div class="qg-wrong">Wrong: Patches only fix security vulnerabilities</div>
+    <div class="qg-right">✅ Patches fix security vulnerabilities, AND fix software bugs, AND can add or improve functionality. Always choose the most complete description.</div>
+  </div>
+
+  <div class="quiz-gap">
+    <div class="qg-label">Gap 3 — Automatic failover terminology</div>
+    <div class="qg-wrong">Wrong: "Fail-safe" or broad resilience term selected</div>
+    <div class="qg-right">✅ "Automatic failover" = the specific technical term for system switching to backup without human intervention. Fail-safe = safe state on failure (life safety). These are different concepts.</div>
+  </div>
+
+  <div class="quiz-gap">
+    <div class="qg-label">Gap 4 — TPM and Secure Boot protect against what malware type?</div>
+    <div class="qg-wrong">Wrong: "Rootkit" selected</div>
+    <div class="qg-right">✅ Bootkit — infects the Master Boot Record or UEFI, loading before the OS. TPM and Secure Boot verify the boot chain integrity specifically to block bootkits. Rootkits operate within the OS (after boot).</div>
+  </div>
+
+  <div class="quiz-gap">
+    <div class="qg-label">Gap 5 — Which RAID level always reduces capacity by 50%?</div>
+    <div class="qg-wrong">Wrong: RAID 5 or RAID 6 selected</div>
+    <div class="qg-right">✅ RAID 1 (Mirroring) — every bit of data is duplicated. Always 50% capacity regardless of number of drives. RAID 5 only loses the equivalent of ONE drive worth of capacity regardless of array size.</div>
+  </div>
+
+  <div class="section-title">Error Pattern Summary</div>
+  <table>
+    <tr><th>Error Type</th><th>Occurrences</th><th>Fix</th></tr>
+    <tr><td>Selected broad term instead of specific one</td><td>Gaps 1, 3, 4</td><td>When two answers seem right, pick the MORE SPECIFIC one.</td></tr>
+    <tr><td>Incomplete answer chosen</td><td>Gap 2</td><td>Always choose the answer that covers ALL aspects, not just one.</td></tr>
+    <tr><td>Similar-sounding confusion</td><td>Gap 4</td><td>Bootkit vs Rootkit — location in boot sequence is the differentiator.</td></tr>
+  </table>
+</div>
+
+<div id="gaps" class="tab-content">
+  <div class="section-title">Domain 7 Gap Analysis</div>
+  <table>
+    <tr><th>Topic</th><th>Risk Level</th><th>Action</th></tr>
+    <tr><td>Digital forensics — order of volatility</td><td class="gap-high">🔴 HIGH</td><td>Drill: Registers → RAM → Swap → Disk → Remote → Archive. Most volatile first.</td></tr>
+    <tr><td>ISC2 Ethics canon order</td><td class="gap-high">🔴 HIGH</td><td>Appears in Domain 7 context too. Canon 1 (public) &gt; Canon 3 (client). Must report criminal activity.</td></tr>
+    <tr><td>Configuration vs Change Management</td><td class="gap-high">🔴 HIGH</td><td>Config Mgmt = what is in environment (CMDB). Change Mgmt = how changes are approved.</td></tr>
+    <tr><td>Bootkit vs Rootkit</td><td class="gap-high">🔴 HIGH</td><td>Bootkit = pre-OS, MBR/UEFI. TPM+Secure Boot defend against bootkit. Rootkit = within OS.</td></tr>
+    <tr><td>RAID 1 capacity rule</td><td class="gap-med">🟡 MEDIUM</td><td>RAID 1 = always 50% capacity. RAID 5 = loses 1 drive equivalent regardless of size.</td></tr>
+    <tr><td>Automatic failover vs fail-safe</td><td class="gap-med">🟡 MEDIUM</td><td>Failover = switches to backup automatically. Fail-safe = defaults to safe state. Different concepts.</td></tr>
+    <tr><td>Incident response phase order</td><td class="gap-low">🟢 LOW</td><td>Preparation → Detection → Containment → Eradication → Recovery → Lessons Learned.</td></tr>
+    <tr><td>DR/BC terminology (RTO/RPO/MTD)</td><td class="gap-low">🟢 LOW</td><td>Strong from BCM role. Watch WRT: RTO + WRT ≤ MTD.</td></tr>
+  </table>
+</div>
+
+<footer>CISSP Study Notes · Domain 7 · May Tang · Source: ISC2 CBK 2024, Chapple &amp; Seidl, Miller · Last updated June 2026</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
