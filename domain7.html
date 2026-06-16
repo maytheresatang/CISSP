@@ -49,10 +49,11 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
-</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.2);color:var(--teal-light);border:1px solid rgba(13,148,136,.4);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.35);}.home-bar{background:var(--navy-mid);padding:10px 40px;border-bottom:1px solid rgba(255,255,255,.07);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
 </head>
 <body>
 
+<div class="home-bar"><a class="home-btn" href="index.html"><div class="header">#8592; All Domains</a></div>
 <div class="header">
   <div class="label">CISSP CBK 2024 · Study Notes</div>
   <h1>Domain 7 — Security Operations</h1>
@@ -60,7 +61,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="meta">
     <span class="badge badge-teal">Exam Weight: 13%</span>
     <span class="badge badge-amber">Quiz Score: 10/15 (67%)</span>
-    <span class="badge badge-green">BCM Strength Domain</span>
+    <span class="badge badge-green">Core Strength Domain</span>
   </div>
 </div>
 
@@ -79,7 +80,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 
 <div id="overview" class="tab-content active">
   <div class="section-title">Domain at a Glance</div>
-  <p>Domain 7 is operationally dense — it covers security operations centre practices, incident response, digital forensics, patch/change management, DR/BC, and physical security. Your BCM background is a major asset for the DR/BC sub-topics. Digital forensics and order of volatility are your highest-risk gap.</p>
+  <p>Domain 7 is operationally dense — it covers security operations centre practices, incident response, digital forensics, patch/change management, DR/BC, and physical security. Your BC background is a major asset for the DR/BC sub-topics. Digital forensics and order of volatility are your highest-risk gap.</p>
 
   <div class="callout callout-amber">
     <strong>⚠️ Quiz Result: 10/15 (67%) — Below 80% threshold</strong>
@@ -94,7 +95,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Malware types (bootkit vs rootkit)</td><td>🔴 High</td><td>⚠️ Quiz miss — drill distinction</td></tr>
     <tr><td>RAID levels</td><td>🟡 Medium</td><td>⚠️ Quiz miss — know RAID 1 vs 5</td></tr>
     <tr><td>Automatic failover terminology</td><td>🟡 Medium</td><td>⚠️ Quiz miss — "failover" not "fail-safe"</td></tr>
-    <tr><td>DR/BC (BCP, RTO, RPO, MTD)</td><td>🔴 High</td><td>Very strong (BCM)</td></tr>
+    <tr><td>DR/BC (BCP, RTO, RPO, MTD)</td><td>🔴 High</td><td>Very strong (BC)</td></tr>
     <tr><td>Patch management process</td><td>🟡 Medium</td><td>⚠️ Quiz miss — full scope of patch definition</td></tr>
   </table>
 </div>
@@ -257,8 +258,8 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 <div id="drbc" class="tab-content">
   <div class="section-title">DR/BC in Domain 7 Context</div>
   <div class="callout callout-green">
-    <strong>✅ BCM Strength: You know this material deeply</strong>
-    Apply your BCM role knowledge directly. The CISSP frames DR/BC the same way you use it at work. Watch for the specific term "automatic failover."
+    <strong>✅ DR/BC Strength: You know this material deeply</strong>
+    Apply your prior experience knowledge directly. The CISSP frames DR/BC the same way you use it at work. Watch for the specific term "automatic failover."
   </div>
 
   <div class="section-title">Automatic Failover</div>
@@ -361,11 +362,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>RAID 1 capacity rule</td><td class="gap-med">🟡 MEDIUM</td><td>RAID 1 = always 50% capacity. RAID 5 = loses 1 drive equivalent regardless of size.</td></tr>
     <tr><td>Automatic failover vs fail-safe</td><td class="gap-med">🟡 MEDIUM</td><td>Failover = switches to backup automatically. Fail-safe = defaults to safe state. Different concepts.</td></tr>
     <tr><td>Incident response phase order</td><td class="gap-low">🟢 LOW</td><td>Preparation → Detection → Containment → Eradication → Recovery → Lessons Learned.</td></tr>
-    <tr><td>DR/BC terminology (RTO/RPO/MTD)</td><td class="gap-low">🟢 LOW</td><td>Strong from BCM role. Watch WRT: RTO + WRT ≤ MTD.</td></tr>
+    <tr><td>DR/BC terminology (RTO/RPO/MTD)</td><td class="gap-low">🟢 LOW</td><td>Strong from prior experience. Watch WRT: RTO + WRT ≤ MTD.</td></tr>
   </table>
 </div>
 
-<footer>CISSP Study Notes · Domain 7 · May Tang · Source: ISC2 CBK 2024, Chapple &amp; Seidl, Miller · Last updated June 2026</footer>
+<footer>CISSP Study Notes · Domain 7 · ISC2 CBK 2024 · Chapple &amp; Seidl · Miller</footer>
 
 <script>
 function showTab(id) {
