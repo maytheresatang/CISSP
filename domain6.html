@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP Domain 6 — Security Assessment &amp; Testing</title>
+<style>
+:root{--navy:#0A1628;--navy-mid:#152238;--teal:#0D9488;--teal-light:#14B8A6;--amber:#B45309;--amber-bg:#FEF3C7;--red:#B91C1C;--red-bg:#FEE2E2;--green:#15803D;--green-bg:#DCFCE7;--blue:#1D4ED8;--blue-bg:#DBEAFE;--border:#E2E8F0;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+.header{background:var(--navy);color:white;padding:40px;border-bottom:4px solid var(--teal);}
+.header .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-light);margin-bottom:8px;}
+.header h1{font-size:2rem;font-weight:800;margin-bottom:6px;}
+.header .sub{color:#94A3B8;font-size:14px;}
+.header .meta{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-teal{background:rgba(13,148,136,.25);color:var(--teal-light);}
+.badge-green{background:var(--green-bg);color:var(--green);}
+.tabs{display:flex;gap:2px;background:var(--navy-mid);padding:0 40px;overflow-x:auto;}
+.tab-btn{padding:12px 18px;font-size:13px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+.tab-btn.active,.tab-btn:hover{color:var(--teal-light);border-bottom-color:var(--teal-light);}
+.tab-content{display:none;padding:32px 40px;}
+.tab-content.active{display:block;}
+.section-title{font-size:1.15rem;font-weight:700;color:var(--navy);margin:28px 0 14px;padding-bottom:6px;border-bottom:2px solid var(--teal);}
+.section-title:first-child{margin-top:0;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;}
+th{background:var(--navy);color:white;padding:10px 12px;text-align:left;font-size:13px;}
+td{padding:9px 12px;border-bottom:1px solid var(--border);}
+tr:nth-child(even) td{background:#F1F5F9;}
+.callout{border-left:4px solid;padding:14px 16px;margin:16px 0;border-radius:0 8px 8px 0;}
+.callout-amber{border-color:var(--amber);background:var(--amber-bg);}
+.callout-red{border-color:var(--red);background:var(--red-bg);}
+.callout-green{border-color:var(--green);background:var(--green-bg);}
+.callout-blue{border-color:var(--blue);background:var(--blue-bg);}
+.callout strong{display:block;margin-bottom:4px;font-size:13px;}
+ul{padding-left:20px;margin:8px 0;}
+li{margin-bottom:5px;}
+.gap-high{color:var(--red);font-weight:700;}
+.gap-med{color:var(--amber);font-weight:700;}
+.gap-low{color:var(--green);font-weight:700;}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
+@media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">CISSP CBK 2024 · Study Notes</div>
+  <h1>Domain 6 — Security Assessment &amp; Testing</h1>
+  <div class="sub">Vulnerability Scanning · Penetration Testing · Audits · SCAP · SOC Reports · Software Testing</div>
+  <div class="meta">
+    <span class="badge badge-teal">Exam Weight: 12%</span>
+    <span class="badge badge-green">2LoD Strength Domain</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('vuln')">Vuln Scanning</button>
+  <button class="tab-btn" onclick="showTab('pentest')">Pen Testing</button>
+  <button class="tab-btn" onclick="showTab('audit')">Audits &amp; SOC</button>
+  <button class="tab-btn" onclick="showTab('scap')">SCAP &amp; Tools</button>
+  <button class="tab-btn" onclick="showTab('swtest')">Software Testing</button>
+  <button class="tab-btn" onclick="showTab('kpi')">KPI vs KRI</button>
+  <button class="tab-btn" onclick="showTab('gaps')">Gap Analysis</button>
+</div>
+
+<div id="overview" class="tab-content active">
+  <div class="section-title">Domain at a Glance</div>
+  <p>Domain 6 tests your ability to design and interpret security assessments, from vulnerability scans to penetration tests, formal audits, and software testing techniques. Your 2LoD background is a strength — you already think in terms of audit strategy, KPI/KRI design, and vendor assurance.</p>
+
+  <div class="callout callout-green">
+    <strong>✅ 2LoD Advantage</strong>
+    Your risk oversight role gives you natural fluency with audit types, KPI vs KRI distinction, SOC report interpretation, and assessment programme design. The specific tool names (Nessus vs Nikto) and SCAP components are the areas to sharpen.
+  </div>
+
+  <table>
+    <tr><th>Topic</th><th>Priority</th><th>Readiness</th></tr>
+    <tr><td>Vulnerability scanning tools (Nessus vs Nmap vs Nikto)</td><td>🔴 High</td><td>⚠️ Tool distinction needed</td></tr>
+    <tr><td>Penetration testing phases and types</td><td>🔴 High</td><td>Good</td></tr>
+    <tr><td>SCAP components (CVE/CVSS/CCE/CPE/OVAL/XCCDF)</td><td>🔴 High</td><td>⚠️ Memorise acronyms</td></tr>
+    <tr><td>Audit types and SOC reports</td><td>🔴 High</td><td>Strong (2LoD)</td></tr>
+    <tr><td>Software testing (SAST/DAST/IAST)</td><td>🟡 Medium</td><td>Good</td></tr>
+    <tr><td>KPI vs KRI distinction</td><td>🟡 Medium</td><td>Strong</td></tr>
+    <tr><td>Log review and SIEM</td><td>🟡 Medium</td><td>Good</td></tr>
+  </table>
+</div>
+
+<div id="vuln" class="tab-content">
+  <div class="section-title">Vulnerability Assessment vs Penetration Test</div>
+  <table>
+    <tr><th></th><th>Vulnerability Assessment</th><th>Penetration Test</th></tr>
+    <tr><td><strong>Goal</strong></td><td>Find and report vulnerabilities</td><td>Actively exploit to prove impact</td></tr>
+    <tr><td><strong>Method</strong></td><td>Automated scanning + manual review</td><td>Manual + automated exploitation</td></tr>
+    <tr><td><strong>Outcome</strong></td><td>List of vulnerabilities with severity ratings</td><td>Proof of exploitation, attack path</td></tr>
+    <tr><td><strong>Risk</strong></td><td>Low — passive/semi-active</td><td>Higher — active exploitation</td></tr>
+    <tr><td><strong>Frequency</strong></td><td>Continuous / monthly</td><td>Annual or after major changes</td></tr>
+  </table>
+
+  <div class="section-title">Scanning Tool Distinctions — Exam Critical</div>
+  <table>
+    <tr><th>Tool</th><th>Purpose</th><th>Target</th><th>Exam Trigger</th></tr>
+    <tr><td><strong>Nessus</strong></td><td>Comprehensive vulnerability scanner</td><td>Hosts, OS, services, credentials</td><td>"Vulnerability assessment of network hosts"</td></tr>
+    <tr><td><strong>OpenVAS</strong></td><td>Open-source Nessus alternative</td><td>Network vulnerability scanning</td><td>"Free/open-source vulnerability scanner"</td></tr>
+    <tr><td><strong>Nmap</strong></td><td>Network discovery and port scanning</td><td>Open ports, OS fingerprinting, services</td><td>"What ports are open?" "Network discovery"</td></tr>
+    <tr><td><strong>Nikto</strong></td><td>Web server scanner — specifically HTTP/HTTPS</td><td>Web servers, CGI, misconfigurations</td><td>"Testing web server on port 443/80"</td></tr>
+    <tr><td><strong>Metasploit</strong></td><td>Exploitation framework</td><td>Active exploitation of known vulns</td><td>"Prove the vulnerability is exploitable"</td></tr>
+    <tr><td><strong>sqlmap</strong></td><td>SQL injection testing tool</td><td>Database-driven web applications</td><td>"Test for SQL injection"</td></tr>
+    <tr><td><strong>zzuf / fuzzer</strong></td><td>Fuzzing — send random/malformed input</td><td>Applications, APIs, parsers</td><td>"Discover unknown input validation flaws"</td></tr>
+  </table>
+
+  <div class="callout callout-red">
+    <strong>🚨 Nessus vs Nikto — Most Tested Tool Confusion</strong>
+    Nessus = general network/host vulnerability scanner. Nikto = specifically web server testing (HTTP/HTTPS). If the scenario involves a web server on port 80 or 443 → <strong>Nikto</strong>. If it's a general network vulnerability scan → <strong>Nessus</strong>.
+  </div>
+</div>
+
+<div id="pentest" class="tab-content">
+  <div class="section-title">Penetration Test Types (Knowledge Level)</div>
+  <table>
+    <tr><th>Type</th><th>Tester Knowledge</th><th>Simulates</th></tr>
+    <tr><td><strong>Black Box</strong></td><td>No prior knowledge — like an external attacker</td><td>External attacker with no insider info</td></tr>
+    <tr><td><strong>White Box</strong></td><td>Full knowledge (architecture, code, credentials)</td><td>Malicious insider or developer</td></tr>
+    <tr><td><strong>Grey Box</strong></td><td>Partial knowledge (limited credentials or network diagrams)</td><td>Compromised partner, phishing victim</td></tr>
+  </table>
+
+  <div class="section-title">Penetration Test Phases</div>
+  <ol style="padding-left:24px;margin:8px 0 20px;">
+    <li style="margin-bottom:8px;"><strong>Planning / Scoping</strong> — Define scope, get written authorisation (rules of engagement). Critical: no test without written permission.</li>
+    <li style="margin-bottom:8px;"><strong>Reconnaissance (Recon)</strong> — Passive: OSINT, WHOIS, LinkedIn. Active: port scanning, banner grabbing.</li>
+    <li style="margin-bottom:8px;"><strong>Scanning / Enumeration</strong> — Identify live hosts, open ports, services, OS. Tools: Nmap, Nessus.</li>
+    <li style="margin-bottom:8px;"><strong>Exploitation</strong> — Attempt to exploit discovered vulnerabilities. Tools: Metasploit, custom exploits.</li>
+    <li style="margin-bottom:8px;"><strong>Post-Exploitation / Lateral Movement</strong> — Escalate privileges, pivot to other systems, establish persistence.</li>
+    <li style="margin-bottom:8px;"><strong>Reporting</strong> — Document findings, evidence, impact, and remediation recommendations.</li>
+    <li style="margin-bottom:8px;"><strong>Cleanup / Remediation Verification</strong> — Remove artefacts. Re-test after fixes.</li>
+  </ol>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ Rules of Engagement (RoE)</strong>
+    Written authorisation is NON-NEGOTIABLE before testing. Without it, penetration testing is criminal. RoE defines: scope (IP ranges, systems), timing (business hours vs off-hours), escalation contacts, off-limits systems.
+  </div>
+</div>
+
+<div id="audit" class="tab-content">
+  <div class="section-title">Audit Types</div>
+  <table>
+    <tr><th>Type</th><th>Description</th></tr>
+    <tr><td><strong>Internal Audit</strong></td><td>Conducted by internal audit function. Less independent but more frequent and contextual.</td></tr>
+    <tr><td><strong>External Audit</strong></td><td>Conducted by independent third party. More credible, required for regulatory compliance (SOX, PCI).</td></tr>
+    <tr><td><strong>Third-Party Audit</strong></td><td>Assessment of a vendor/supplier. Standard in 2LoD vendor assurance programmes.</td></tr>
+    <tr><td><strong>Certification Audit</strong></td><td>Leads to formal certification (ISO 27001, PCI-DSS). Stage 1 = document review. Stage 2 = implementation test.</td></tr>
+    <tr><td><strong>Compliance Audit</strong></td><td>Assesses adherence to regulatory requirements (GDPR, HIPAA).</td></tr>
+  </table>
+
+  <div class="section-title">SOC Reports (SSAE 18 / AICPA)</div>
+  <table>
+    <tr><th>Report</th><th>Audience</th><th>What it covers</th><th>Type 1 vs Type 2</th></tr>
+    <tr><td><strong>SOC 1</strong></td><td>Financial auditors of user organisations</td><td>Controls over financial reporting (ICFR)</td><td>Type 1 = point in time. Type 2 = period (6–12 months).</td></tr>
+    <tr><td><strong>SOC 2</strong></td><td>Security-focused: customers, business partners</td><td>Trust Service Criteria: Security, Availability, Processing Integrity, Confidentiality, Privacy</td><td>Type 1 = design. Type 2 = design + operating effectiveness over time.</td></tr>
+    <tr><td><strong>SOC 3</strong></td><td>General public</td><td>High-level summary of SOC 2 controls. No detailed testing results.</td><td>Published on website.</td></tr>
+  </table>
+
+  <div class="callout callout-blue">
+    <strong>📌 2LoD Usage: SOC 2 Type 2</strong>
+    In your vendor assurance role, you request SOC 2 Type 2 reports — they show controls were operating effectively over a period (not just designed correctly). A Type 1 is weaker evidence for ongoing assurance.
+  </div>
+
+  <div class="callout callout-amber">
+    <strong>⚠️ Exam Trap: SOC 1 vs SOC 2</strong>
+    SOC 1 = financial reporting controls. SOC 2 = security and operational controls. Never mix these up. A cloud hosting provider showing their security posture → SOC 2. A payroll processor showing financial control reliability → SOC 1.
+  </div>
+</div>
+
+<div id="scap" class="tab-content">
+  <div class="section-title">SCAP (Security Content Automation Protocol) Components</div>
+
+  <div class="callout callout-red">
+    <strong>🚨 SCAP Components — Memorise All Six</strong>
+    The exam tests these by acronym. Know what each one does.
+  </div>
+
+  <table>
+    <tr><th>Acronym</th><th>Full Name</th><th>Purpose</th></tr>
+    <tr><td><strong>CVE</strong></td><td>Common Vulnerabilities and Exposures</td><td>Unique identifier for known vulnerabilities (CVE-2024-XXXX)</td></tr>
+    <tr><td><strong>CVSS</strong></td><td>Common Vulnerability Scoring System</td><td>Numeric severity score 0–10 for vulnerabilities</td></tr>
+    <tr><td><strong>CCE</strong></td><td>Common Configuration Enumeration</td><td>Unique identifiers for system configuration issues (misconfigurations)</td></tr>
+    <tr><td><strong>CPE</strong></td><td>Common Platform Enumeration</td><td>Standardised naming for software, hardware, and OS</td></tr>
+    <tr><td><strong>OVAL</strong></td><td>Open Vulnerability Assessment Language</td><td>XML-based language for describing system state and checking vulnerabilities</td></tr>
+    <tr><td><strong>XCCDF</strong></td><td>Extensible Configuration Checklist Description Format</td><td>XML format for security checklists and benchmarks (like CIS Benchmarks)</td></tr>
+  </table>
+
+  <div class="callout callout-blue">
+    <strong>📌 CVE vs CVSS distinction</strong>
+    CVE = the unique ID (name). CVSS = the score (severity number). CVE-2021-44228 is Log4Shell. Its CVSS score was 10.0 (critical). Know the difference.
+  </div>
+</div>
+
+<div id="swtest" class="tab-content">
+  <div class="section-title">Software Testing Types</div>
+  <table>
+    <tr><th>Type</th><th>Acronym</th><th>How it works</th><th>Best for</th></tr>
+    <tr><td><strong>Static Application Security Testing</strong></td><td>SAST</td><td>Analyses source code without executing it. "White box." Early in SDLC.</td><td>Finding coding flaws early — SQL injection, buffer overflow in code</td></tr>
+    <tr><td><strong>Dynamic Application Security Testing</strong></td><td>DAST</td><td>Tests running application. "Black box." No source code needed.</td><td>Runtime vulnerabilities — auth bypass, XSS, session management</td></tr>
+    <tr><td><strong>Interactive Application Security Testing</strong></td><td>IAST</td><td>Combines agent inside app + external testing. Best of both.</td><td>Comprehensive, real-time feedback during testing</td></tr>
+    <tr><td><strong>Software Composition Analysis</strong></td><td>SCA</td><td>Scans open-source components and libraries for known CVEs</td><td>Third-party library risk (Log4j, OpenSSL)</td></tr>
+    <tr><td><strong>Fuzz Testing</strong></td><td>Fuzzing</td><td>Sends random/malformed input to find crashes or unexpected behaviour</td><td>Input validation, protocol parsers, edge cases</td></tr>
+  </table>
+
+  <div class="section-title">Regression Testing</div>
+  <p>Regression testing = re-running a test suite after changes to verify previously passing tests still pass. Confirms new code changes don't break existing functionality. Essential in CI/CD pipelines.</p>
+
+  <div class="section-title">Code Review Types</div>
+  <table>
+    <tr><th>Type</th><th>Description</th></tr>
+    <tr><td><strong>Self-review</strong></td><td>Developer reviews their own code — lowest assurance</td></tr>
+    <tr><td><strong>Peer review</strong></td><td>Another developer reviews the code — good practice</td></tr>
+    <tr><td><strong>Formal inspection (Fagan)</strong></td><td>Structured multi-person review with defined roles — highest assurance</td></tr>
+  </table>
+</div>
+
+<div id="kpi" class="tab-content">
+  <div class="section-title">KPI vs KRI — Critical 2LoD Distinction</div>
+  <table>
+    <tr><th></th><th>KPI (Key Performance Indicator)</th><th>KRI (Key Risk Indicator)</th></tr>
+    <tr><td><strong>Measures</strong></td><td>How well controls and processes are performing <em>now</em></td><td>Leading signal of increasing risk — <em>predictive</em></td></tr>
+    <tr><td><strong>Time orientation</strong></td><td>Lagging indicator (historical)</td><td>Leading indicator (forward-looking)</td></tr>
+    <tr><td><strong>Example</strong></td><td>% of critical patches applied within 30 days = 94%</td><td>Increase in failed login attempts = rising brute-force risk</td></tr>
+    <tr><td><strong>Used by</strong></td><td>Operations / 1LoD to show control effectiveness</td><td>Risk function / 2LoD to identify emerging risk</td></tr>
+    <tr><td><strong>Action when threshold breached</strong></td><td>Investigate control failure</td><td>Escalate risk to risk committee, consider control enhancement</td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>✅ 2LoD Strength: You live this distinction</strong>
+    In your role, you design KRIs for the risk dashboard and monitor KPIs reported by 1LoD. Map this directly to CISSP questions about security metrics design and reporting to senior management.
+  </div>
+
+  <div class="section-title">Synthetic Transactions</div>
+  <p>Synthetic transactions = scripted test transactions run against production systems to continuously verify availability and performance without real user traffic. Simulates what a user would do (login → search → checkout) and validates the full path is working.</p>
+</div>
+
+<div id="gaps" class="tab-content">
+  <div class="section-title">Domain 6 Gap Analysis</div>
+  <table>
+    <tr><th>Topic</th><th>Risk Level</th><th>Action</th></tr>
+    <tr><td>Scanning tool distinctions (Nessus vs Nikto vs Nmap)</td><td class="gap-high">🔴 HIGH</td><td>Nikto=web server only. Nessus=general vuln scan. Nmap=port/network discovery. Drill scenarios.</td></tr>
+    <tr><td>SCAP component names and purposes</td><td class="gap-high">🔴 HIGH</td><td>Memorise: CVE=ID, CVSS=score, CCE=config, CPE=platform, OVAL=language, XCCDF=checklists.</td></tr>
+    <tr><td>SOC 1 vs SOC 2 vs SOC 3 distinction</td><td class="gap-med">🟡 MEDIUM</td><td>SOC 1=financial. SOC 2=security (TSC). SOC 3=public summary. Type 2=period of effectiveness.</td></tr>
+    <tr><td>Black/White/Grey box pen testing</td><td class="gap-low">🟢 LOW</td><td>Black=no knowledge. White=full knowledge. Grey=partial. Know what each simulates.</td></tr>
+    <tr><td>SAST vs DAST vs IAST</td><td class="gap-low">🟢 LOW</td><td>SAST=code review (pre-execution). DAST=runtime test (no source). IAST=both.</td></tr>
+    <tr><td>KPI vs KRI</td><td class="gap-low">🟢 LOW</td><td>Already strong from 2LoD role. KRI=predictive/leading. KPI=historical/lagging.</td></tr>
+  </table>
+</div>
+
+<footer>CISSP Study Notes · Domain 6 · May Tang · Source: ISC2 CBK 2024, Chapple &amp; Seidl, Miller · Last updated June 2026</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
