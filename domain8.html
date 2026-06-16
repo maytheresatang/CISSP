@@ -47,10 +47,11 @@ li{margin-bottom:5px;}
 .card h4{color:var(--navy);font-size:14px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:700px){.tab-content{padding:20px;}.header{padding:24px;}.grid2{grid-template-columns:1fr;}}
-</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.2);color:var(--teal-light);border:1px solid rgba(13,148,136,.4);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.35);}.home-bar{background:var(--navy-mid);padding:10px 40px;border-bottom:1px solid rgba(255,255,255,.07);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
 </head>
 <body>
 
+<div class="home-bar"><a class="home-btn" href="index.html"><div class="header">#8592; All Domains</a></div>
 <div class="header">
   <div class="label">CISSP CBK 2024 · Study Notes</div>
   <h1>Domain 8 — Software Development Security</h1>
@@ -79,8 +80,8 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="section-title">Domain 8 at a Glance</div>
 
   <div class="callout callout-blue">
-    <strong>📌 2LoD Lens</strong>
-    Your BCM/risk background maps well here. Threat modelling belongs in DESIGN phase (not post-build). Security reviews of acquired/third-party software = vendor assurance. Change Advisory Board (CAB) = formal change control you know from operations. The gap is in software-specific terms: SDLC model names, vulnerability classes, testing types.
+    <strong>📌 Exam Lens</strong>
+    Your Risk management background maps well here. Threat modelling belongs in DESIGN phase (not post-build). Security reviews of acquired/third-party software = vendor assurance. Change Advisory Board (CAB) = formal change control you know from operations. The gap is in software-specific terms: SDLC model names, vulnerability classes, testing types.
   </div>
 
   <table>
@@ -135,7 +136,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 
   <div class="callout callout-amber">
     <strong>⚠️ Exam Trap — Threat Modelling Phase</strong>
-    Threat modelling must occur at the <strong>Design phase</strong>, not during testing and not post-deployment. Remediation ownership = system/application owners, not the security team (your 2LoD instinct is correct here — you advise, they fix).
+    Threat modelling must occur at the <strong>Design phase</strong>, not during testing and not post-deployment. Remediation ownership = system/application owners, not the security team (remediation ownership = system/app owners, not the security function).
   </div>
 
   <div class="section-title">SDLC Development Models</div>
@@ -486,8 +487,8 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <ul>
       <li>Change Advisory Board (CAB) — maps directly to your change management experience</li>
       <li>Environment separation (Dev/Test/UAT/Prod) — risk governance parallel</li>
-      <li>Vendor assurance / third-party assessment — your 2LoD background</li>
-      <li>Supply chain risk — oil &amp; gas OT/ICS supply chain maps here</li>
+      <li>Vendor assurance / third-party assessment</li>
+      <li>Supply chain risk management</li>
       <li>SBOM / EoL tracking — regulatory compliance lens from GDPR experience</li>
     </ul>
   </div>
@@ -517,7 +518,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </table>
 </div>
 
-<footer>CISSP Domain 8 — Software Development Security · Built for May Tang · ISC2 CBK 2024 + Chapple &amp; Seidl + Miller · Target Exam: Aug–Sep 2026</footer>
+<footer>CISSP Domain 8 — Software Development Security · Built for ISC2 CBK 2024 + Chapple &amp; Seidl + Miller</footer>
 
 <script>
 function showTab(id) {
