@@ -49,7 +49,7 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}.pq{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #B45309;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;}.pq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B45309;font-weight:700;margin-bottom:6px;}.pq-q{font-size:14px;font-style:italic;color:#1E293B;margin-bottom:8px;}.pq-a{font-size:14px;font-weight:700;color:#15803D;margin-bottom:6px;}.pq-why{font-size:13.5px;color:#334155;line-height:1.6;}.pq-why ul{margin:6px 0 0;padding-left:20px;}.pq-why li{margin-bottom:3px;}.pq-note{font-size:12px;color:#92400E;background:#FEF3C7;border-radius:6px;padding:6px 10px;margin-top:8px;}</style>
 </head>
 <body>
 
@@ -139,6 +139,27 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td><strong>Forensic Copy (bit-level)</strong></td><td>Complete bit-for-bit copy including deleted files and slack space. Not a logical copy.</td></tr>
     <tr><td><strong>Work on copy</strong></td><td>Always analyse a copy — never work on original evidence.</td></tr>
   </table>
+
+  <div class="section-title">e-Discovery vs Related Legal Terms</div>
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td><strong>e-Discovery</strong></td><td>The overall process of <strong>identifying, collecting and producing</strong> electronically stored information (ESI) requested for litigation</td></tr>
+    <tr><td><strong>Litigation (legal) hold</strong></td><td>An instruction to <strong>preserve</strong> relevant data — suspends normal deletion/retention schedules</td></tr>
+    <tr><td><strong>Subpoena</strong></td><td>A court order compelling someone to testify or hand over documents</td></tr>
+    <tr><td><strong>Chain of custody</strong></td><td>Documentation of everyone who handled the evidence, and when</td></tr>
+  </table>
+  <div class="mnemonic">
+    <div class="m-title">EDRM — Electronic Discovery Reference Model (9 stages)</div>
+    <div class="m-text">Govern → Identify → Preserve → Collect → Process → Review → Analyse → Produce → Present</div>
+    <div class="m-expand">Information governance comes first; presentation (in court) comes last.</div>
+  </div>
+
+  <div class="pq" id="pq-e-discovery">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">An employee receives an order requesting a former employee's email for pending litigation. She immediately begins retaining the emails and notifies her manager. What BEST describes the process of identifying and producing the data requested in this type of order?</div>
+    <div class="pq-a">✅ e-Discovery</div>
+    <div class="pq-why">Trap: what she did <em>first</em> — retaining the emails — is a <strong>litigation hold</strong> (preservation). But the question asks about <em>identifying and producing</em> the data, which is e-Discovery. A subpoena is the order itself; chain of custody documents evidence handling.</div>
+  </div>
 </div>
 
 <div id="logging" class="tab-content">
@@ -164,6 +185,21 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td><strong>System monitoring</strong></td><td>CPU/memory/disk usage, process behaviour, file integrity</td></tr>
     <tr><td><strong>User Activity Monitoring (UAM)</strong></td><td>Privileged user behaviour, data access patterns — insider threat detection</td></tr>
   </table>
+
+  <div class="section-title">SIEM vs SOAR</div>
+  <table>
+    <tr><th></th><th>SIEM</th><th>SOAR</th></tr>
+    <tr><td><strong>Does</strong></td><td>Collects, correlates and alerts on log/event data</td><td>Orchestrates security tools and <strong>automates response</strong> with playbooks</td></tr>
+    <tr><td><strong>Question it answers</strong></td><td>"What is happening?"</td><td>"What do we do about it — automatically?"</td></tr>
+    <tr><td><strong>Examples</strong></td><td>Splunk Enterprise Security, IBM QRadar, Microsoft Sentinel</td><td><strong>Splunk SOAR</strong> (formerly Phantom), Palo Alto Cortex XSOAR, IBM QRadar SOAR</td></tr>
+  </table>
+
+  <div class="pq" id="pq-soar">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Security tools such as SIEMs and SOAR platforms aim to provide detailed and graphical analysis of a network. Which of the following software programs is considered a SOAR tool? (Splunk · PFELK · Security Onion · Ntopng)</div>
+    <div class="pq-a">✅ Splunk</div>
+    <div class="pq-why">Splunk offers a dedicated SOAR product (Splunk SOAR) alongside its SIEM.<ul><li><strong>PFELK</strong> = pfSense firewall logs fed into the ELK stack for dashboards (log analysis/visualisation).</li><li><strong>Security Onion</strong> = open-source network security monitoring / threat-hunting platform (IDS, Zeek, log management).</li><li><strong>ntopng</strong> = network traffic and flow monitoring.</li></ul></div>
+  </div>
 </div>
 
 <div id="ops" class="tab-content">
@@ -219,6 +255,34 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 
   <div class="section-title">ISC2 Ethics in Incident Response</div>
   <p>If investigation reveals criminal activity, the security professional must prioritise public safety (Canon 1) over client confidentiality (Canon 3). Evidence must be preserved. Contact legal counsel before law enforcement to understand obligations.</p>
+
+  <div class="section-title">ISC2 Exam Outline — 7 Incident Management Steps</div>
+  <div class="callout callout-red">
+    <strong>🚨 Two models — know both</strong>
+    The NIST list above has 6 phases. The ISC2 CISSP outline (7.6) lists <strong>7 steps</strong>, and practice questions often use this one.
+  </div>
+  <table>
+    <tr><th>#</th><th>ISC2 Step</th><th>What happens</th><th>NIST equivalent</th></tr>
+    <tr><td>1</td><td><strong>Detection</strong></td><td>Identify the event via alerts, logs, user reports</td><td>Detection &amp; Analysis</td></tr>
+    <tr><td>2</td><td><strong>Response</strong></td><td>Activate the IR team, triage, begin investigation</td><td>Detection &amp; Analysis</td></tr>
+    <tr><td>3</td><td><strong>Mitigation</strong></td><td>Contain the incident to limit damage</td><td>Containment</td></tr>
+    <tr><td>4</td><td><strong>Reporting</strong></td><td>Notify management, and regulators/customers where required</td><td>(throughout)</td></tr>
+    <tr><td>5</td><td><strong>Recovery</strong></td><td>Return systems to normal operation</td><td>Recovery</td></tr>
+    <tr><td>6</td><td><strong>Remediation</strong></td><td>Root-cause analysis; fix the underlying weakness so it can't recur</td><td>Eradication</td></tr>
+    <tr><td>7</td><td><strong>Lessons learned</strong></td><td>Review and improve the process</td><td>Post-Incident Activity</td></tr>
+  </table>
+  <div class="mnemonic">
+    <div class="m-title">ISC2 Order</div>
+    <div class="m-text">D · R · M · R · R · R · L</div>
+    <div class="m-expand">Detect → Respond → Mitigate → Report → Recover → Remediate → Learn. "Doctor (DR) Mister (MR) — then Report, Recover, Remediate, Learn."</div>
+  </div>
+
+  <div class="pq" id="pq-response">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Effective incident response management is handled in several phases. Which is performed just after the "detection" phase?</div>
+    <div class="pq-a">✅ Response</div>
+    <div class="pq-why">ISC2 order: Detection → <strong>Response</strong> → Mitigation → Reporting → Recovery → Remediation → Lessons learned. Note that ISC2 puts <em>recovery before remediation</em> — the opposite of NIST, where eradication comes before recovery.</div>
+  </div>
 </div>
 
 <div id="patch" class="tab-content">
@@ -285,6 +349,16 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td><strong>Incremental</strong></td><td>Changes since last backup (any type)</td><td>Slowest (need full + all incrementals)</td><td>Least</td></tr>
     <tr><td><strong>Differential</strong></td><td>Changes since last <em>full</em> backup</td><td>Medium (need full + latest differential)</td><td>Medium</td></tr>
   </table>
+
+  <div class="section-title">Alternate Processing Arrangements</div>
+  <table>
+    <tr><th>Arrangement</th><th>Description</th><th>Watch-out</th></tr>
+    <tr><td><strong>Reciprocal agreement / MAA</strong></td><td>Two organisations agree to use each other's <strong>data centre</strong> if disaster strikes</td><td>Hard to enforce; both may be hit by the same disaster; capacity and confidentiality concerns</td></tr>
+    <tr><td><strong>Service bureau</strong></td><td>Vendor provides processing capacity on contract</td><td>Capacity may be oversubscribed in a regional disaster</td></tr>
+    <tr><td><strong>Cloud / IaaS</strong></td><td>Spin up infrastructure on demand</td><td>Shared responsibility; test failover regularly</td></tr>
+    <tr><td><strong>Hot / warm / cold / mobile site</strong></td><td>See the Domain 1 BCP/DRP tab for the full comparison</td><td>Cost vs recovery speed</td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted);">The reciprocal-agreement practice question is written up on the Domain 1 → BCP/DRP tab.</p>
 </div>
 
 <div id="physical" class="tab-content">
@@ -306,6 +380,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td><strong>Warden system</strong></td><td>Floor wardens for evacuation. Ensure all personnel account for in emergency.</td></tr>
     <tr><td><strong>Safety vs security priority</strong></td><td>In conflicts, human safety ALWAYS takes precedence over protecting assets. This is a core CISSP principle.</td></tr>
   </table>
+
+  <div class="pq" id="pq-piggybacking">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">What is the MOST effective control at preventing piggybacking? (Bollards · Double door installation · Identification badges · Administrative policy)</div>
+    <div class="pq-a">✅ Double door installation (mantrap / access control vestibule)</div>
+    <div class="pq-why">Only one person can pass the double-door chamber at a time, so it <em>physically</em> stops someone following an authorised person in.<ul><li><strong>Bollards</strong> stop vehicles, not people.</li><li><strong>ID badges</strong> identify people but don't stop a follower.</li><li><strong>Administrative policy</strong> depends on people complying — weakest of the four.</li></ul>Terminology: many sources say <em>piggybacking</em> happens with the authorised person's consent and <em>tailgating</em> without their knowledge (definitions vary). The best control is the same either way. The 2024 term for a mantrap is an <em>access control vestibule</em>.</div>
+  </div>
 </div>
 
 <div id="quizgaps" class="tab-content">
@@ -361,8 +442,12 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Bootkit vs Rootkit</td><td class="gap-high">🔴 HIGH</td><td>Bootkit = pre-OS, MBR/UEFI. TPM+Secure Boot defend against bootkit. Rootkit = within OS.</td></tr>
     <tr><td>RAID 1 capacity rule</td><td class="gap-med">🟡 MEDIUM</td><td>RAID 1 = always 50% capacity. RAID 5 = loses 1 drive equivalent regardless of size.</td></tr>
     <tr><td>Automatic failover vs fail-safe</td><td class="gap-med">🟡 MEDIUM</td><td>Failover = switches to backup automatically. Fail-safe = defaults to safe state. Different concepts.</td></tr>
-    <tr><td>Incident response phase order</td><td class="gap-low">🟢 LOW</td><td>Preparation → Detection → Containment → Eradication → Recovery → Lessons Learned.</td></tr>
+    <tr><td>🎯 Incident response phase order — NIST AND ISC2</td><td class="gap-high">🔴 HIGH</td><td>NIST: Prep → Detect → Contain → Eradicate → Recover → Lessons. ISC2 7 steps: Detection → Response → Mitigation → Reporting → Recovery → Remediation → Lessons learned.</td></tr>
     <tr><td>DR/BC terminology (RTO/RPO/MTD)</td><td class="gap-low">🟢 LOW</td><td>Strong from prior experience. Watch WRT: RTO + WRT ≤ MTD.</td></tr>
+    <tr><td>🎯 e-Discovery vs litigation hold</td><td class="gap-med">🟡 MEDIUM</td><td>Identify + produce data = e-Discovery. Preserve data = litigation hold.</td></tr>
+    <tr><td>🎯 SIEM vs SOAR tools</td><td class="gap-med">🟡 MEDIUM</td><td>SIEM = correlate and alert. SOAR = orchestrate and automate response (Splunk SOAR, Cortex XSOAR).</td></tr>
+    <tr><td>🎯 Reciprocal agreement (MAA)</td><td class="gap-low">🟢 LOW</td><td>Two orgs share data centres in a disaster — cheap but unenforceable and risky.</td></tr>
+    <tr><td>🎯 Piggybacking control</td><td class="gap-low">🟢 LOW</td><td>Double doors / mantrap (access control vestibule) is the most effective physical control.</td></tr>
   </table>
 </div>
 

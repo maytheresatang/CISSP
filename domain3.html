@@ -51,7 +51,7 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.two-col{grid-template-columns:1fr;}.header{padding:24px;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}.pq{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #B45309;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;}.pq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B45309;font-weight:700;margin-bottom:6px;}.pq-q{font-size:14px;font-style:italic;color:#1E293B;margin-bottom:8px;}.pq-a{font-size:14px;font-weight:700;color:#15803D;margin-bottom:6px;}.pq-why{font-size:13.5px;color:#334155;line-height:1.6;}.pq-why ul{margin:6px 0 0;padding-left:20px;}.pq-why li{margin-bottom:3px;}.pq-note{font-size:12px;color:#92400E;background:#FEF3C7;border-radius:6px;padding:6px 10px;margin-top:8px;}</style>
 </head>
 <body>
 
@@ -130,6 +130,31 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="callout callout-amber">
     <strong>⚠️ Exam Trap: Clark-Wilson vs Bell-LaPadula</strong>
     Clark-Wilson uses <em>well-formed transactions</em> — data can only be modified through authorised procedures (TPs). This is the commercial/banking model. Bell-LaPadula is the military model focused purely on classification levels.
+  </div>
+
+  <div class="section-title">Model Categories — Know the Type, Not Just the Name</div>
+  <table>
+    <tr><th>Model Type</th><th>What it does</th><th>Examples</th></tr>
+    <tr><td><strong>Information-flow</strong></td><td>Controls how information moves between classification/integrity levels — prevents unauthorised flows from one level to another</td><td>Bell-LaPadula, Biba</td></tr>
+    <tr><td><strong>State machine</strong></td><td>System must start, stay and transition only between <em>secure states</em></td><td>Basis of BLP and Biba</td></tr>
+    <tr><td><strong>Non-interference</strong></td><td>Actions at one security level must not affect (or be observable by) subjects at another level — blocks inference and covert channels</td><td>Goguen-Meseguer</td></tr>
+    <tr><td><strong>Lattice-based</strong></td><td>Subjects and objects placed in a lattice of levels with upper/lower bounds</td><td>MAC implementations</td></tr>
+    <tr><td><strong>Take-Grant</strong></td><td>Directed graph showing how rights pass between subjects (take, grant, create, remove)</td><td>Rights-propagation analysis</td></tr>
+    <tr><td><strong>Brewer-Nash</strong></td><td>Access changes <em>dynamically</em> based on prior access — conflict-of-interest walls</td><td>Chinese Wall</td></tr>
+  </table>
+
+  <div class="pq" id="pq-constrained-data-items">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which security model uses Transformation Procedures (TPs) and Constrained Data Items (CDIs)?</div>
+    <div class="pq-a">✅ Clark-Wilson</div>
+    <div class="pq-why">Clark-Wilson enforces integrity through the <strong>access triple</strong>: <em>subject → program (TP) → object (CDI)</em>. Users never touch CDIs directly — only through authorised TPs.<ul><li><strong>CDI</strong> = Constrained Data Item (protected data). <strong>UDI</strong> = Unconstrained Data Item (raw input, converted to a CDI by a TP).</li><li><strong>TP</strong> = Transformation Procedure (the only way to change a CDI). <strong>IVP</strong> = Integrity Verification Procedure (confirms CDIs are valid).</li><li>Bell-LaPadula = confidentiality labels; Biba = integrity levels (no TPs); Take-Grant = rights-propagation graph.</li></ul></div>
+  </div>
+
+  <div class="pq" id="pq-information-flow-model">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which security model would you use to prevent the movement of information from one classification to another?</div>
+    <div class="pq-a">✅ Information-flow model</div>
+    <div class="pq-why">Information-flow models control the direction information may move between levels — Bell-LaPadula and Biba are both information-flow models.<ul><li><strong>Non-interference</strong> keeps one domain's actions from affecting another domain.</li><li><strong>Brewer-Nash</strong> dynamically changes access to prevent conflicts of interest.</li><li><strong>State machine</strong> uses state variables to keep the system in a secure state.</li></ul>Exam tip: when a question asks for a model <em>type</em> in generic words ("prevent movement between classifications"), pick the category, not a specific named model.</div>
   </div>
 
   <div class="section-title">Common Evaluation Frameworks</div>
@@ -288,6 +313,23 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <strong>⚠️ Exam Trap: Fire Classes and Suppression</strong>
     Class A = ordinary combustibles (wood, paper) → water OK. Class B = flammable liquids → CO2, dry powder. Class C = electrical equipment → CO2, Halon replacement. Never use water on Class C (electrical shock risk).
   </div>
+
+  <div class="section-title">TEMPEST — Electromagnetic Emanations</div>
+  <table>
+    <tr><th>Term / Control</th><th>Meaning</th></tr>
+    <tr><td><strong>TEMPEST</strong></td><td>The study of electromagnetic emanations from equipment and the controls that stop attackers intercepting them (e.g. reading a monitor's signal from outside the building — Van Eck phreaking)</td></tr>
+    <tr><td><strong>Faraday cage</strong></td><td>Conductive enclosure that blocks emanations from leaving (and signals entering)</td></tr>
+    <tr><td><strong>White noise</strong></td><td>Broadcasts false signals to mask real emanations</td></tr>
+    <tr><td><strong>Control zone</strong></td><td>Shielded area/distance so emanations are too weak to intercept beyond it</td></tr>
+    <tr><td><strong>COMSEC</strong></td><td>Communications security — the broad discipline of protecting telecommunications (crypto, transmission, emission security). TEMPEST is a narrower part of it.</td></tr>
+  </table>
+
+  <div class="pq" id="pq-tempest">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which term refers to the study of electromagnetic emissions, and the control of those emissions, that can be intercepted by a system attacker? (Tracker · CONAttack · TEMPEST · COMSEC)</div>
+    <div class="pq-a">✅ TEMPEST</div>
+    <div class="pq-why">TEMPEST is specifically about emanations. <strong>COMSEC</strong> is broader communications security, so it's the tempting near-miss. "Tracker" and "CONAttack" are not standard CISSP terms.</div>
+  </div>
 </div>
 
 <div id="vulns" class="tab-content">
@@ -307,6 +349,23 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <strong>🚨 Quiz Gap: Bootkit vs Rootkit</strong>
     Both hide at deep system levels. <strong>Bootkit</strong> = infects bootloader/MBR/UEFI, runs before OS. <strong>Rootkit</strong> = infects OS kernel, runs within OS. TPM and Secure Boot are designed specifically against <strong>bootkits</strong>. The exam will try to make you pick "rootkit."
   </div>
+
+  <div class="section-title">Process &amp; Memory Isolation</div>
+  <table>
+    <tr><th>Concept</th><th>What it does</th></tr>
+    <tr><td><strong>Process isolation</strong></td><td>The OS gives each process its own memory space so processes cannot read or modify each other's memory</td></tr>
+    <tr><td><strong>Hardware segmentation</strong></td><td>Same goal, but enforced by <em>hardware</em> (CPU / memory management unit) — an extra layer beneath the OS. Strongest form of memory isolation.</td></tr>
+    <tr><td><strong>Protection rings</strong></td><td>Ring 0 = kernel (most privileged) → Ring 3 = user applications. Lower rings cannot be directly accessed by higher ones.</td></tr>
+    <tr><td><strong>Memory protection</strong></td><td>General term for preventing a process from accessing memory not allocated to it</td></tr>
+    <tr><td><strong>Abstraction / data hiding</strong></td><td>Exposes only necessary interfaces; internal details stay hidden from other levels</td></tr>
+  </table>
+
+  <div class="pq" id="pq-hardware-segmentation">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which resource isolation term BEST describes an added layer of protection to ensure low-privilege processes cannot access and modify a high-level process's memory space?</div>
+    <div class="pq-a">✅ Hardware segmentation</div>
+    <div class="pq-why">"Added layer" is the signal: hardware segmentation backs up OS-level process isolation by enforcing memory separation in hardware.<ul><li><strong>Cache memory</strong>, <strong>ROM</strong> and <strong>RAM</strong> are types of memory, not isolation controls.</li></ul></div>
+  </div>
 </div>
 
 <div id="gaps" class="tab-content">
@@ -320,6 +379,10 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Symmetric vs asymmetric use cases</td><td class="gap-med">🟡 MEDIUM</td><td>Know when to use which. Hybrid model = asymmetric key exchange + symmetric bulk encryption.</td></tr>
     <tr><td>Physical security layering</td><td class="gap-low">🟢 LOW</td><td>Know the 5 layers and which controls sit at each layer.</td></tr>
     <tr><td>Fire suppression classes</td><td class="gap-low">🟢 LOW</td><td>Know which agent for which fire class. Never water on electrical.</td></tr>
+    <tr><td>🎯 Clark-Wilson components</td><td class="gap-high">🔴 HIGH</td><td>Access triple: subject → TP → CDI. Know CDI, UDI, TP, IVP.</td></tr>
+    <tr><td>🎯 Model categories (information-flow, non-interference, state machine)</td><td class="gap-high">🔴 HIGH</td><td>BLP and Biba = information-flow models. Generic question → pick the category.</td></tr>
+    <tr><td>🎯 TEMPEST vs COMSEC</td><td class="gap-med">🟡 MEDIUM</td><td>TEMPEST = emanations (Faraday cage, white noise, control zones). COMSEC = broader comms security.</td></tr>
+    <tr><td>🎯 Hardware segmentation vs process isolation</td><td class="gap-med">🟡 MEDIUM</td><td>Hardware segmentation = hardware-enforced memory isolation — the "added layer".</td></tr>
   </table>
 
   <div class="callout callout-red">

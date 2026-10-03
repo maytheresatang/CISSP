@@ -42,6 +42,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gap-table tr:nth-child(even) td{background:#F1F5F9;}
 .high{color:var(--red);font-weight:700;}
 .med{color:var(--amber);font-weight:700;}
+.gap-table a{color:var(--teal);font-weight:600;text-decoration:none;}
+.gap-table a:hover{text-decoration:underline;}
+@media(max-width:640px){.gap-table th,.gap-table td{padding:8px;}}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:640px){.domains{grid-template-columns:1fr;}.content{padding:20px;}.header{padding:28px 20px;}}
 </style>
@@ -166,11 +169,58 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Bootkit vs Rootkit (TPM/Secure Boot distinction)</td><td class="high">HIGH</td><td>D3, D7</td></tr>
     <tr><td>SAST vs DAST vs IAST — what each does, when</td><td class="high">HIGH</td><td>D6, D8</td></tr>
     <tr><td>Threat modelling belongs at DESIGN phase</td><td class="high">HIGH</td><td>D8</td></tr>
+    <tr><td>Third-party audit = on behalf of ANOTHER org (regulator/customer) — not the same as external</td><td class="high">HIGH</td><td>D6</td></tr>
+    <tr><td>Incident response: ISC2 7 steps (Detection → Response → Mitigation → Reporting → Recovery → Remediation → Lessons) vs NIST 6</td><td class="high">HIGH</td><td>D7</td></tr>
+    <tr><td>COOP = mission essential functions only; BCP = broader business processes</td><td class="high">HIGH</td><td>D1</td></tr>
+    <tr><td>Clark-Wilson (TP / CDI / IVP / UDI) and model categories (information-flow, non-interference)</td><td class="high">HIGH</td><td>D3</td></tr>
     <tr><td>OAuth vs SAML vs OIDC scenario mapping</td><td class="med">MED</td><td>D5</td></tr>
-    <tr><td>Biometric FAR / FRR / CER</td><td class="med">MED</td><td>D5</td></tr>
+    <tr><td>Biometric Type I (FRR — valid user rejected) vs Type II (FAR — impostor accepted)</td><td class="high">HIGH</td><td>D5</td></tr>
     <tr><td>SCAP components (CVE, CVSS, CCE, CPE, OVAL, XCCDF)</td><td class="med">MED</td><td>D6</td></tr>
     <tr><td>SQL injection: parameterised queries fix it; client-side validation does NOT</td><td class="med">MED</td><td>D8</td></tr>
     <tr><td>Aggregation vs Inference attacks on databases</td><td class="med">MED</td><td>D8</td></tr>
+  </table>
+
+  <div class="section-title">Practice Question Review — Pocket Prep, Sep–Oct 2026</div>
+  <div class="callout callout-amber">
+    <strong>🎯 34 practice questions answered wrong or unsure</strong>
+    Each one is now written up as a card in the matching domain tab, with the correct answer and why each distractor is wrong. Click a link to jump straight to the card. Search "Practice Q" to see them all. Two answers marked ⚠️ verify weren't shown in the screenshots — confirm them in Pocket Prep.
+  </div>
+  <table class="gap-table">
+    <tr><th>Question</th><th>Answer</th><th>Where</th></tr>
+    <tr><td>Certified mail + recipient signature</td><td><strong>Nonrepudiation (proof of delivery)</strong></td><td><a href="domain1.html?q=Haruto#pq-haruto">D1 · CIA Triad</a></td></tr>
+    <tr><td>Which term means "weakness"?</td><td><strong>Vulnerability</strong></td><td><a href="domain1.html?q=weakness#pq-weakness">D1 · Risk</a></td></tr>
+    <tr><td>Which is part of STRIDE?</td><td><strong>Spoofing ("Discover" is from DREAD)</strong></td><td><a href="domain1.html?q=Spoofing#pq-spoofing">D1 · Risk</a></td></tr>
+    <tr><td>NOT a common-law category</td><td><strong>Congressional law</strong></td><td><a href="domain1.html?q=Congressional#pq-congressional">D1 · Ethics &amp; Law</a></td></tr>
+    <tr><td>Legally characterised by brand identity</td><td><strong>Trademarks</strong></td><td><a href="domain1.html?q=brand%20identity#pq-brand-identity">D1 · Ethics &amp; Law</a></td></tr>
+    <tr><td>Reciprocal agreement for DR</td><td><strong>Two orgs share each other's data centre</strong></td><td><a href="domain1.html?q=reciprocal%20agreement#pq-reciprocal-agreement">D1 · BCP/DRP</a></td></tr>
+    <tr><td>COOP vs BCP</td><td><strong>COOP = MEFs; BCP = beyond MEFs</strong></td><td><a href="domain1.html?q=COOP#pq-coop">D1 · BCP/DRP</a></td></tr>
+    <tr><td>HR told not to work before IT restores ⚠️ verify</td><td><strong>Business continuity planning</strong></td><td><a href="domain1.html?q=HR%20database#pq-hr-database">D1 · BCP/DRP</a></td></tr>
+    <tr><td>MOST likely used to exfiltrate data</td><td><strong>Steganography</strong></td><td><a href="domain2.html?q=Steganography#pq-steganography">D2 · Data States</a></td></tr>
+    <tr><td>Model using TPs and CDIs</td><td><strong>Clark-Wilson</strong></td><td><a href="domain3.html?q=Constrained%20Data%20Items#pq-constrained-data-items">D3 · Security Models</a></td></tr>
+    <tr><td>Prevent movement between classifications</td><td><strong>Information-flow model</strong></td><td><a href="domain3.html?q=Information-flow%20model#pq-information-flow-model">D3 · Security Models</a></td></tr>
+    <tr><td>Study/control of electromagnetic emissions</td><td><strong>TEMPEST</strong></td><td><a href="domain3.html?q=TEMPEST#pq-tempest">D3 · Physical</a></td></tr>
+    <tr><td>Extra layer stopping low-privilege memory access</td><td><strong>Hardware segmentation</strong></td><td><a href="domain3.html?q=Hardware%20segmentation#pq-hardware-segmentation">D3 · Vulnerabilities</a></td></tr>
+    <tr><td>What the session layer provides</td><td><strong>Dialogue control</strong></td><td><a href="domain4.html?q=Dialogue%20control#pq-dialogue-control">D4 · OSI Model</a></td></tr>
+    <tr><td>Device letting a firewall see others' unicast traffic</td><td><strong>Hub</strong></td><td><a href="domain4.html?q=Hub#pq-hub">D4 · OSI Model</a></td></tr>
+    <tr><td>Designed by Netscape for web traffic</td><td><strong>SSL (now TLS)</strong></td><td><a href="domain4.html?q=Netscape#pq-netscape">D4 · IPsec &amp; VPN</a></td></tr>
+    <tr><td>US channels on 2.4 GHz</td><td><strong>11 (non-overlapping: 1, 6, 11)</strong></td><td><a href="domain4.html?q=2.4%20GHz#pq-2-4-ghz">D4 · Wireless</a></td></tr>
+    <tr><td>MFA: something you know + have</td><td><strong>Smart cards</strong></td><td><a href="domain5.html?q=Smart%20cards#pq-smart-cards">D5 · Authentication</a></td></tr>
+    <tr><td>New OTP on each login attempt</td><td><strong>HOTP (TOTP = time-based)</strong></td><td><a href="domain5.html?q=HOTP#pq-hotp">D5 · Authentication</a></td></tr>
+    <tr><td>Biometric Type 1 and Type 2 errors</td><td><strong>Type I = valid rejected · Type II = invalid accepted</strong></td><td><a href="domain5.html?q=Insult#pq-insult">D5 · Authentication</a></td></tr>
+    <tr><td>Who assigns MAC labels</td><td><strong>System administrators</strong></td><td><a href="domain5.html?q=System%20administrators#pq-system-administrators">D5 · Access Models</a></td></tr>
+    <tr><td>Employee promoted to management</td><td><strong>Role definition &amp; transition</strong></td><td><a href="domain5.html?q=Role%20Definition%20and%20Transition#pq-role-definition-and-transition">D5 · Lifecycle &amp; PAM</a></td></tr>
+    <tr><td>Nmap: open port, no response</td><td><strong>Open|Filtered</strong></td><td><a href="domain6.html?q=Open%7CFiltered#pq-open-filtered">D6 · Vuln Scanning</a></td></tr>
+    <tr><td>Scan completing the 3-way handshake</td><td><strong>TCP connect scan</strong></td><td><a href="domain6.html?q=TCP%20connect#pq-tcp-connect">D6 · Vuln Scanning</a></td></tr>
+    <tr><td>NOT a pen test phase</td><td><strong>Lessons learned</strong></td><td><a href="domain6.html?q=Lessons%20learned#pq-lessons-learned">D6 · Pen Testing</a></td></tr>
+    <tr><td>LEAST likely in scanning &amp; probing</td><td><strong>Searching DNS records</strong></td><td><a href="domain6.html?q=DNS%20records#pq-dns-records">D6 · Pen Testing</a></td></tr>
+    <tr><td>Third-party vs external audit</td><td><strong>Third-party = on behalf of another firm</strong></td><td><a href="domain6.html?q=on%20behalf%20of%20another#pq-on-behalf-of-another">D6 · Audits &amp; SOC</a></td></tr>
+    <tr><td>LEAST likely audit report audience ⚠️ verify</td><td><strong>Functional management</strong></td><td><a href="domain6.html?q=Functional%20management#pq-functional-management">D6 · Audits &amp; SOC</a></td></tr>
+    <tr><td>Most formal inspection before dynamic testing</td><td><strong>Fagan inspection</strong></td><td><a href="domain6.html?q=Fagan#pq-fagan">D6 · Software Testing</a></td></tr>
+    <tr><td>Identifying &amp; producing data for litigation</td><td><strong>e-Discovery</strong></td><td><a href="domain7.html?q=e-Discovery#pq-e-discovery">D7 · Investigations</a></td></tr>
+    <tr><td>Which tool is SOAR?</td><td><strong>Splunk (Splunk SOAR)</strong></td><td><a href="domain7.html?q=SOAR#pq-soar">D7 · Logging &amp; SIEM</a></td></tr>
+    <tr><td>Step right after detection (ISC2)</td><td><strong>Response</strong></td><td><a href="domain7.html?q=Response#pq-response">D7 · Incident Mgmt</a></td></tr>
+    <tr><td>Most effective vs piggybacking</td><td><strong>Double doors (mantrap)</strong></td><td><a href="domain7.html?q=piggybacking#pq-piggybacking">D7 · Physical &amp; Personnel</a></td></tr>
+    <tr><td>Object swapped between check and use</td><td><strong>Race condition</strong></td><td><a href="domain8.html?q=TOCTOU#pq-toctou">D8 · Vulnerabilities</a></td></tr>
   </table>
 
   <div class="section-title">Study Framework</div>

@@ -56,7 +56,7 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.two-col{grid-template-columns:1fr;}.tabs{padding:0 16px;}.header{padding:24px;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}.pq{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #B45309;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;}.pq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B45309;font-weight:700;margin-bottom:6px;}.pq-q{font-size:14px;font-style:italic;color:#1E293B;margin-bottom:8px;}.pq-a{font-size:14px;font-weight:700;color:#15803D;margin-bottom:6px;}.pq-why{font-size:13.5px;color:#334155;line-height:1.6;}.pq-why ul{margin:6px 0 0;padding-left:20px;}.pq-why li{margin-bottom:3px;}.pq-note{font-size:12px;color:#92400E;background:#FEF3C7;border-radius:6px;padding:6px 10px;margin-top:8px;}</style>
 </head>
 <body>
 
@@ -130,7 +130,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="section-title">Extended Security Concepts</div>
   <table>
     <tr><th>Concept</th><th>Definition</th></tr>
-    <tr><td><strong>Non-repudiation</strong></td><td>Proof that a party performed an action (sender cannot deny). Achieved via digital signatures.</td></tr>
+    <tr><td><strong>Non-repudiation</strong></td><td>Proof that a party performed an action and cannot deny it. Works both ways: <em>proof of origin</em> (sender cannot deny sending — digital signatures) and <em>proof of delivery</em> (recipient cannot deny receiving — signed delivery receipt, certified mail).</td></tr>
     <tr><td><strong>Authenticity</strong></td><td>Verifying identity of a user or system (who you say you are).</td></tr>
     <tr><td><strong>Privacy</strong></td><td>Right of individuals to control personal information.</td></tr>
     <tr><td><strong>Accountability</strong></td><td>Tracking actions back to a specific identity (audit logs).</td></tr>
@@ -139,6 +139,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="callout callout-amber">
     <strong>⚠️ Exam Trap: Availability vs Confidentiality Priority</strong>
     In most civilian/commercial scenarios, Confidentiality > Integrity > Availability. In safety-critical systems (hospitals, power grids, OT/ICS) Availability often trumps Confidentiality. Read the scenario carefully.
+  </div>
+
+  <div class="pq" id="pq-haruto">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Haruto sends legal documents by certified mail and requests a recipient signature on delivery, so he will have paperwork confirming the documents were delivered. This is an example of?</div>
+    <div class="pq-a">✅ Nonrepudiation</div>
+    <div class="pq-why">The signed receipt is proof of delivery — the recipient cannot later deny receiving the documents.<ul><li><strong>Accountability</strong> = tracing actions to an identity (audit logs). Nonrepudiation <em>supports</em> it, but the question is about undeniable proof.</li><li><strong>Authentication</strong> = verifying identity before granting access.</li><li><strong>"Confidentiality upon delivery"</strong> — certified mail does nothing to hide the contents.</li></ul>Trap: don't think nonrepudiation = digital signatures only. Any mechanism producing undeniable proof (signatures, signed receipts, notarised documents) counts.</div>
   </div>
 </div>
 
@@ -188,9 +195,35 @@ ALE after control = ALE before – ALE after – Cost of control</div>
     <tr><td><strong>Attack Trees</strong></td><td>Graphical decomposition of attack paths from root goal</td><td>🟡 Recognise diagram type</td></tr>
   </table>
 
+  <div class="pq" id="pq-spoofing">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">The STRIDE threat model is used for assessing threats against applications or operating systems. Which of the following is part of STRIDE? (Spamming · Replay · Discover · Spoofing)</div>
+    <div class="pq-a">✅ Spoofing</div>
+    <div class="pq-why"><table style="margin:8px 0;"><tr><th>Letter</th><th>Threat</th><th>Property violated</th></tr><tr><td>S</td><td>Spoofing</td><td>Authentication</td></tr><tr><td>T</td><td>Tampering</td><td>Integrity</td></tr><tr><td>R</td><td>Repudiation</td><td>Nonrepudiation</td></tr><tr><td>I</td><td>Information disclosure</td><td>Confidentiality</td></tr><tr><td>D</td><td>Denial of service</td><td>Availability</td></tr><tr><td>E</td><td>Elevation of privilege</td><td>Authorisation</td></tr></table>Why the distractors look familiar: <strong>"Discover"</strong> echoes DREAD's <em>Discoverability</em>; <strong>"Replay"</strong> is an attack <em>technique</em> (it would be categorised under Spoofing), not a STRIDE category; <strong>"Spamming"</strong> is not a threat-model category at all.</div>
+  </div>
+
   <div class="callout callout-green">
     <strong>✅ Key Concept</strong>
     Threat modelling belongs at the <em>design phase</em> — not after deployment. 
+  </div>
+
+  <div class="section-title">Core Risk Vocabulary</div>
+  <table>
+    <tr><th>Term</th><th>Definition</th><th>Example</th></tr>
+    <tr><td><strong>Asset</strong></td><td>Anything of value to the organisation</td><td>Customer database</td></tr>
+    <tr><td><strong>Threat</strong></td><td>Any potential occurrence that could cause harm</td><td>Ransomware, flood, insider</td></tr>
+    <tr><td><strong>Threat agent / actor</strong></td><td>The entity that carries out the threat</td><td>Criminal group, disgruntled employee</td></tr>
+    <tr><td><strong>Vulnerability</strong></td><td>A <strong>weakness</strong> (or absence of a control) that a threat could exploit</td><td>Unpatched server, weak password policy</td></tr>
+    <tr><td><strong>Exposure</strong></td><td>Being susceptible to loss because a threat could exploit a vulnerability</td><td>Internet-facing unpatched server</td></tr>
+    <tr><td><strong>Risk</strong></td><td>Likelihood AND impact of a threat exploiting a vulnerability</td><td>High likelihood × high impact = high risk</td></tr>
+    <tr><td><strong>CVE</strong></td><td>A catalogue <em>identifier</em> for one publicly known vulnerability — not the concept of weakness</td><td>CVE-2021-44228 (Log4Shell)</td></tr>
+  </table>
+
+  <div class="pq" id="pq-weakness">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">When discussing risk analysis, which of the following BEST describes <em>weakness</em>?</div>
+    <div class="pq-a">✅ Vulnerability</div>
+    <div class="pq-why"><ul><li><strong>"Likelihood and impact of a threat occurring in the organisation's operating context"</strong> is the definition of <em>risk</em>, not weakness.</li><li><strong>CVE</strong> is a naming system for specific known vulnerabilities — too narrow.</li><li><strong>Risk</strong> combines threat + vulnerability + impact; the weakness itself is the vulnerability.</li></ul>Memory hook: <strong>Threat</strong> = what could happen · <strong>Vulnerability</strong> = the weak spot · <strong>Risk</strong> = how likely × how bad.</div>
   </div>
 </div>
 
@@ -250,6 +283,30 @@ ALE after control = ALE before – ALE after – Cost of control</div>
     <tr><td><strong>Administrative</strong></td><td>Regulatory bodies; fines and sanctions</td><td>GDPR enforcement, SEC action</td></tr>
   </table>
 
+  <div class="pq" id="pq-congressional">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Of the following, which is NOT a type of law that exists within the Common legal category of law? (Criminal · Tort · Congressional · Administrative)</div>
+    <div class="pq-a">✅ Congressional law</div>
+    <div class="pq-why">The common-law system (US, UK, Canada, Australia) has three main categories: <strong>criminal</strong>, <strong>civil</strong> (which includes <em>tort</em> and contract law) and <strong>administrative</strong> (regulatory) law. "Congressional law" is not a category — Congress is the body that passes <em>statutes</em>, and those statutes land in one of the three categories.<ul><li>Other legal <em>systems</em> to recognise: civil (code) law — continental Europe; religious law; customary law; mixed systems.</li></ul></div>
+  </div>
+
+  <div class="section-title">Intellectual Property</div>
+  <table>
+    <tr><th>Type</th><th>Protects</th><th>Duration (US)</th><th>Exam Signal</th></tr>
+    <tr><td><strong>Trademark</strong></td><td>Brand identity — names, logos, slogans that identify a company or product</td><td>10 years, renewable indefinitely</td><td>"Brand identity", ™ / ®</td></tr>
+    <tr><td><strong>Patent</strong></td><td>Inventions — must be novel, useful and non-obvious. Details become public.</td><td>20 years from filing</td><td>"Invention", "process"</td></tr>
+    <tr><td><strong>Copyright</strong></td><td>Original works of authorship (code, books, music). Automatic on creation.</td><td>Author's life + 70 years</td><td>"Original work", "software code"</td></tr>
+    <tr><td><strong>Trade secret</strong></td><td>Confidential business information that gives a competitive edge (recipes, algorithms)</td><td>As long as it stays secret</td><td>"Keep secret", "NDA" — no registration</td></tr>
+    <tr><td><strong>Licence</strong></td><td>Contract granting the right to <em>use</em> IP (EULA, click-through, shrink-wrap, cloud ToS)</td><td>Per contract</td><td>"Permission to use" — not ownership</td></tr>
+  </table>
+
+  <div class="pq" id="pq-brand-identity">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which of the following is characterised legally by an established brand identity?</div>
+    <div class="pq-a">✅ Trademarks</div>
+    <div class="pq-why">Trademarks protect the words, names, symbols and logos that identify a brand. <ul><li><strong>Patents</strong> protect inventions.</li><li><strong>Copyrights</strong> protect creative/authored works.</li><li><strong>Commercial licences</strong> are contracts that grant usage rights — they don't establish a brand.</li></ul></div>
+  </div>
+
   <div class="section-title">Evidence Handling (Digital Forensics Primer)</div>
   <table>
     <tr><th>Rule</th><th>Detail</th></tr>
@@ -306,6 +363,39 @@ ALE after control = ALE before – ALE after – Cost of control</div>
     <tr><td><strong>Mobile Site</strong></td><td>Variable</td><td>Medium</td><td>Transportable containers/trailers. Deployable anywhere.</td></tr>
     <tr><td><strong>Reciprocal Agreement</strong></td><td>Variable</td><td>Very low</td><td>Mutual agreement between two orgs — least reliable.</td></tr>
   </table>
+
+  <div class="pq" id="pq-reciprocal-agreement">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Jacob's team is building a disaster recovery plan and is considering a <strong>reciprocal agreement</strong> for a failover site. Which BEST describes a reciprocal agreement?</div>
+    <div class="pq-a">✅ An agreement between two organisations that allows each to use the other's data centre during a disaster</div>
+    <div class="pq-why">Also called a <strong>Mutual Assistance Agreement (MAA)</strong>: two organisations pledge to host each other's computing workload if one suffers a disaster. Cheap, but rarely relied on because:<ul><li>Hard to enforce — it's a promise, not a contract with SLAs.</li><li>Both organisations may be hit by the same regional disaster.</li><li>The host may not have spare capacity; hosting another company's data raises confidentiality concerns.</li></ul>Distractors: a <strong>line of credit</strong> is a financial arrangement; <strong>office space</strong> alone misses the point (it's about processing capability); "no competitive pressure" is invented.</div>
+  </div>
+
+  <div class="section-title">Contingency Plan Types (NIST SP 800-34)</div>
+  <table>
+    <tr><th>Plan</th><th>Focus</th></tr>
+    <tr><td><strong>BCP</strong> (Business Continuity Plan)</td><td>Sustains business processes during and after a disruption — scope goes <em>beyond</em> just the mission essential functions</td></tr>
+    <tr><td><strong>COOP</strong> (Continuity of Operations Plan)</td><td>Restores an organisation's <strong>Mission Essential Functions (MEFs)</strong> at an alternate site and sustains them for up to 30 days. US federal origin (FEMA).</td></tr>
+    <tr><td><strong>DRP</strong> (Disaster Recovery Plan)</td><td>Restores IT systems/facilities at an alternate site after a major disruption</td></tr>
+    <tr><td><strong>ISCP</strong> (Information System Contingency Plan)</td><td>Recovery of a <em>single</em> information system</td></tr>
+    <tr><td><strong>OEP</strong> (Occupant Emergency Plan)</td><td>Protects people in a facility — evacuation, shelter-in-place</td></tr>
+    <tr><td><strong>Crisis Communications Plan</strong></td><td>Internal and external messaging during an incident</td></tr>
+  </table>
+
+  <div class="pq" id="pq-coop">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">What is the difference between a COOP and a BCP?</div>
+    <div class="pq-a">✅ A BCP focuses on processes and tasks beyond mission essential functions (MEFs), while a COOP is primarily focused on MEFs</div>
+    <div class="pq-why">COOP = the essential core only (MEFs, alternate site, up to 30 days). BCP = the broader business, including processes that aren't mission-essential. The "security vs privacy" options are invented — neither plan is defined by security or privacy.<div class="mnemonic" style="margin:10px 0 0;"><div class="m-title">Memory Hook</div><div class="m-text">COOP = Core Only · BCP = Broader</div></div></div>
+  </div>
+
+  <div class="pq" id="pq-hr-database">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">The HR database must be restored from backups; IT says this will take about 24 hours. HR management has already told staff that operations will cease tomorrow and they need not report to work — even though IT has not started the restore. What is this result MOST LIKELY due to?</div>
+    <div class="pq-a">✅ Business continuity planning</div>
+    <div class="pq-why">Deciding how the <em>business</em> operates (or pauses) during an outage — including what staff should do — is a pre-planned BCP decision built on BIA data (MTD, RTO). The DRP covers the <em>technical</em> restore that IT is about to perform. The fact that management already knew the business response before IT began restoring points to an existing continuity plan, not IT staff experience or an ad hoc risk/reward call.<ul><li>Scenario signal: <strong>people / business processes</strong> → BCP. <strong>Systems / data restoration</strong> → DRP.</li></ul></div>
+    <div class="pq-note">⚠️ The screenshot showed only the question, not the answer key. This is the best-reasoned answer — confirm it against Pocket Prep's explanation.</div>
+  </div>
 
   <div class="section-title">BCP Process Phases</div>
   <ol style="padding-left:24px;margin:8px 0;">
@@ -382,6 +472,13 @@ ALE after control = ALE before – ALE after – Cost of control</div>
     <tr><td>BCP terminology (RTO/RPO/MTD)</td><td class="gap-low">🟢 LOW</td><td>Already strong from prior experience. Review WRT formula.</td></tr>
     <tr><td>Risk treatment options</td><td class="gap-low">🟢 LOW</td><td>Already strong. Watch for "accept" vs "ignore" — accepting is documented and signed off.</td></tr>
     <tr><td>Legal frameworks (HIPAA/SOX/GLBA)</td><td class="gap-low">🟢 LOW</td><td>Know which law applies to which sector. GDPR already strong.</td></tr>
+    <tr><td>🎯 COOP vs BCP scope</td><td class="gap-high">🔴 HIGH</td><td>COOP = MEFs only, alternate site, ≤30 days. BCP = broader business processes beyond MEFs.</td></tr>
+    <tr><td>🎯 BCP vs DRP in scenarios</td><td class="gap-med">🟡 MEDIUM</td><td>Business/people decisions → BCP. IT restoration → DRP. Verify the HR-database practice question.</td></tr>
+    <tr><td>🎯 Nonrepudiation (origin AND delivery)</td><td class="gap-med">🟡 MEDIUM</td><td>Signed delivery receipt / certified mail = proof of delivery = nonrepudiation, not accountability.</td></tr>
+    <tr><td>🎯 Risk vocabulary: weakness = vulnerability</td><td class="gap-med">🟡 MEDIUM</td><td>Threat = what could happen. Vulnerability = weakness. Risk = likelihood × impact. CVE = an ID.</td></tr>
+    <tr><td>🎯 STRIDE letters</td><td class="gap-med">🟡 MEDIUM</td><td>Spoofing, Tampering, Repudiation, Info disclosure, DoS, Elevation. "Discover" is DREAD, not STRIDE.</td></tr>
+    <tr><td>🎯 Common-law categories</td><td class="gap-med">🟡 MEDIUM</td><td>Criminal, civil (tort/contract), administrative. "Congressional law" is not a category.</td></tr>
+    <tr><td>🎯 Intellectual property types</td><td class="gap-low">🟢 LOW</td><td>Trademark = brand. Patent = invention. Copyright = authored work. Trade secret = kept secret.</td></tr>
   </table>
 
   <div class="section-title">Study Priority Actions</div>

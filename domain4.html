@@ -49,7 +49,7 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.compare-box{grid-template-columns:1fr;}.header{padding:24px;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}.pq{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #B45309;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;}.pq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B45309;font-weight:700;margin-bottom:6px;}.pq-q{font-size:14px;font-style:italic;color:#1E293B;margin-bottom:8px;}.pq-a{font-size:14px;font-weight:700;color:#15803D;margin-bottom:6px;}.pq-why{font-size:13.5px;color:#334155;line-height:1.6;}.pq-why ul{margin:6px 0 0;padding-left:20px;}.pq-why li{margin-bottom:3px;}.pq-note{font-size:12px;color:#92400E;background:#FEF3C7;border-radius:6px;padding:6px 10px;margin-top:8px;}</style>
 </head>
 <body>
 
@@ -97,6 +97,43 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="callout callout-amber">
     <strong>⚠️ TCP vs UDP — Exam Trap</strong>
     TCP = connection-oriented (3-way handshake: SYN → SYN-ACK → ACK). Reliable, ordered delivery. UDP = connectionless, no handshake. Fast but unreliable. Layer 4 connectionless = <strong>UDP</strong> (not ICMP — that's Layer 3).
+  </div>
+
+  <div class="section-title">What Each Layer PROVIDES</div>
+  <table>
+    <tr><th>#</th><th>Layer</th><th>Core function — the exam's keyword</th></tr>
+    <tr><td>7</td><td>Application</td><td>Interface to user applications / network services</td></tr>
+    <tr><td>6</td><td>Presentation</td><td><strong>Formatting</strong>, data translation, encryption, compression</td></tr>
+    <tr><td>5</td><td>Session</td><td><strong>Dialogue control</strong> — establishes, manages and terminates sessions; simplex, half-duplex or full-duplex; checkpoints</td></tr>
+    <tr><td>4</td><td>Transport</td><td>End-to-end delivery, segmentation, flow control, ports</td></tr>
+    <tr><td>3</td><td>Network</td><td>Logical (IP) addressing and <strong>routing</strong></td></tr>
+    <tr><td>2</td><td>Data Link</td><td><strong>Framing</strong>, MAC addressing, error detection</td></tr>
+    <tr><td>1</td><td>Physical</td><td>Bits on the wire — voltages, light, radio</td></tr>
+  </table>
+
+  <div class="pq" id="pq-dialogue-control">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">What does the session layer provide? (Dialogue control · Formatting · Framing · Routing)</div>
+    <div class="pq-a">✅ Dialogue control</div>
+    <div class="pq-why">Each distractor is the job of a different layer: <strong>Formatting</strong> = Presentation (L6), <strong>Routing</strong> = Network (L3), <strong>Framing</strong> = Data Link (L2).</div>
+  </div>
+
+  <div class="section-title">Network Devices by Layer</div>
+  <table>
+    <tr><th>Device</th><th>Layer</th><th>Behaviour</th></tr>
+    <tr><td><strong>Hub / Repeater</strong></td><td>1</td><td>Repeats every frame out of <em>all</em> ports regardless of MAC address — everything connected sees all traffic (one collision domain)</td></tr>
+    <tr><td><strong>Bridge</strong></td><td>2</td><td>Connects two network segments so they act as one network; forwards by MAC address</td></tr>
+    <tr><td><strong>Switch</strong></td><td>2</td><td>Forwards frames only to the destination port using its MAC table — hosts don't see each other's unicast traffic</td></tr>
+    <tr><td><strong>Router</strong></td><td>3</td><td>Routes packets <em>between</em> networks by IP address</td></tr>
+    <tr><td><strong>Gateway</strong></td><td>7</td><td>Translates between different protocols</td></tr>
+  </table>
+
+  <div class="pq" id="pq-hub">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which device would let a firewall see unicast traffic between other devices, even when that traffic is not addressed to the firewall? (Router · A second firewall · Hub · Bridge)</div>
+    <div class="pq-a">✅ Hub</div>
+    <div class="pq-why">A hub floods every frame out of every port, so any device on it — including the firewall — sees all the unicast traffic. A router routes between networks, a bridge joins two segments into one network, and firewalls filter traffic rather than rebroadcasting it.</div>
+    <div class="pq-note">Question wording paraphrased — the screenshot showed the answer options and explanation but not the full question text.</div>
   </div>
 </div>
 
@@ -153,6 +190,24 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Phase 1</td><td>Main Mode (more secure, 6 messages) or Aggressive Mode (faster, 3 messages, less secure)</td><td>Establish IKE SA — secure channel for Phase 2 negotiation</td></tr>
     <tr><td>Phase 2</td><td>Quick Mode (always)</td><td>Negotiate IPsec SAs for actual data protection</td></tr>
   </table>
+
+  <div class="section-title">Secure Channel &amp; Remote Authentication Protocols</div>
+  <table>
+    <tr><th>Protocol</th><th>Key Facts</th></tr>
+    <tr><td><strong>SSL</strong></td><td>Created by <strong>Netscape</strong> to protect web server ↔ browser traffic. Hybrid: asymmetric/PKI to exchange a session key, then symmetric encryption for the data. All versions deprecated — superseded by TLS.</td></tr>
+    <tr><td><strong>TLS</strong></td><td>Successor to SSL. Use TLS 1.2 or 1.3.</td></tr>
+    <tr><td><strong>PAP</strong></td><td>Password Authentication Protocol — sends the password in <strong>clear text</strong>. Never acceptable.</td></tr>
+    <tr><td><strong>CHAP</strong></td><td>Challenge Handshake Authentication Protocol (used with PPP). Hashes the password with a challenge <strong>nonce</strong> — the password never crosses the wire. Can re-challenge periodically during the session.</td></tr>
+    <tr><td><strong>EAP</strong></td><td>Extensible Authentication Protocol — a framework supporting many methods (used by 802.1X)</td></tr>
+    <tr><td><strong>IKE</strong></td><td>Key exchange inside IPsec — negotiates SAs and establishes shared symmetric keys via Diffie-Hellman (UDP 500)</td></tr>
+  </table>
+
+  <div class="pq" id="pq-netscape">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">What was designed by Netscape to protect communications between a web server and a web browser?</div>
+    <div class="pq-a">✅ Secure Sockets Layer (SSL)</div>
+    <div class="pq-why">Distractors: <strong>CHAP</strong> is a PPP authentication protocol (improved on PAP by hashing the password with a nonce); <strong>IKE</strong> is the key-exchange protocol within IPsec.</div>
+  </div>
 </div>
 
 <div id="wireless" class="tab-content">
@@ -185,6 +240,21 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td><strong>Deauthentication Attack</strong></td><td>Forged 802.11 deauth frames force clients to reconnect (capture handshake for offline cracking)</td><td>WPA3 SAE (protected management frames)</td></tr>
     <tr><td><strong>KRACK</strong></td><td>Key Reinstallation Attack against WPA2 4-way handshake</td><td>Patch devices, use WPA3</td></tr>
   </table>
+
+  <div class="section-title">Wi-Fi Frequencies &amp; Channels</div>
+  <table>
+    <tr><th>Band</th><th>Standards</th><th>Channels (US)</th></tr>
+    <tr><td><strong>2.4 GHz</strong></td><td>802.11b / g / n / ax</td><td><strong>11 channels</strong> allocated by the FCC. Channels overlap — use only <strong>1, 6 and 11</strong> (the only non-overlapping set).</td></tr>
+    <tr><td><strong>5 GHz</strong></td><td>802.11a / n / ac / ax</td><td>Many more non-overlapping channels; shorter range</td></tr>
+    <tr><td><strong>6 GHz</strong></td><td>802.11ax (Wi-Fi 6E)</td><td>Newest band — least congested</td></tr>
+  </table>
+
+  <div class="pq" id="pq-2-4-ghz">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">When discussing Wi-Fi networks, how many channels are available for use in the United States on the 2.4 GHz spectrum?</div>
+    <div class="pq-a">✅ 11</div>
+    <div class="pq-why">The FCC allocates 11 channels on 2.4 GHz. They overlap, so a well-designed network uses only channels 1, 6 and 11 to avoid interference.<ul><li>Trap: "3" (or "1, 6, 11") answers a different question — how many <em>non-overlapping</em> channels there are.</li></ul></div>
+  </div>
 </div>
 
 <div id="aaa" class="tab-content">
@@ -330,6 +400,10 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Port numbers (critical ports)</td><td class="gap-med">🟡 MEDIUM</td><td>Drill the ports cheatsheet. Focus: RADIUS 1812/1813, TACACS+ 49, Kerberos 88, LDAPS 636.</td></tr>
     <tr><td>IKE Phase 1 modes</td><td class="gap-med">🟡 MEDIUM</td><td>Main Mode = more secure (6 messages). Aggressive Mode = faster (3 messages, less secure).</td></tr>
     <tr><td>VLAN hopping techniques</td><td class="gap-low">🟢 LOW</td><td>Know double-tagging and switch spoofing. Mitigation: disable DTP, explicit trunk config.</td></tr>
+    <tr><td>🎯 OSI layer functions</td><td class="gap-med">🟡 MEDIUM</td><td>Session = dialogue control. Presentation = formatting. Data Link = framing. Network = routing.</td></tr>
+    <tr><td>🎯 Hub vs bridge vs switch vs router</td><td class="gap-med">🟡 MEDIUM</td><td>Hub floods all ports (L1). Switch forwards by MAC (L2). Router routes between networks (L3).</td></tr>
+    <tr><td>🎯 2.4 GHz channels</td><td class="gap-med">🟡 MEDIUM</td><td>US = 11 channels; non-overlapping = 1, 6, 11.</td></tr>
+    <tr><td>🎯 SSL origin, PAP vs CHAP</td><td class="gap-low">🟢 LOW</td><td>SSL = Netscape, replaced by TLS. PAP = clear text. CHAP = hashed challenge-response with a nonce.</td></tr>
   </table>
 </div>
 

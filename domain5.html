@@ -44,7 +44,7 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}.pq{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #B45309;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;}.pq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B45309;font-weight:700;margin-bottom:6px;}.pq-q{font-size:14px;font-style:italic;color:#1E293B;margin-bottom:8px;}.pq-a{font-size:14px;font-weight:700;color:#15803D;margin-bottom:6px;}.pq-why{font-size:13.5px;color:#334155;line-height:1.6;}.pq-why ul{margin:6px 0 0;padding-left:20px;}.pq-why li{margin-bottom:3px;}.pq-note{font-size:12px;color:#92400E;background:#FEF3C7;border-radius:6px;padding:6px 10px;margin-top:8px;}</style>
 </head>
 <body>
 
@@ -109,6 +109,27 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     MFA = at least two <em>different factor types</em>. Password + PIN = 1FA (both Type 1). Password + token = MFA (Type 1 + Type 2).
   </div>
 
+  <div class="pq" id="pq-smart-cards">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">When discussing Multi-Factor Authentication (MFA), what method uses something you know and something you have?</div>
+    <div class="pq-a">✅ Smart cards</div>
+    <div class="pq-why">The card is something you <em>have</em>; the PIN that unlocks it is something you <em>know</em> — two factor types in one method.<ul><li><strong>PKI</strong> is infrastructure for managing certificates, not an authentication factor.</li><li><strong>Retina scan</strong> = something you <em>are</em> (single factor).</li><li><strong>One-time pad</strong> is an unbreakable <em>encryption cipher</em> — don't confuse it with a one-time <em>password</em>.</li></ul></div>
+  </div>
+
+  <div class="section-title">One-Time Password Algorithms</div>
+  <table>
+    <tr><th>Algorithm</th><th>Based on</th><th>Code changes</th><th>Notes</th></tr>
+    <tr><td><strong>HOTP</strong></td><td>HMAC + a <strong>counter</strong> (event-based) — RFC 4226</td><td>On each login attempt / button press</td><td>Code stays valid until it is used</td></tr>
+    <tr><td><strong>TOTP</strong></td><td>HMAC + the current <strong>time</strong> — RFC 6238</td><td>Every 30–60 seconds</td><td>Needs synchronised clocks; authenticator apps</td></tr>
+  </table>
+
+  <div class="pq" id="pq-hotp">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which one-time password (OTP) algorithm generates a new code upon each login attempt rather than waiting a specific amount of time before changing the code?</div>
+    <div class="pq-a">✅ HOTP</div>
+    <div class="pq-why">HOTP is event/counter-based. TOTP is time-based. "NOTP" and "IOTP" are made-up distractors.<div class="mnemonic" style="margin:10px 0 0;"><div class="m-title">Memory Hook</div><div class="m-text">HOTP = Hit the button · TOTP = Time</div></div></div>
+  </div>
+
   <div class="section-title">Biometric Error Rates</div>
   <table>
     <tr><th>Metric</th><th>Full Name</th><th>Definition</th><th>Exam Relevance</th></tr>
@@ -120,6 +141,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="callout callout-amber">
     <strong>⚠️ FAR vs FRR trade-off</strong>
     You cannot simultaneously minimise both. Increasing sensitivity (accept fewer people) → lower FAR (more secure) but higher FRR (more false rejections). The CER is the "sweet spot." High security = lower FAR (accept fewer). High convenience = lower FRR (reject fewer legit users).
+  </div>
+
+  <div class="pq" id="pq-insult">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Two questions: (1) Which is an example of a <strong>Type 1</strong> error for a biometric system? (2) Which is an example of a <strong>Type 2</strong> error?</div>
+    <div class="pq-a">✅ Type 1 = a valid subject is NOT authenticated (false rejection, FRR) · Type 2 = an invalid subject IS authenticated (false acceptance, FAR)</div>
+    <div class="pq-why"><table style="margin:8px 0;"><tr><th></th><th>Type 1 (FRR)</th><th>Type 2 (FAR)</th></tr><tr><td><strong>What happens</strong></td><td>Legitimate user rejected</td><td>Impostor accepted</td></tr><tr><td><strong>Impact</strong></td><td>Usability / annoyance</td><td>Security breach — more dangerous</td></tr></table>The other options — a valid subject authenticated, an invalid subject rejected — are the system working <em>correctly</em>.<div class="mnemonic" style="margin:10px 0 0;"><div class="m-title">Memory Hook</div><div class="m-text">Type I = Insult · Type II = Intruder</div><div class="m-expand">Type I insults the legitimate user by rejecting them. Type II lets an intruder in.</div></div></div>
   </div>
 
   <div class="section-title">Password Policies (NIST SP 800-63B)</div>
@@ -189,6 +217,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     RBAC: "What is your role?" ABAC: "What are ALL your attributes, and what context does this request occur in?" ABAC is more granular — can evaluate time of day, device health, location. Zero Trust implementations use ABAC-style continuous evaluation.
   </div>
 
+  <div class="pq" id="pq-system-administrators">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">The assignment of labels or classifications in Mandatory Access Control (MAC) can only be performed by who? (Managers · Physical security personnel · System administrators · Users)</div>
+    <div class="pq-a">✅ System administrators</div>
+    <div class="pq-why">In MAC the <em>system</em> enforces access using labels, and only administrators can assign or change those labels. Users — even the owners of the data — cannot change labels or grant access themselves. That is the key difference from DAC, where the owner decides.<ul><li>Nuance: the data owner <em>determines</em> the classification; the administrator <em>applies</em> the label in the system.</li></ul></div>
+  </div>
+
   <div class="section-title">Formal Security Models (revisit from D3)</div>
   <table>
     <tr><th>Model</th><th>Protects</th><th>Key Rule</th></tr>
@@ -207,6 +242,23 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <li style="margin-bottom:8px;"><strong>Review</strong> — Regular access certification / recertification (user access reviews)</li>
     <li style="margin-bottom:8px;"><strong>Deprovision</strong> — Disable account immediately on termination, revoke tokens, collect hardware</li>
   </ol>
+
+  <div class="section-title">ISC2 Exam Outline — Identity &amp; Access Provisioning Lifecycle (5.5)</div>
+  <table>
+    <tr><th>Stage</th><th>Example</th></tr>
+    <tr><td><strong>Account access review</strong></td><td>Periodic certification of user, system and service account access</td></tr>
+    <tr><td><strong>Provisioning &amp; deprovisioning</strong></td><td>Onboarding, offboarding, transfers</td></tr>
+    <tr><td><strong>Role definition &amp; transition</strong></td><td>People assigned to new roles — promotions, department moves</td></tr>
+    <tr><td><strong>Privilege escalation</strong></td><td>Controlled elevation (e.g. sudo) and auditing its use</td></tr>
+    <tr><td><strong>Service accounts management</strong></td><td>Ownership, credential rotation and least privilege for non-human accounts</td></tr>
+  </table>
+
+  <div class="pq" id="pq-role-definition-and-transition">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">An employee has recently been promoted to management. Which stage of the Identity and Access Provisioning Lifecycle applies?</div>
+    <div class="pq-a">✅ Role Definition and Transition</div>
+    <div class="pq-why">A promotion is a role change: grant the access the new role needs <em>and remove the old role's access</em>, which prevents privilege creep.<ul><li><strong>Provisioning</strong> = creating a new account (onboarding).</li><li><strong>Account access review</strong> = periodic recertification.</li><li><strong>Deprovisioning</strong> = removing access when someone leaves.</li></ul></div>
+  </div>
 
   <div class="callout callout-red">
     <strong>🚨 Deprovisioning is a critical control</strong>
@@ -271,6 +323,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>RBAC vs ABAC distinction</td><td class="gap-med">🟡 MEDIUM</td><td>ABAC = most granular, context-aware. Zero Trust uses ABAC-style continuous eval.</td></tr>
     <tr><td>Privilege creep and access reviews</td><td class="gap-low">🟢 LOW</td><td>High-frequency exam topic — know access certification controls.</td></tr>
     <tr><td>Deprovisioning priority</td><td class="gap-low">🟢 LOW</td><td>Disable access FIRST. Everything else follows. This is the primary control on termination.</td></tr>
+    <tr><td>🎯 Type 1 vs Type 2 biometric errors</td><td class="gap-high">🔴 HIGH</td><td>Type I = valid user rejected (FRR) — "Insult". Type II = impostor accepted (FAR) — "Intruder".</td></tr>
+    <tr><td>🎯 HOTP vs TOTP</td><td class="gap-med">🟡 MEDIUM</td><td>HOTP = counter/event-based (new code each attempt). TOTP = time-based (30–60 s).</td></tr>
+    <tr><td>🎯 Smart card = know + have</td><td class="gap-med">🟡 MEDIUM</td><td>Card (have) + PIN (know). One-time PAD is a cipher, not an OTP.</td></tr>
+    <tr><td>🎯 MAC label assignment</td><td class="gap-med">🟡 MEDIUM</td><td>Only administrators assign/change labels in MAC. Owners decide classification; users cannot change labels.</td></tr>
+    <tr><td>🎯 Provisioning lifecycle stage names</td><td class="gap-med">🟡 MEDIUM</td><td>Promotion / job change → Role definition &amp; transition. Learn the 5 ISC2 outline stages.</td></tr>
   </table>
 </div>
 
