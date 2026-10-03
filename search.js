@@ -169,8 +169,10 @@
   }
 
   function activateTab(id) {
-    var target = document.getElementById(id);
-    if (!target || !target.classList.contains('tab-content')) return;
+    var el = document.getElementById(id);
+    var target = el && (el.classList.contains('tab-content') ? el : el.closest('.tab-content'));
+    if (!target) return;
+    id = target.id;
     var i;
     var contents = document.querySelectorAll('.tab-content');
     for (i = 0; i < contents.length; i++) contents[i].classList.remove('active');
@@ -293,5 +295,12 @@
       }
     }
     jumpTo(target, q);
+    // The browser scrolls to the #hash element after load, which would undo jumpTo's scroll.
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        var first = document.querySelector('mark.ss-mark');
+        if (first) first.scrollIntoView({ block: 'center' });
+      }, 0);
+    });
   }
 })();

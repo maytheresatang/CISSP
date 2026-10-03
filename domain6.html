@@ -40,7 +40,7 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.header{padding:24px;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}.pq{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #B45309;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;}.pq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B45309;font-weight:700;margin-bottom:6px;}.pq-q{font-size:14px;font-style:italic;color:#1E293B;margin-bottom:8px;}.pq-a{font-size:14px;font-weight:700;color:#15803D;margin-bottom:6px;}.pq-why{font-size:13.5px;color:#334155;line-height:1.6;}.pq-why ul{margin:6px 0 0;padding-left:20px;}.pq-why li{margin-bottom:3px;}.pq-note{font-size:12px;color:#92400E;background:#FEF3C7;border-radius:6px;padding:6px 10px;margin-top:8px;}</style>
 </head>
 <body>
 
@@ -114,6 +114,41 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <strong>🚨 Nessus vs Nikto — Most Tested Tool Confusion</strong>
     Nessus = general network/host vulnerability scanner. Nikto = specifically web server testing (HTTP/HTTPS). If the scenario involves a web server on port 80 or 443 → <strong>Nikto</strong>. If it's a general network vulnerability scan → <strong>Nessus</strong>.
   </div>
+
+  <div class="section-title">Nmap Port States</div>
+  <table>
+    <tr><th>State</th><th>Meaning</th></tr>
+    <tr><td><strong>Open</strong></td><td>An application is actively accepting connections on the port</td></tr>
+    <tr><td><strong>Closed</strong></td><td>Port is reachable and responds, but nothing is listening</td></tr>
+    <tr><td><strong>Filtered</strong></td><td>A firewall/filter stops probes reaching the port — nmap can't tell if it's open</td></tr>
+    <tr><td><strong>Unfiltered</strong></td><td>Port is reachable but nmap can't tell open from closed (ACK scan result)</td></tr>
+    <tr><td><strong>Open|Filtered</strong></td><td>Can't tell open from filtered — <strong>open ports that give no response</strong> (UDP, FIN, NULL, Xmas scans)</td></tr>
+    <tr><td><strong>Closed|Filtered</strong></td><td>Can't tell closed from filtered (IP ID idle scan only)</td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted);">The Sybex study guide teaches three states (open, closed, filtered); nmap itself reports six.</p>
+
+  <div class="pq" id="pq-open-filtered">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">You are scanning with nmap. It detects that a port is open on a remote system but receives no responses to its probes to that port. What status will nmap report?</div>
+    <div class="pq-a">✅ Open|Filtered</div>
+    <div class="pq-why">Nmap uses Open|Filtered when it can't distinguish an open port from a filtered one — which happens exactly when an open port stays silent. Unfiltered means reachable but undetermined; Open requires a positive response; "Unfiltered Open" isn't an nmap state.</div>
+  </div>
+
+  <div class="section-title">TCP Scan Types</div>
+  <table>
+    <tr><th>Scan</th><th>How it works</th><th>Notes</th></tr>
+    <tr><td><strong>TCP connect</strong></td><td><strong>Completes the full three-way handshake</strong> (SYN → SYN/ACK → ACK)</td><td>Noisy, logged by the target; no special privileges needed</td></tr>
+    <tr><td><strong>TCP SYN ("half-open")</strong></td><td>Sends SYN, receives SYN/ACK, replies RST — never completes the handshake</td><td>Stealthier; nmap's default with root</td></tr>
+    <tr><td><strong>TCP ACK</strong></td><td>Sends ACK packets to map firewall rules</td><td>Shows filtered vs unfiltered — not open vs closed</td></tr>
+    <tr><td><strong>Xmas / FIN / NULL</strong></td><td>Unusual flag combinations (FIN+PSH+URG / FIN only / no flags)</td><td>Evade simple filters; open ports often don't respond</td></tr>
+  </table>
+
+  <div class="pq" id="pq-tcp-connect">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which scan type completes the TCP three-way handshake as an attack?</div>
+    <div class="pq-a">✅ TCP connect scanning</div>
+    <div class="pq-why">A connect scan makes a full connection. A SYN scan deliberately stops halfway (half-open). An ACK scan maps firewall rules. "TCP remote scanning" is not a real scan type.</div>
+  </div>
 </div>
 
 <div id="pentest" class="tab-content">
@@ -140,6 +175,31 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <strong>⚠️ Rules of Engagement (RoE)</strong>
     Written authorisation is NON-NEGOTIABLE before testing. Without it, penetration testing is criminal. RoE defines: scope (IP ranges, systems), timing (business hours vs off-hours), escalation contacts, off-limits systems.
   </div>
+
+  <div class="section-title">Pen Test Phases — Exam Models</div>
+  <table>
+    <tr><th>Source</th><th>Phases</th></tr>
+    <tr><td><strong>ISC2 / Sybex</strong></td><td>Planning → Information gathering &amp; discovery → Vulnerability scanning → Exploitation → Reporting</td></tr>
+    <tr><td><strong>NIST SP 800-115</strong></td><td>Planning → Discovery → Attack → Reporting</td></tr>
+  </table>
+  <div class="callout callout-amber">
+    <strong>⚠️ "Lessons learned" is NOT a pen test phase</strong>
+    Lessons learned is the final phase of <em>incident response</em>. Pen tests end with <strong>reporting</strong>.
+  </div>
+
+  <div class="pq" id="pq-lessons-learned">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which of the following is NOT a valid phase of a penetration test? (Reporting · Exploitation · Information gathering and discovery · Lessons learned)</div>
+    <div class="pq-a">✅ Lessons learned</div>
+    <div class="pq-why">It belongs to the incident response lifecycle. The other three are core pen test phases.</div>
+  </div>
+
+  <div class="pq" id="pq-dns-records">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Of the various ways to gather information about a target, which would a penetration tester be LEAST LIKELY to use in the <em>scanning and probing</em> phase? (Port scanning · Vulnerability scanning · Searching DNS records · Using Nmap)</div>
+    <div class="pq-a">✅ Searching Domain Name System (DNS) records</div>
+    <div class="pq-why">Searching DNS records (along with WHOIS and OSINT) is <em>passive</em> reconnaissance done earlier, in information gathering. Port scanning, vulnerability scanning and Nmap actively probe the target — the definition of scanning and probing.</div>
+  </div>
 </div>
 
 <div id="audit" class="tab-content">
@@ -147,8 +207,8 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <table>
     <tr><th>Type</th><th>Description</th></tr>
     <tr><td><strong>Internal Audit</strong></td><td>Conducted by internal audit function. Less independent but more frequent and contextual.</td></tr>
-    <tr><td><strong>External Audit</strong></td><td>Conducted by independent third party. More credible, required for regulatory compliance (SOX, PCI).</td></tr>
-    <tr><td><strong>Third-Party Audit</strong></td><td>Assessment of a vendor/supplier. Standard in vendor assurance programmes.</td></tr>
+    <tr><td><strong>External Audit</strong></td><td>Conducted by an outside, independent auditing firm <em>hired by the organisation itself</em>. More credible than internal; required for regulatory compliance (SOX, PCI).</td></tr>
+    <tr><td><strong>Third-Party Audit</strong></td><td>Conducted by, or <strong>on behalf of, another organisation</strong> (e.g. a regulator or a customer). That other organisation initiates it, chooses the auditors and sets the scope — your organisation is the subject, not the client. SOC reports let a service provider satisfy many third parties with one audit.</td></tr>
     <tr><td><strong>Certification Audit</strong></td><td>Leads to formal certification (ISO 27001, PCI-DSS). Stage 1 = document review. Stage 2 = implementation test.</td></tr>
     <tr><td><strong>Compliance Audit</strong></td><td>Assesses adherence to regulatory requirements (GDPR, HIPAA).</td></tr>
   </table>
@@ -169,6 +229,22 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="callout callout-amber">
     <strong>⚠️ Exam Trap: SOC 1 vs SOC 2</strong>
     SOC 1 = financial reporting controls. SOC 2 = security and operational controls. Never mix these up. A cloud hosting provider showing their security posture → SOC 2. A payroll processor showing financial control reliability → SOC 1.
+  </div>
+
+  <div class="pq" id="pq-on-behalf-of-another">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">What distinguishes a third-party audit from an external audit?</div>
+    <div class="pq-a">✅ A third-party audit is conducted on behalf of another firm</div>
+    <div class="pq-why">An external audit is performed by an outside auditor that <em>your organisation</em> hires. A third-party audit is initiated by <em>another organisation</em> (a regulator, a customer), which picks the auditor and the scope.<ul><li>"Multiple firms in one audit" and "the public testing controls" don't distinguish the two types.</li><li>"Conducted by a firm other than the audited organisation" is true of <em>both</em>, so it isn't a distinction either.</li></ul></div>
+    <div class="pq-note">Question wording paraphrased — the screenshot showed the answer options and explanation but not the full question text.</div>
+  </div>
+
+  <div class="pq" id="pq-functional-management">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Which of the following is LEAST LIKELY to be the audience of a security audit report? (Board of directors · Government regulators · Large enterprise customers of the audited organisation · Functional management)</div>
+    <div class="pq-a">✅ Functional management</div>
+    <div class="pq-why">Audit reports provide <em>independent assurance</em> to those who oversee the organisation or rely on it: the board / audit committee and senior management, regulators, and customers (often via SOC 2 reports). Functional (line) managers usually receive the specific findings they must remediate, not the audit report itself.</div>
+    <div class="pq-note">⚠️ The screenshot showed only the question, not the answer key. This is the best-reasoned answer — confirm it against Pocket Prep's explanation.</div>
   </div>
 </div>
 
@@ -217,6 +293,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td><strong>Peer review</strong></td><td>Another developer reviews the code — good practice</td></tr>
     <tr><td><strong>Formal inspection (Fagan)</strong></td><td>Structured multi-person review with defined roles — highest assurance</td></tr>
   </table>
+
+  <div class="pq" id="pq-fagan">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">An organisation wants a formal inspection of all software before any time is spent on dynamic analysis testing. What would be the MOST formal and in-depth approach?</div>
+    <div class="pq-a">✅ Fagan inspection</div>
+    <div class="pq-why">Fagan is the most formal code review: defined roles (moderator, author, reader, recorder, inspectors) and six steps — <strong>Planning → Overview → Preparation → Inspection → Rework → Follow-up</strong>.<ul><li><strong>Peer review</strong> is less formal.</li><li><strong>Static testing</strong> is the broad category (often automated tools), not a specific formal process.</li><li><strong>Fuzz testing</strong> is dynamic — the question says <em>before</em> dynamic testing.</li></ul></div>
+  </div>
 </div>
 
 <div id="kpi" class="tab-content">
@@ -249,6 +332,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Black/White/Grey box pen testing</td><td class="gap-low">🟢 LOW</td><td>Black=no knowledge. White=full knowledge. Grey=partial. Know what each simulates.</td></tr>
     <tr><td>SAST vs DAST vs IAST</td><td class="gap-low">🟢 LOW</td><td>SAST=code review (pre-execution). DAST=runtime test (no source). IAST=both.</td></tr>
     <tr><td>KPI vs KRI</td><td class="gap-low">🟢 LOW</td><td>KRI=predictive/leading. KPI=historical/lagging.</td></tr>
+    <tr><td>🎯 Third-party vs external audit</td><td class="gap-high">🔴 HIGH</td><td>Third-party = on behalf of ANOTHER org (regulator/customer). External = outside firm hired by you. Notes corrected.</td></tr>
+    <tr><td>🎯 Nmap port states and TCP scan types</td><td class="gap-med">🟡 MEDIUM</td><td>No response from an open port = Open|Filtered. TCP connect completes the handshake; SYN = half-open.</td></tr>
+    <tr><td>🎯 Pen test phases</td><td class="gap-med">🟡 MEDIUM</td><td>Planning → Info gathering → Vuln scanning → Exploitation → Reporting. Lessons learned = IR, not pen test.</td></tr>
+    <tr><td>🎯 Audit report audience</td><td class="gap-med">🟡 MEDIUM</td><td>Board, senior management, regulators, customers. Verify the practice-question answer.</td></tr>
+    <tr><td>🎯 Fagan inspection</td><td class="gap-low">🟢 LOW</td><td>Most formal code review. Steps: Planning, Overview, Preparation, Inspection, Rework, Follow-up.</td></tr>
   </table>
 </div>
 

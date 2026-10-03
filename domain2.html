@@ -47,7 +47,7 @@ li{margin-bottom:5px;}
 .gap-low{color:var(--green);font-weight:700;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:600px){.tab-content{padding:20px;}.two-col{grid-template-columns:1fr;}.header{padding:24px;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}.pq{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #B45309;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;}.pq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B45309;font-weight:700;margin-bottom:6px;}.pq-q{font-size:14px;font-style:italic;color:#1E293B;margin-bottom:8px;}.pq-a{font-size:14px;font-weight:700;color:#15803D;margin-bottom:6px;}.pq-why{font-size:13.5px;color:#334155;line-height:1.6;}.pq-why ul{margin:6px 0 0;padding-left:20px;}.pq-why li{margin-bottom:3px;}.pq-note{font-size:12px;color:#92400E;background:#FEF3C7;border-radius:6px;padding:6px 10px;margin-top:8px;}</style>
 </head>
 <body>
 
@@ -180,6 +180,15 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <strong>⚠️ Exam Trap: Which control matches which state?</strong>
     TLS protects data <em>in transit</em>. AES-256 on disk protects data <em>at rest</em>. Neither protects data <em>in use</em>. The exam tests whether you know which control matches which state.
   </div>
+
+  <div class="section-title">Data Exfiltration via Steganography</div>
+
+  <div class="pq" id="pq-steganography">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">Of the following, which is MOST LIKELY used to exfiltrate data? (Steganography · ARP poisoning · Fuzzing · Race condition)</div>
+    <div class="pq-a">✅ Steganography</div>
+    <div class="pq-why">Steganography hides data <em>inside</em> innocent-looking carrier files (images, audio, video, documents). Stolen data can leave the organisation in a holiday photo and slip past content inspection and DLP.<ul><li><strong>ARP poisoning</strong> = LAN man-in-the-middle; it intercepts traffic rather than smuggling data out.</li><li><strong>Fuzzing</strong> = a testing technique (random input).</li><li><strong>Race condition</strong> = a timing flaw (TOCTOU).</li></ul>Defensive twin: <strong>digital watermarking</strong> uses the same technique to tag documents so leaks can be traced. Countermeasures: DLP with file-type and entropy analysis, egress filtering, blocking unapproved upload channels, steganalysis tools.</div>
+  </div>
 </div>
 
 <div id="lifecycle" class="tab-content">
@@ -252,6 +261,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>Data states and matching controls</td><td class="gap-low">🟢 LOW</td><td>Keep the TLS/AES/TEE mapping sharp.</td></tr>
     <tr><td>Scoping vs Tailoring vs Supplementation</td><td class="gap-low">🟢 LOW</td><td>Scoping = remove. Tailoring = adjust. Supplementation = add beyond baseline.</td></tr>
     <tr><td>Retention + legal hold interaction</td><td class="gap-low">🟢 LOW</td><td>Legal hold overrides normal retention schedule — do not destroy under hold.</td></tr>
+    <tr><td>🎯 Steganography as an exfiltration channel</td><td class="gap-med">🟡 MEDIUM</td><td>Hides data inside carrier files — a DLP blind spot. Watermarking is the defensive use.</td></tr>
   </table>
 </div>
 

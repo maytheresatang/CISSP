@@ -47,7 +47,7 @@ li{margin-bottom:5px;}
 .card h4{color:var(--navy);font-size:14px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:700px){.tab-content{padding:20px;}.header{padding:24px;}.grid2{grid-template-columns:1fr;}}
-.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}</style>
+.home-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.12);color:#0D9488;border:1px solid rgba(13,148,136,.5);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;}.home-btn:hover{background:rgba(13,148,136,.22);}.home-bar{background:#FFFFFF;padding:10px 40px;border-bottom:2px solid var(--teal);}@media(max-width:600px){.home-bar{padding:10px 20px;}}.pq{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #B45309;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;}.pq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B45309;font-weight:700;margin-bottom:6px;}.pq-q{font-size:14px;font-style:italic;color:#1E293B;margin-bottom:8px;}.pq-a{font-size:14px;font-weight:700;color:#15803D;margin-bottom:6px;}.pq-why{font-size:13.5px;color:#334155;line-height:1.6;}.pq-why ul{margin:6px 0 0;padding-left:20px;}.pq-why li{margin-bottom:3px;}.pq-note{font-size:12px;color:#92400E;background:#FEF3C7;border-radius:6px;padding:6px 10px;margin-top:8px;}</style>
 </head>
 <body>
 
@@ -308,6 +308,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td><strong>UAT (User Acceptance Testing)</strong></td><td>Business users validate the system meets requirements.</td><td>Final gate before production.</td></tr>
     <tr><td><strong>Mutation Testing</strong></td><td>Introduce deliberate bugs to see if tests catch them. Validates test quality.</td><td>Tests your tests.</td></tr>
     <tr><td><strong>Orthogonal Array Testing</strong></td><td>Systematic selection of test cases to cover all pairs of variables efficiently.</td><td>Reduces test case count while maximising coverage.</td></tr>
+    <tr><td><strong>Fagan Inspection</strong></td><td>Most formal static code review: Planning → Overview → Preparation → Inspection → Rework → Follow-up.</td><td>"Most formal / in-depth inspection before dynamic testing" → Fagan</td></tr>
   </table>
 
   <div class="section-title">Testing Sequence</div>
@@ -362,6 +363,14 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td><strong>Lost Update</strong></td><td>Transaction overwrites data written by another transaction with earlier precedence.</td></tr>
     <tr><td><strong>Incorrect Summary</strong></td><td>Aggregate function runs while another transaction modifies the data. Produces wrong summary.</td></tr>
   </table>
+
+  <div class="pq" id="pq-toctou">
+    <div class="pq-label">🎯 Practice Q Review · Missed / Unsure</div>
+    <div class="pq-q">An attacker modifies an object (e.g. swaps a file) after one process has checked it but before the next process acts on it. Which attack is this? (Race conditions · Buffer overflow · Birthday attack · Client-side manipulation)</div>
+    <div class="pq-a">✅ Race conditions</div>
+    <div class="pq-why">Example: process A authorises a user to open a non-critical file; before process B opens it, the attacker swaps in a protected file, so B opens the protected file instead. That is time-of-check to time-of-use (TOCTOU).<ul><li><strong>Buffer overflow</strong> — missing input validation lets data overflow into adjacent memory (crash or code execution).</li><li><strong>Birthday attack</strong> — finding two inputs with the same hash (a collision); takes about 2<sup>n/2</sup> attempts for an n-bit hash. Defence: longer digests. Salting defeats precomputed attacks on password hashes.</li><li><strong>Client-side manipulation</strong> — e.g. XSS, where altered web code executes in the user's browser.</li></ul></div>
+    <div class="pq-note">Question wording paraphrased — the screenshot showed the answer options and explanation but not the full question text.</div>
+  </div>
 </div>
 
 <!-- DATABASE SECURITY -->
@@ -515,6 +524,8 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <tr><td>"Combines non-sensitive data to reveal sensitive info"</td><td><strong>Aggregation</strong></td><td>Inference (deduction from query results)</td></tr>
     <tr><td>"Malicious code dormant until employee fired"</td><td><strong>Logic bomb</strong></td><td>Backdoor, Trojan</td></tr>
     <tr><td>"SAST tool for code review"</td><td><strong>SAST = static, on source code</strong></td><td>DAST (that runs against live app)</td></tr>
+    <tr><td>"Attacker swaps an object between check and use"</td><td><strong>Race condition (TOCTOU)</strong></td><td>Buffer overflow, birthday attack</td></tr>
+    <tr><td>"Most formal inspection before dynamic testing"</td><td><strong>Fagan inspection</strong></td><td>Peer review, static testing (less formal)</td></tr>
   </table>
 </div>
 
