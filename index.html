@@ -47,6 +47,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:640px){.gap-table th,.gap-table td{padding:8px;}}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px;}
 @media(max-width:640px){.domains{grid-template-columns:1fr;}.content{padding:20px;}.header{padding:28px 20px;}}
+/* Design polish: contrast, focus, motion, type */
+:root{--teal-text:#0F766E;}
+html{-webkit-text-size-adjust:100%;}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+h1,h2,h3,.section-title{text-wrap:balance;}
+p,li{text-wrap:pretty;}
+td,th{font-variant-numeric:tabular-nums;}
+.dc-num,.gap-table a{color:var(--teal-text);}
+.header .label,.dc-badge,.m-title{font-size:12px;}
+.tab-btn{transition:color .15s ease-out,border-color .15s ease-out;}
+.tab-btn:active,.home-btn:active{transform:scale(.97);}
+.tab-btn,.home-btn{transition-property:color,border-color,background-color,transform;transition-duration:.15s;transition-timing-function:ease-out;}
+.domain-card{transition:box-shadow .2s ease-out,border-color .2s ease-out,transform .2s ease-out;}
+.domain-card:active{transform:scale(.99);}
+@media(hover:hover) and (pointer:fine){.domain-card:hover{transform:translateY(-2px);}}
+.tab-content.active{animation:tabin .2s ease-out;}
+@keyframes tabin{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+a:focus-visible,button:focus-visible,input:focus-visible,.domain-card:focus-visible{outline:2px solid var(--teal-text);outline-offset:2px;border-radius:6px;}
+.tabs .tab-btn:focus-visible{outline-color:var(--teal-light);outline-offset:-2px;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
 </style>
 </head>
 <body>
